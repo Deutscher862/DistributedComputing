@@ -22,11 +22,9 @@ public class JavaUdpServer {
                 String msg = new String(receivePacket.getData());
                 System.out.println("received msg: " + msg);
 
-                System.out.println(receivePacket.getData());
-
-                if (Arrays.toString(receivePacket.getData()).startsWith("Java"))
+                if (msg.startsWith("Java"))
                     sendBuffer = "Pong Java".getBytes();
-                else if (Arrays.toString(receivePacket.getData()).startsWith("Python"))
+                else if (msg.startsWith("Python"))
                     sendBuffer = "Pong Python".getBytes();
 
                 DatagramPacket sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, receivePacket.getAddress(), receivePacket.getPort());
