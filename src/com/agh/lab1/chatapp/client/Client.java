@@ -30,7 +30,7 @@ class Client {
             out.println(nick);
 
             while (true) {
-                System.out.println(nick + "> ");
+                System.out.print(nick + "> ");
                 Scanner scan = new Scanner(System.in);
                 out.println(scan.nextLine());
             }
