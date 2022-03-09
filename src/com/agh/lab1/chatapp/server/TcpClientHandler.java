@@ -24,7 +24,7 @@ class TcpClientHandler extends Thread {
             Server.addUser(nick, this);
             while (true) {
                 String msg = in.readLine();
-                Server.sendMessages(nick, msg);
+                Server.sendTcpMessage(nick, msg);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -33,5 +33,9 @@ class TcpClientHandler extends Thread {
 
     public void send(String msg) {
         out.println(msg);
+    }
+
+    public Socket getSocket() {
+        return socket;
     }
 }
