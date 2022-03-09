@@ -1,40 +1,32 @@
 package com.agh.lab1.chatapp.server;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 class Server {
+    public final static int PORT = 12345;
+    public static final ExecutorService executor = Executors.newFixedThreadPool(100);
+    static final Map<String, TcpClientHandler> users = new HashMap<>();
+
     public static void main(String[] args) {
         System.out.println("JAVA TCP SERVER");
-        int noOpenPorts = 2;
-//        List<PortListener> openPorts = new ArrayList<>();
-        MessageNotificator messageNotificator = new MessageNotificator();
+        TcpListener tcpListener = new TcpListener();
+        tcpListener.start();
+    }
 
-        for (int i = 0; i < noOpenPorts; i++) {
-            PortListener portListener = new PortListener(i + 12345, messageNotificator);
-            messageNotificator.addObserver(portListener);
-//            openPorts.add(portListener);
-            portListener.start();
+    public static void addUser(String nick, TcpClientHandler tcpClientHandler) {
+        System.out.println("Adding " + nick);
+        users.put(nick, tcpClientHandler);
+    }
+
+    public static void sendMessages(String nick, String msg) {
+        synchronized (users) {
+            for (Map.Entry<String, TcpClientHandler> user : users.entrySet()) {
+                if (!user.getKey().equals(nick))
+                    user.getValue().send(nick + ": " + msg);
+            }
         }
-
-//        System.out.println("JAVA TCP SERVER");
-//        int portNumber = 12345;
-//
-//        try (ServerSocket serverSocket = new ServerSocket(portNumber)) {
-//            while (true) {
-//                // accept client
-//                Socket clientSocket = serverSocket.accept();
-//                System.out.println("client connected");
-//
-//                // in & out streams
-//                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-//                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-//
-//                // read msg, send response
-//                String msg = in.readLine();
-//                System.out.println("received msg: " + msg);
-//                out.println("Pong Java Tcp");
-//
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 }

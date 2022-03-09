@@ -7,26 +7,32 @@ import java.net.Socket;
 import java.util.Scanner;
 
 class Client {
+    static String nick;
+    final static int PORT = 12345;
+    static String hostName = "localhost";
+
     public static void main(String[] args) {
-        System.out.println("JAVA TCP CLIENT");
-        String hostName = "localhost";
-        String nick = "Maciek123";
-        int portNumber = 12345;
+        System.out.println("JAVA CLIENT");
 
-        try (Socket socket = new Socket(hostName, portNumber)) {
+        System.out.print("Enter your nick: ");
+        Scanner scanner = new Scanner(System.in);
+        nick = scanner.nextLine();
+
+        startSocket();
+    }
+
+    public static void startSocket() {
+        try (Socket socket = new Socket(hostName, PORT)) {
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            TcpListener tcpListener = new TcpListener(in);
+            tcpListener.start();
+            out.println(nick);
+
             while (true) {
-                // in & out streams
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-                // send msg, read response
-                System.out.print("msg>");
+                System.out.println(nick + "> ");
                 Scanner scan = new Scanner(System.in);
-                String msg = scan.nextLine();
-                //TODO split input and output into 2 threads
-                out.println(nick + ": " + msg);
-                String response = in.readLine();
-                System.out.println(response);
+                out.println(scan.nextLine());
             }
         } catch (Exception e) {
             e.printStackTrace();
