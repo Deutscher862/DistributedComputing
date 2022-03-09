@@ -1,19 +1,16 @@
-package com.agh.lab1.chatapp;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.agh.lab1.chatapp.server;
 
 class Server {
     public static void main(String[] args) {
         System.out.println("JAVA TCP SERVER");
         int noOpenPorts = 2;
-        List<PortListener> openPorts = new ArrayList<>();
+//        List<PortListener> openPorts = new ArrayList<>();
         MessageNotificator messageNotificator = new MessageNotificator();
 
         for (int i = 0; i < noOpenPorts; i++) {
             PortListener portListener = new PortListener(i + 12345, messageNotificator);
             messageNotificator.addObserver(portListener);
-            openPorts.add(portListener);
+//            openPorts.add(portListener);
             portListener.start();
         }
 

@@ -1,4 +1,4 @@
-package com.agh.lab1.chatapp;
+package com.agh.lab1.chatapp.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,6 +11,7 @@ import java.util.List;
 
 class PortListener extends Thread {
     private final int portNumber;
+    private String currentClient;
     private final MessageNotificator messageNotificator;
     private final List<String> messagesToSent = new ArrayList<>();
 
@@ -21,6 +22,10 @@ class PortListener extends Thread {
 
     void addMessage(String msg) {
         messagesToSent.add(msg);
+    }
+
+    String getUserFromMessage(String msg) {
+        return msg.split(":")[0];
     }
 
     @Override
@@ -36,11 +41,14 @@ class PortListener extends Thread {
                 PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
                 //add message to buffer
-                messageNotificator.notifyOthers(in.readLine());
+                String receivedMessage = in.readLine();
+                currentClient = getUserFromMessage(receivedMessage);
+                messageNotificator.notifyOthers(receivedMessage);
 
                 if (!messagesToSent.isEmpty()) {
                     String msg = messagesToSent.remove(0);
-                    out.println(msg);
+                    if (!getUserFromMessage(msg).equals(currentClient))
+                        out.println(msg);
                 }
             }
         } catch (IOException e) {

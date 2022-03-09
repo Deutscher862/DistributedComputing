@@ -1,4 +1,4 @@
-package com.agh.lab1.chatapp;
+package com.agh.lab1.chatapp.server;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ class MessageNotificator {
     }
 
     void notifyOthers(String message) {
-        System.out.println("Adding message: " + message);
+        System.out.println("Sending message: " + message);
         for (PortListener portListener : observers) {
             portListener.addMessage(message);
         }
