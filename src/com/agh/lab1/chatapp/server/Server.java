@@ -23,8 +23,13 @@ class Server {
     }
 
     public static void addUser(String nick, TcpClientHandler tcpClientHandler) {
-        System.out.println("Adding " + nick);
         users.put(nick, tcpClientHandler);
+        System.out.println(nick + " connected");
+    }
+
+    public static void removeUser(String nick){
+        users.remove(nick);
+        System.out.println(nick + " disconnected");
     }
 
     public static void sendTcpMessage(String nick, String msg) {

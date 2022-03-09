@@ -5,12 +5,10 @@ import java.net.*;
 
 class UdpDatagram {
     private final DatagramSocket datagramSocket;
-    private final InetAddress IPAddress;
     private final byte[] msgBytes;
 
     UdpDatagram(Socket socket, String nick) throws SocketException, UnknownHostException {
         datagramSocket = new DatagramSocket(socket.getLocalPort());
-        IPAddress = InetAddress.getByName("localhost");
 
         msgBytes =(nick + ":\n" +
                 "   __\n" +
@@ -20,8 +18,9 @@ class UdpDatagram {
                 "    (_/ (_/\n").getBytes();
     }
 
-    void send() throws IOException {
-        datagramSocket.send(new DatagramPacket(msgBytes, msgBytes.length, IPAddress, Client.PORT));
+    void send(String address, int port) throws IOException {
+        InetAddress IPAddress = InetAddress.getByName(address);
+        datagramSocket.send(new DatagramPacket(msgBytes, msgBytes.length, IPAddress, port));
     }
 
     public DatagramSocket getDatagramSocket() {

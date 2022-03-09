@@ -19,15 +19,20 @@ class TcpClientHandler extends Thread {
 
     @Override
     public void run() {
+        String nick = "";
         try {
-            String nick = in.readLine();
+            nick = in.readLine();
             Server.addUser(nick, this);
             while (true) {
                 String msg = in.readLine();
                 Server.sendTcpMessage(nick, msg);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            if (!nick.equals("")) {
+                Server.removeUser(nick);
+            } else {
+                e.printStackTrace();
+            }
         }
     }
 

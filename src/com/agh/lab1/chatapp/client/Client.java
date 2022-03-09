@@ -10,7 +10,9 @@ import java.util.Scanner;
 class Client {
     static String nick;
     final static int PORT = 12345;
-    static String hostName = "localhost";
+    final static String LOCALHOST = "localhost";
+    final static String MULTICAST_IP = "224.1.1.1";
+    final static int MULTICAST_PORT = 12346;
     static Socket socket;
     static PrintWriter tcpOut;
 
@@ -22,27 +24,31 @@ class Client {
         nick = scanner.nextLine();
 
         try {
-            socket = new Socket(hostName, PORT);
-            startTcpSocket();
+            socket = new Socket(LOCALHOST, PORT);
+            startTcpListener();
             UdpDatagram udpDatagram = new UdpDatagram(socket, nick);
-            startUdpSocket(udpDatagram);
+            startUdpListener(udpDatagram);
+            startMulticastListener();
 
             while (true) {
                 Scanner scan = new Scanner(System.in);
                 String msg = scan.nextLine();
 
                 if (msg.equals("U")) {
-                    udpDatagram.send();
+                    udpDatagram.send(LOCALHOST, PORT);
+                } else if (msg.equals("M")) {
+                    udpDatagram.send(MULTICAST_IP, MULTICAST_PORT);
                 } else {
                     tcpOut.println(msg);
                 }
             }
-        } catch (IOException e) {
+        } catch (
+                IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void startTcpSocket() throws IOException {
+    public static void startTcpListener() throws IOException {
         tcpOut = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         TcpListener tcpListener = new TcpListener(in);
@@ -50,9 +56,13 @@ class Client {
         tcpOut.println(nick);
     }
 
-    public static void startUdpSocket(UdpDatagram udpConnection) {
+    public static void startUdpListener(UdpDatagram udpConnection) {
         UdpListener udpListener = new UdpListener(udpConnection.getDatagramSocket());
         udpListener.start();
     }
 
+    public static void startMulticastListener() {
+        MulticastListener multicastListener = new MulticastListener();
+        multicastListener.start();
+    }
 }
