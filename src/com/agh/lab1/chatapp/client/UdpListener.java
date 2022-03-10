@@ -18,7 +18,7 @@ class UdpListener extends Thread {
                 byte[] buffer = new byte[500];
                 DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length);
                 datagramSocket.receive(datagramPacket);
-                System.out.println(new String(buffer));
+                System.out.println(new String(buffer).replaceAll("0", "\0"));
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());

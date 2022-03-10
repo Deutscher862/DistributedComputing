@@ -12,10 +12,9 @@ class UdpListener extends Thread {
                 byte[] bytes = new byte[500];
                 DatagramPacket datagramPacket = new DatagramPacket(bytes, bytes.length);
                 datagramSocket.receive(datagramPacket);
-                String message = new String(bytes);
+                String message = new String(bytes).replaceAll("0", "\0");
                 String[] split = message.split(":", 2);
                 String nick = split[0];
-                System.out.println("TO WCZYTAŁEM: " + nick);
                 Server.sendUdpMessage(nick, bytes, datagramSocket);
             }
         } catch (IOException e) {

@@ -15,7 +15,7 @@ class MulticastListener extends Thread {
                 byte[] buff = new byte[500];
                 DatagramPacket datagramPacket = new DatagramPacket(buff, buff.length);
                 multicastSocket.receive(datagramPacket);
-                String msg = new String(buff);
+                String msg = new String(buff).replaceAll("0", "\0");
                 if (!msg.startsWith(Client.nick)) {
                     System.out.println("MultiCast UDP " + msg);
                 }
