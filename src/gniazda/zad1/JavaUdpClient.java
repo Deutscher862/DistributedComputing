@@ -1,4 +1,4 @@
-package com.agh.lab1.zad1;
+package gniazda.zad1;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;

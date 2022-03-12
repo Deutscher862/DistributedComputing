@@ -1,4 +1,4 @@
-package com.agh.lab1.zad1;
+package gniazda.zad2;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -9,7 +9,7 @@ public class JavaUdpServer {
     public static void main(String[] args) {
         System.out.println("JAVA UDP SERVER");
 
-        int portNumber = 9007;
+        int portNumber = 9010;
         try (DatagramSocket socket = new DatagramSocket(portNumber)) {
             byte[] receiveBuffer = new byte[1024];
 
@@ -19,11 +19,6 @@ public class JavaUdpServer {
                 socket.receive(receivePacket);
                 String msg = new String(receivePacket.getData());
                 System.out.println("received msg: " + msg);
-
-                byte[] sendBuffer = "Ping Java Udp".getBytes();
-
-                DatagramPacket sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, receivePacket.getAddress(), receivePacket.getPort());
-                socket.send(sendPacket);
             }
         } catch (Exception e) {
             e.printStackTrace();

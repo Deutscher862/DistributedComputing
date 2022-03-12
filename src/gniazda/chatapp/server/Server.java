@@ -1,4 +1,4 @@
-package com.agh.lab1.chatapp.server;
+package gniazda.chatapp.server;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
