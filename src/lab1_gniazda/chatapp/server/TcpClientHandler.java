@@ -1,4 +1,4 @@
-package gniazda.chatapp.server;
+package lab1_gniazda.chatapp.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;

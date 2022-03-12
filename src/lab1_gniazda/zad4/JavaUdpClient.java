@@ -1,4 +1,4 @@
-package gniazda.zad1;
+package lab1_gniazda.zad4;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -10,10 +10,10 @@ public class JavaUdpClient {
     public static void main(String[] args) {
         System.out.println("JAVA UDP CLIENT");
 
-        int portNumber = 9007;
+        int portNumber = 9012;
         try (DatagramSocket socket = new DatagramSocket()) {
             InetAddress address = InetAddress.getByName("localhost");
-            byte[] sendBuffer = "Ping Java Udp".getBytes();
+            byte[] sendBuffer = "Java Ping".getBytes();
             byte[] receiveBuffer = new byte[1024];
 
             DatagramPacket sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, address, portNumber);
