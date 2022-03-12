@@ -1,4 +1,4 @@
-package lab1_gniazda.zad4;
+package lab1gniazda.zad4;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;

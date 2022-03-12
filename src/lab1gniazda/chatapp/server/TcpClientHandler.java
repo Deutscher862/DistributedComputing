@@ -1,4 +1,4 @@
-package lab1_gniazda.chatapp.server;
+package lab1gniazda.chatapp.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;

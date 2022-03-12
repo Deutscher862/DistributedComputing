@@ -1,4 +1,4 @@
-package lab1_gniazda.chatapp.client;
+package lab1gniazda.chatapp.client;
 
 import java.io.IOException;
 import java.net.*;
