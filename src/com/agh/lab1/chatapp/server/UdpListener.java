@@ -12,13 +12,13 @@ class UdpListener extends Thread {
                 byte[] bytes = new byte[500];
                 DatagramPacket datagramPacket = new DatagramPacket(bytes, bytes.length);
                 datagramSocket.receive(datagramPacket);
-                String message = new String(bytes).replaceAll("0", "\0");
+                String message = new String(bytes);
                 String[] split = message.split(":", 2);
                 String nick = split[0];
                 Server.sendUdpMessage(nick, bytes, datagramSocket);
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

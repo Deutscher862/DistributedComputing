@@ -12,10 +12,10 @@ class MulticastListener extends Thread {
         try (MulticastSocket multicastSocket = new MulticastSocket(Client.MULTICAST_PORT)) {
             multicastSocket.joinGroup(InetAddress.getByName(Client.MULTICAST_IP));
             while (!multicastSocket.isClosed()) {
-                byte[] buff = new byte[500];
-                DatagramPacket datagramPacket = new DatagramPacket(buff, buff.length);
+                byte[] buffer = new byte[500];
+                DatagramPacket datagramPacket = new DatagramPacket(buffer, buffer.length);
                 multicastSocket.receive(datagramPacket);
-                String msg = new String(buff).replaceAll("0", "\0");
+                String msg = new String(datagramPacket.getData(), 0, datagramPacket.getLength());
                 if (!msg.startsWith(Client.nick)) {
                     System.out.println("MultiCast UDP " + msg);
                 }

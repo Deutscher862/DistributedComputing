@@ -17,8 +17,7 @@ class Client {
     static PrintWriter tcpOut;
 
     public static void main(String[] args) {
-        System.out.println("JAVA CLIENT");
-
+        System.out.println("JAVA CLIENT STARTING");
         System.out.print("Enter your nick: ");
         Scanner scanner = new Scanner(System.in);
         nick = scanner.nextLine();

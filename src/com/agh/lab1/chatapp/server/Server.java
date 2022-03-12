@@ -6,48 +6,46 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 class Server {
-    public final static int PORT = 12345;
-    public static final ExecutorService executor = Executors.newFixedThreadPool(100);
-    static final Map<String, TcpClientHandler> users = new HashMap<>();
+    final static int PORT = 12345;
+    final static String LOCALHOST = "localhost";
+    final static Map<String, TcpClientHandler> USERS = new HashMap<>();
 
     public static void main(String[] args) {
-        System.out.println("JAVA SERVER");
+        System.out.println("JAVA SERVER STARTING");
         TcpListener tcpListener = new TcpListener();
         tcpListener.start();
         UdpListener udpListener = new UdpListener();
         udpListener.start();
     }
 
-    public static void addUser(String nick, TcpClientHandler tcpClientHandler) {
-        users.put(nick, tcpClientHandler);
+    static void addUser(String nick, TcpClientHandler tcpClientHandler) {
+        USERS.put(nick, tcpClientHandler);
         System.out.println(nick + " connected");
     }
 
-    public static void removeUser(String nick){
-        users.remove(nick);
+    static void removeUser(String nick) {
+        USERS.remove(nick);
         System.out.println(nick + " disconnected");
     }
 
-    public static void sendTcpMessage(String nick, String msg) {
-        synchronized (users) {
-            for (Map.Entry<String, TcpClientHandler> user : users.entrySet()) {
+    static void sendTcpMessage(String nick, String msg) {
+        synchronized (USERS) {
+            for (Map.Entry<String, TcpClientHandler> user : USERS.entrySet()) {
                 if (!user.getKey().equals(nick))
                     user.getValue().send(nick + ": " + msg);
             }
         }
     }
 
-    public static void sendUdpMessage(String nick, byte[] msg, DatagramSocket datagramSocket) {
-        synchronized (Server.users) {
-            for (Map.Entry<String, TcpClientHandler> user : users.entrySet()) {
+    static void sendUdpMessage(String nick, byte[] msg, DatagramSocket datagramSocket) {
+        synchronized (Server.USERS) {
+            for (Map.Entry<String, TcpClientHandler> user : USERS.entrySet()) {
                 if (!user.getKey().equals(nick)) {
                     try {
                         int port = user.getValue().getSocket().getPort();
-                        InetAddress IPAddress = InetAddress.getByName("localhost");
+                        InetAddress IPAddress = InetAddress.getByName(LOCALHOST);
                         datagramSocket.send(new DatagramPacket(msg, msg.length, IPAddress, port));
                     } catch (IOException e) {
                         e.printStackTrace();
