@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Pokemon data</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Result</h1>
+<p th:text="'name: ' + ${pokemon.name}" />
+<p th:text="'health points: ' + ${pokemon.healthPoints}" />
+<img th:src="${pokemon.imageUrl}" width="120"/>
+</body>
+</html>
