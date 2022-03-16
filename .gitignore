@@ -366,3 +366,10 @@ cython_debug/
 /.idea/
 /SystemyRozproszone.iml
 /DistributedComputing.iml
+/Lab1_gniazda/Lab1_gniazda.iml
+/Lab1_gniazda/.idea/
+/Lab2_PokemonRestApp/Lab2_PokemonRestApp.iml
+/Lab2_PokemonRestApp/mvnw
+/Lab2_PokemonRestApp/mvnw.cmd
+/Lab2_PokemonRestApp/.idea/
+/Lab2_PokemonRestApp/.mvn/

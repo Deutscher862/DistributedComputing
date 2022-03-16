@@ -25,7 +25,7 @@ class Client {
         try {
             socket = new Socket(LOCALHOST, PORT);
             startTcpListener();
-            UdpDatagram udpDatagram = new UdpDatagram(socket, nick);
+            lab1gniazda.chatapp.client.UdpDatagram udpDatagram = new lab1gniazda.chatapp.client.UdpDatagram(socket, nick);
             startUdpListener(udpDatagram);
             startMulticastListener();
 
