@@ -5,6 +5,7 @@ import com.agh.lab2_pokemonrestapp.model.PokemonImageUrl;
 import com.agh.lab2_pokemonrestapp.request.RequestMaker;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
 import java.io.IOException;
 
@@ -20,6 +21,7 @@ class PokemonService {
 
             PokemonImageUrl pokemonImageUrl = new Gson().fromJson(json, PokemonImageUrl.class);
             pokemon.setImageUrl(pokemonImageUrl.getImageUrl());
+            pokemon.setName(StringUtils.capitalize(pokemon.getName()));
 
         } catch (IOException e) {
             e.printStackTrace();
