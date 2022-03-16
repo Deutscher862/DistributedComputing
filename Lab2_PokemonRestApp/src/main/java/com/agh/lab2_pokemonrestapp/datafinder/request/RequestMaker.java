@@ -1,6 +1,4 @@
-package com.agh.lab2_pokemonrestapp.request;
-
-import com.agh.lab2_pokemonrestapp.Commons;
+package com.agh.lab2_pokemonrestapp.datafinder.request;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,8 +8,7 @@ import java.net.URL;
 
 public class RequestMaker {
 
-    public String findPokemon(String pokemonName) throws IOException {
-        URL url = new URL(Commons.POKEAPI_URL + pokemonName);
+    public String sendGetRequest(URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 

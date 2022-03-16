@@ -1,9 +1,11 @@
 package com.agh.lab2_pokemonrestapp.model;
 
+import java.util.List;
+
 public class Pokemon {
     private String name;
-    private int healthPoints;
     private String imageUrl;
+    private List<String> types;
 
     public String getName() {
         return name;
@@ -13,19 +15,19 @@ public class Pokemon {
         this.name = name;
     }
 
-    public int getHealthPoints() {
-        return healthPoints;
-    }
-
-    public void setHealthPoints(int healthPoints) {
-        this.healthPoints = healthPoints;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public List<String> getTypes() {
+        return types;
+    }
+
+    public void setTypes(List<String> types) {
+        this.types = types;
     }
 }
