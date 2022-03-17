@@ -13,10 +13,12 @@ class PokemonService {
     public void getParameters(Pokemon pokemon) {
         try {
             PokemonDataFinder dataFinder = new PokemonDataFinder();
-            PokemonData pokemonData = dataFinder.findData(pokemon.getName());
-            pokemon.setImageUrl(pokemonData.getImageUrl());
-            pokemon.setTypes(pokemonData.getTypes());
-            pokemon.setName(StringUtils.capitalize(pokemon.getName()));
+            PokemonData firstPokemonData = dataFinder.findData(pokemon.getFirstName());
+            PokemonData secondPokemonData = dataFinder.findData(pokemon.getSecondName());
+            pokemon.setFirstPokemonData(firstPokemonData);
+            pokemon.setSecondPokemonData(secondPokemonData);
+            pokemon.setFirstName(StringUtils.capitalize(pokemon.getFirstName()));
+            pokemon.setSecondName(StringUtils.capitalize(pokemon.getSecondName()));
 
         } catch (IOException e) {
             e.printStackTrace();

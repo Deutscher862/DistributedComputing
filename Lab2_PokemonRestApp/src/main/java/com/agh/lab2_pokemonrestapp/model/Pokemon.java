@@ -1,33 +1,40 @@
 package com.agh.lab2_pokemonrestapp.model;
 
-import java.util.List;
-
 public class Pokemon {
-    private String name;
-    private String imageUrl;
-    private List<String> types;
+    private String firstName;
+    private String SecondName;
+    private PokemonData firstPokemonData;
+    private PokemonData SecondPokemonData;
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getSecondName() {
+        return SecondName;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setSecondName(String secondName) {
+        SecondName = secondName;
     }
 
-    public List<String> getTypes() {
-        return types;
+    public PokemonData getFirstPokemonData() {
+        return firstPokemonData;
     }
 
-    public void setTypes(List<String> types) {
-        this.types = types;
+    public void setFirstPokemonData(PokemonData firstPokemonData) {
+        this.firstPokemonData = firstPokemonData;
+    }
+
+    public PokemonData getSecondPokemonData() {
+        return SecondPokemonData;
+    }
+
+    public void setSecondPokemonData(PokemonData secondPokemonData) {
+        SecondPokemonData = secondPokemonData;
     }
 }

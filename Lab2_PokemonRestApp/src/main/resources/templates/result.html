@@ -2,12 +2,16 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <title>Pokemon data</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <h1>Result</h1>
-<img th:src="${pokemon.imageUrl}" width="120"/>
-<p th:text="'Name: ' + ${pokemon.name}" />
-<p th:text="'Types: ' + ${pokemon.types}" />
+<img th:src="${pokemon.getFirstPokemonData().getImageUrl()}" width="120"/>
+<p th:text="'Name: ' + ${pokemon.firstName}"/>
+<p th:text="'Types: ' + ${pokemon.getFirstPokemonData().getTypes()}"/>
+<br>
+<img th:src="${pokemon.getSecondPokemonData().getImageUrl()}" width="120"/>
+<p th:text="'Name: ' + ${pokemon.secondName}"/>
+<p th:text="'Types: ' + ${pokemon.getSecondPokemonData().getTypes()}"/>
 </body>
 </html>

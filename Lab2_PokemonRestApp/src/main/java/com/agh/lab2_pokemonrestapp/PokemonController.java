@@ -20,6 +20,8 @@ class PokemonController {
     @PostMapping("/pokemon")
     public String greetingSubmit(@ModelAttribute Pokemon pokemon, Model model) {
         model.addAttribute("pokemon", pokemon);
+        System.out.println(pokemon.getFirstName());
+        System.out.println(pokemon.getSecondName());
         pokemonService.getParameters(pokemon);
         return "result";
     }
