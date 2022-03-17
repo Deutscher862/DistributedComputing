@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.net.URL;
 
 public class PokemonDataFinder {
-    public PokemonData findData(String name) throws IOException {
-        URL url = new URL(Commons.POKEAPI_URL + name.toLowerCase());
+    public PokemonData findData(String pokemonName) throws IOException {
+        URL url = new URL(Commons.POKEAPI_POKEMON_DATA + pokemonName.toLowerCase());
         RequestMaker requestMaker = new RequestMaker();
         String json = requestMaker.sendGetRequest(url);
         PokemonData pokemonData = new Gson().fromJson(json, PokemonData.class);
