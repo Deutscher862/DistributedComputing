@@ -2,6 +2,8 @@ package com.agh.lab2_pokemonrestapp;
 
 import com.agh.lab2_pokemonrestapp.datafinder.PokemonDataFinder;
 import com.agh.lab2_pokemonrestapp.datafinder.TypeDataFinder;
+import com.agh.lab2_pokemonrestapp.fightreferee.FightReferee;
+import com.agh.lab2_pokemonrestapp.fightreferee.FightResult;
 import com.agh.lab2_pokemonrestapp.model.Pokemon;
 import com.agh.lab2_pokemonrestapp.model.PokemonData;
 import com.agh.lab2_pokemonrestapp.model.TypeData;
@@ -27,7 +29,22 @@ class PokemonService {
 
             TypeDataFinder typeDataFinder = new TypeDataFinder();
             //this can possibly throw index out of range?
-            TypeData typeData = typeDataFinder.findData(pokemon.getFirstPokemonData().getTypes().get(0));
+            String firstPokemonType = pokemon.getFirstPokemonData().getTypes().get(0);
+            String secondPokemonType = pokemon.getSecondPokemonData().getTypes().get(0);
+            TypeData typeData = typeDataFinder.findData(secondPokemonType);
+
+            FightReferee fightReferee = new FightReferee();
+            FightResult fightResult = fightReferee.calculateFight(firstPokemonType, typeData);
+
+            String resultMessage;
+            if (fightResult.equals(FightResult.FIRST_WON)) {
+                resultMessage = pokemon.getFirstName() + "wins!";
+            } else if (fightResult.equals(FightResult.SECOND_WON)) {
+                resultMessage = pokemon.getSecondName() + "wins!";
+            } else {
+                resultMessage = "It's a draw!";
+            }
+            pokemon.setResultMessage(resultMessage);
 
         } catch (IOException e) {
             e.printStackTrace();

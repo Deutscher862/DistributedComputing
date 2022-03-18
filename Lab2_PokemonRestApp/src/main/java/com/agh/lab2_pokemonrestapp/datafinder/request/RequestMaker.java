@@ -1,6 +1,7 @@
 package com.agh.lab2_pokemonrestapp.datafinder.request;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -12,16 +13,21 @@ public class RequestMaker {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
 
-        BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        try {
+            BufferedReader input = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            StringBuilder content = new StringBuilder();
+            while ((line = input.readLine()) != null) {
+                content.append(line);
+            }
+            input.close();
+            connection.disconnect();
 
-        String line;
-        StringBuilder content = new StringBuilder();
-        while ((line = input.readLine()) != null) {
-            content.append(line);
+            return content.toString();
+        } catch (FileNotFoundException e) {
+            System.out.println("Resource not found");
+            return "";
         }
-        input.close();
-        connection.disconnect();
 
-        return content.toString();
     }
 }

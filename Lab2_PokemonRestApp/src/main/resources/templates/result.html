@@ -13,5 +13,7 @@
 <img th:src="${pokemon.getSecondPokemonData().getImageUrl()}" width="120"/>
 <p th:text="'Name: ' + ${pokemon.secondName}"/>
 <p th:text="'Types: ' + ${pokemon.getSecondPokemonData().getTypes()}"/>
+<br>
+<p th:text="${pokemon.getResultMessage()}"/>
 </body>
 </html>

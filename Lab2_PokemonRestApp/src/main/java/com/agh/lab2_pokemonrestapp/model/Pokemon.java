@@ -5,6 +5,7 @@ public class Pokemon {
     private String SecondName;
     private PokemonData firstPokemonData;
     private PokemonData SecondPokemonData;
+    private String resultMessage;
 
     public String getFirstName() {
         return firstName;
@@ -36,5 +37,13 @@ public class Pokemon {
 
     public void setSecondPokemonData(PokemonData secondPokemonData) {
         SecondPokemonData = secondPokemonData;
+    }
+
+    public String getResultMessage() {
+        return resultMessage;
+    }
+
+    public void setResultMessage(String resultMessage) {
+        this.resultMessage = resultMessage;
     }
 }

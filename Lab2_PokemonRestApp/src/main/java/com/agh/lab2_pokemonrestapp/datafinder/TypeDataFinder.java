@@ -15,6 +15,7 @@ public class TypeDataFinder {
         RequestMaker requestMaker = new RequestMaker();
         String json = requestMaker.sendGetRequest(url);
         TypeData typeData = new Gson().fromJson(json, TypeData.class);
+        System.out.println(typeData);
         return typeData;
     }
 }
