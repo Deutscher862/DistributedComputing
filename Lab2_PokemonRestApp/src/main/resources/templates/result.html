@@ -6,13 +6,13 @@
 </head>
 <body>
 <h1>Result</h1>
-<img th:src="${pokemon.getFirstPokemonData().getImageUrl()}" width="120"/>
+<img th:src="${pokemon.getFirstPokemonImageUrl().getImageUrl()}" width="120"/>
 <p th:text="'Name: ' + ${pokemon.firstName}"/>
-<p th:text="'Types: ' + ${pokemon.getFirstPokemonData().getTypes()}"/>
+<p th:text="'Types: ' + ${pokemon.getFirstPokemonType().getTypes()}"/>
 <br>
-<img th:src="${pokemon.getSecondPokemonData().getImageUrl()}" width="120"/>
+<img th:src="${pokemon.getSecondPokemonImageUrl().getImageUrl()}" width="120"/>
 <p th:text="'Name: ' + ${pokemon.secondName}"/>
-<p th:text="'Types: ' + ${pokemon.getSecondPokemonData().getTypes()}"/>
+<p th:text="'Types: ' + ${pokemon.getSecondPokemonType().getTypes()}"/>
 <br>
 <p th:text="${pokemon.getResultMessage()}"/>
 </body>

@@ -3,8 +3,10 @@ package com.agh.lab2_pokemonrestapp.model;
 public class Pokemon {
     private String firstName;
     private String SecondName;
-    private PokemonData firstPokemonData;
-    private PokemonData SecondPokemonData;
+    private PokemonImageUrl firstPokemonImageUrl;
+    private PokemonImageUrl SecondPokemonImageUrl;
+    private PokemonType firstPokemonType;
+    private PokemonType secondPokemonType;
     private String resultMessage;
 
     public String getFirstName() {
@@ -23,20 +25,36 @@ public class Pokemon {
         SecondName = secondName;
     }
 
-    public PokemonData getFirstPokemonData() {
-        return firstPokemonData;
+    public PokemonImageUrl getFirstPokemonImageUrl() {
+        return firstPokemonImageUrl;
     }
 
-    public void setFirstPokemonData(PokemonData firstPokemonData) {
-        this.firstPokemonData = firstPokemonData;
+    public void setFirstPokemonImageUrl(PokemonImageUrl firstPokemonImageUrl) {
+        this.firstPokemonImageUrl = firstPokemonImageUrl;
     }
 
-    public PokemonData getSecondPokemonData() {
-        return SecondPokemonData;
+    public PokemonImageUrl getSecondPokemonImageUrl() {
+        return SecondPokemonImageUrl;
     }
 
-    public void setSecondPokemonData(PokemonData secondPokemonData) {
-        SecondPokemonData = secondPokemonData;
+    public void setSecondPokemonImageUrl(PokemonImageUrl secondPokemonImageUrl) {
+        SecondPokemonImageUrl = secondPokemonImageUrl;
+    }
+
+    public PokemonType getFirstPokemonType() {
+        return firstPokemonType;
+    }
+
+    public void setFirstPokemonType(PokemonType firstPokemonType) {
+        this.firstPokemonType = firstPokemonType;
+    }
+
+    public PokemonType getSecondPokemonType() {
+        return secondPokemonType;
+    }
+
+    public void setSecondPokemonType(PokemonType secondPokemonType) {
+        this.secondPokemonType = secondPokemonType;
     }
 
     public String getResultMessage() {

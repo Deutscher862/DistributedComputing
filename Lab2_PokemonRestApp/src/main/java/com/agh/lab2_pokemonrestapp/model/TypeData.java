@@ -12,6 +12,7 @@ public class TypeData {
     public List<String> getTypesThatCountYou() {
         List<TypeName> newList = new ArrayList<>(damage_relations.double_damage_from);
         newList.addAll(damage_relations.half_damage_to);
+        newList.addAll(damage_relations.no_damage_to);
 
         return newList.stream()
                 .map(TypeName::getName)
@@ -21,6 +22,7 @@ public class TypeData {
     public List<String> getTypesThatYouCount() {
         List<TypeName> newList = new ArrayList<>(damage_relations.double_damage_to);
         newList.addAll(damage_relations.half_damage_from);
+        newList.addAll(damage_relations.no_damage_from);
 
         return newList.stream()
                 .map(TypeName::getName)
@@ -42,5 +44,12 @@ public class TypeData {
         public String getName() {
             return name;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "TypeData{" +
+                "damage_relations=" + damage_relations +
+                '}';
     }
 }

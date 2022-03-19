@@ -3,19 +3,19 @@ package com.agh.lab2_pokemonrestapp.datafinder;
 import com.agh.lab2_pokemonrestapp.Commons;
 import com.agh.lab2_pokemonrestapp.datafinder.request.RequestMaker;
 import com.agh.lab2_pokemonrestapp.model.PokemonType;
-import com.agh.lab2_pokemonrestapp.model.TypeData;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.net.URL;
 
-public class TypeDataFinder {
-    public TypeData findData(PokemonType pokemonType) throws IOException {
-        String typeId = Commons.TYPE_ID_MAP.get(pokemonType.getTypes().get(0));
-        URL url = new URL(Commons.POKEAPI_TYPE_DATA + typeId);
+public class PokemonTypeFinder {
+    public PokemonType findData(String pokemonName) throws IOException {
+        URL url = new URL(Commons.POKEMONTCG_POKEMON_TYPE + pokemonName.toLowerCase());
         RequestMaker requestMaker = new RequestMaker();
         String json = requestMaker.sendGetRequest(url);
-        TypeData typeData = new Gson().fromJson(json, TypeData.class);
-        return typeData;
+        PokemonType pokemonType = new Gson().fromJson(json, PokemonType.class);
+        System.out.println(pokemonType.getTypes());
+        return pokemonType;
     }
 }
+
