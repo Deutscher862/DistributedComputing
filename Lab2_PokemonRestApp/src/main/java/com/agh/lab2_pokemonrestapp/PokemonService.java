@@ -62,6 +62,7 @@ class PokemonService {
             pokemon.setSecondName(StringUtils.capitalize(pokemon.getSecondName()));
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
+            pokemon.setResultMessage(Commons.ERROR_MESSAGE);
             return "error";
         }
 
@@ -80,7 +81,8 @@ class PokemonService {
             pokemon.setResultMessage(resultMessage);
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
-            return "error";
+            pokemon.setResultMessage(Commons.FIGHT_CALCULATING_ERROR);
+            return "result";
         }
         return "result";
     }

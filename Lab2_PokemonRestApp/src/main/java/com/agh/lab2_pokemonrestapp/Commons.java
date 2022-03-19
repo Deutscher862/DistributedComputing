@@ -26,4 +26,6 @@ public class Commons {
             Map.entry("dark", "17"),
             Map.entry("fairy", "18")
     );
+    public static String ERROR_MESSAGE = "External API could not be reached";
+    public final static String FIGHT_CALCULATING_ERROR = "Fight result could not be calculated";
 }
