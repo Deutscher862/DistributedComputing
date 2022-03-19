@@ -4,27 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TypeData {
+public class TypeData extends RequestData {
     DamageRelations damage_relations;
 
-    //TODO DRY
-
     public List<String> getTypesThatCountYou() {
-        List<TypeName> newList = new ArrayList<>(damage_relations.double_damage_from);
-        newList.addAll(damage_relations.half_damage_to);
-        newList.addAll(damage_relations.no_damage_to);
+        List<TypeName> typeNames = new ArrayList<>(damage_relations.double_damage_from);
+        typeNames.addAll(damage_relations.half_damage_to);
+        typeNames.addAll(damage_relations.no_damage_to);
 
-        return newList.stream()
-                .map(TypeName::getName)
-                .collect(Collectors.toList());
+        return getStringTypeNames(typeNames);
     }
 
     public List<String> getTypesThatYouCount() {
-        List<TypeName> newList = new ArrayList<>(damage_relations.double_damage_to);
-        newList.addAll(damage_relations.half_damage_from);
-        newList.addAll(damage_relations.no_damage_from);
+        List<TypeName> typeNames = new ArrayList<>(damage_relations.double_damage_to);
+        typeNames.addAll(damage_relations.half_damage_from);
+        typeNames.addAll(damage_relations.no_damage_from);
 
-        return newList.stream()
+        return getStringTypeNames(typeNames);
+    }
+
+    private List<String> getStringTypeNames(List<TypeName> typeNames) {
+        return typeNames.stream()
                 .map(TypeName::getName)
                 .collect(Collectors.toList());
     }
@@ -44,12 +44,5 @@ public class TypeData {
         public String getName() {
             return name;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "TypeData{" +
-                "damage_relations=" + damage_relations +
-                '}';
     }
 }

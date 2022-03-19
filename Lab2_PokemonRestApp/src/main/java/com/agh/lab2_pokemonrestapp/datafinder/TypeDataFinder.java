@@ -9,13 +9,13 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.URL;
 
-public class TypeDataFinder {
-    public TypeData findData(PokemonType pokemonType) throws IOException {
-        String typeId = Commons.TYPE_ID_MAP.get(pokemonType.getTypes().get(0));
+public class TypeDataFinder implements DataFinder{
+    @Override
+    public TypeData findData(String typeName) throws IOException {
+        String typeId = Commons.TYPE_ID_MAP.get(typeName);
         URL url = new URL(Commons.POKEAPI_TYPE_DATA + typeId);
         RequestMaker requestMaker = new RequestMaker();
         String json = requestMaker.sendGetRequest(url);
-        TypeData typeData = new Gson().fromJson(json, TypeData.class);
-        return typeData;
+        return new Gson().fromJson(json, TypeData.class);
     }
 }

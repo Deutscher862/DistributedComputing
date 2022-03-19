@@ -7,14 +7,10 @@ public class FightReferee {
 
     public FightResult calculateFight(PokemonType firstPokemonType, TypeData opponentTypeData) {
         String firstPokemonTypeName = firstPokemonType.getTypes().get(0);
-        for (String typeName : opponentTypeData.getTypesThatCountYou()) {
-            if (firstPokemonTypeName.equalsIgnoreCase(typeName))
-                return FightResult.FIRST_WON;
-        }
-        for (String typeName : opponentTypeData.getTypesThatYouCount()) {
-            if (firstPokemonTypeName.equalsIgnoreCase(typeName))
-                return FightResult.SECOND_WON;
-        }
-        return FightResult.DRAW;
+        if (opponentTypeData.getTypesThatCountYou().contains(firstPokemonTypeName)) {
+            return FightResult.FIRST_WON;
+        } else if (opponentTypeData.getTypesThatYouCount().contains(firstPokemonTypeName))
+            return FightResult.SECOND_WON;
+        else return FightResult.DRAW;
     }
 }

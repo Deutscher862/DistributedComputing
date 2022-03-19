@@ -8,13 +8,14 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.net.URL;
 
-public class PokemonTypeFinder {
+public class PokemonTypeFinder implements DataFinder {
+    @Override
     public PokemonType findData(String pokemonName) throws IOException {
         URL url = new URL(Commons.POKEMONTCG_POKEMON_TYPE + pokemonName.toLowerCase());
         RequestMaker requestMaker = new RequestMaker();
         String json = requestMaker.sendGetRequest(url);
         PokemonType pokemonType = new Gson().fromJson(json, PokemonType.class);
-        System.out.println(pokemonType.getTypes());
+        pokemonType.decapitalizeNames();
         return pokemonType;
     }
 }
