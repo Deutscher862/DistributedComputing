@@ -61,7 +61,6 @@ class PokemonService {
             pokemon.setFirstName(StringUtils.capitalize(pokemon.getFirstName()));
             pokemon.setSecondName(StringUtils.capitalize(pokemon.getSecondName()));
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
             pokemon.setResultMessage(Commons.ERROR_MESSAGE);
             return "error";
         }
@@ -80,7 +79,6 @@ class PokemonService {
             String resultMessage = fightReferee.getResultMessage(firstName, secondName, firstPokemonType, typeData);
             pokemon.setResultMessage(resultMessage);
         } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
             pokemon.setResultMessage(Commons.FIGHT_CALCULATING_ERROR);
             return "result";
         }

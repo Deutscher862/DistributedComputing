@@ -16,7 +16,7 @@ class PokemonController {
     }
 
     @PostMapping("/pokemon")
-    public String greetingSubmit(@ModelAttribute Pokemon pokemon, Model model) {
+    public String pokemonSubmit(@ModelAttribute Pokemon pokemon, Model model) {
         model.addAttribute("pokemon", pokemon);
         return pokemonService.makeRequestsAndGetResult(pokemon);
     }
