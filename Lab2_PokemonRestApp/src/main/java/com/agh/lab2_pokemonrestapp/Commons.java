@@ -28,4 +28,5 @@ public class Commons {
     );
     public static String ERROR_MESSAGE = "External API could not be reached";
     public final static String FIGHT_CALCULATING_ERROR = "Fight result could not be calculated";
+    public final static String DEFAULT_ERROR_MESSAGE = ERROR_MESSAGE;
 }

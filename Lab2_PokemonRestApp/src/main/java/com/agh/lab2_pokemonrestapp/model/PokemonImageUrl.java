@@ -7,6 +7,11 @@ public class PokemonImageUrl extends RequestData {
         return sprites.getFront_default();
     }
 
+    public void setNullSprites() {
+        sprites = new Sprites();
+        sprites.front_default = "";
+    }
+
     static class Sprites {
         String front_default;
 

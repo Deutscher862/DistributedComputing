@@ -48,6 +48,7 @@ class PokemonService {
         Future<PokemonImageUrl> response2 = getImageUrl(secondName);
         Future<PokemonType> response3 = getPokemonType(firstName);
         Future<PokemonType> response4 = getPokemonType(secondName);
+        Commons.ERROR_MESSAGE = Commons.DEFAULT_ERROR_MESSAGE;
 
         while (!response1.isDone() && !response2.isDone() && !response3.isDone() && !response4.isDone()) {
             Thread.onSpinWait();
@@ -56,6 +57,14 @@ class PokemonService {
         try {
             pokemon.setFirstPokemonImageUrl(response1.get());
             pokemon.setSecondPokemonImageUrl(response2.get());
+        } catch (ExecutionException | InterruptedException e) {
+            pokemon.setFirstPokemonImageUrl(new PokemonImageUrl());
+            pokemon.setSecondPokemonImageUrl(new PokemonImageUrl());
+            pokemon.getFirstPokemonImageUrl().setNullSprites();
+            pokemon.getSecondPokemonImageUrl().setNullSprites();
+        }
+
+        try {
             pokemon.setFirstPokemonType(response3.get());
             pokemon.setSecondPokemonType(response4.get());
             pokemon.setFirstName(StringUtils.capitalize(pokemon.getFirstName()));
@@ -80,7 +89,6 @@ class PokemonService {
             pokemon.setResultMessage(resultMessage);
         } catch (InterruptedException | ExecutionException e) {
             pokemon.setResultMessage(Commons.FIGHT_CALCULATING_ERROR);
-            return "result";
         }
         return "result";
     }
