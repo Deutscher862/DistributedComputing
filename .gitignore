@@ -373,3 +373,14 @@ cython_debug/
 /Lab2_PokemonRestApp/mvnw.cmd
 /Lab2_PokemonRestApp/.idea/
 /Lab2_PokemonRestApp/.mvn/
+/Lab3_RabbitMQ/.idea/.gitignore
+/Lab3_RabbitMQ/Lab3_RabbitMQ.iml
+/Lab3_RabbitMQ/.idea/libraries/Lab3_RabbitMQ.xml
+/Lab3_RabbitMQ/.idea/misc.xml
+/Lab3_RabbitMQ/.idea/modules.xml
+/Lab3_RabbitMQ/.idea/runConfigurations.xml
+/Lab3_RabbitMQ/.idea/vcs.xml
+/Lab3_RabbitMQ/Z1_Consumer.java
+/Lab3_RabbitMQ/Z1_Producer.java
+/Lab3_RabbitMQ/Z2_Consumer.java
+/Lab3_RabbitMQ/Z2_Producer.java
