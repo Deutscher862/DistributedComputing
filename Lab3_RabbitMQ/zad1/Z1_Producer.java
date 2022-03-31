@@ -1,4 +1,4 @@
-package zad1a;
+package zad1;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -24,12 +24,22 @@ public class Z1_Producer {
         String QUEUE_NAME = "queue1";
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 
-        // producer (publish msg)
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String message = br.readLine();
 
-        channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
-        System.out.println("Sent: " + message);
+        //ZAD 1a
+//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//        String message = br.readLine();
+//
+//
+//        channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+//        System.out.println("Sent: " + message);
+
+        //ZAD 1b
+        String message;
+        for (int i = 0; i < 10; i++) {
+            message = i % 2 == 0 ? "1" : "5";
+            channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+            System.out.println("Sent: " + message);
+        }
 
         // close
         channel.close();
