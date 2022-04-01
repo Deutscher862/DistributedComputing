@@ -37,15 +37,15 @@ public class Z1_Consumer {
                     e.printStackTrace();
                 }
                 System.out.println("Parsed: " + message);
-                channel.basicAck(envelope.getDeliveryTag(), false);
+                channel.basicAck(envelope.getDeliveryTag(), false); // z tym po restarcie działa dalej
             }
         };
 
         // start listening
         System.out.println("Waiting for messages...");
-//        channel.basicConsume(QUEUE_NAME, true, consumer);
         channel.basicQos(1);
-        channel.basicConsume(QUEUE_NAME, false, consumer);
+//        channel.basicConsume(QUEUE_NAME, true, consumer);
+        channel.basicConsume(QUEUE_NAME, false, consumer); // z tym po restarcie działa dalej
 
         // close
 //        channel.close();
