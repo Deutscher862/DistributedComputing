@@ -44,7 +44,7 @@ public class Z1_Consumer {
         // start listening
         System.out.println("Waiting for messages...");
         channel.basicQos(1);
-//        channel.basicConsume(QUEUE_NAME, true, consumer);
+//        channel.basicConsume(QUEUE_NAME, true, consumer); // z tym po restarcie nic nie robi
         channel.basicConsume(QUEUE_NAME, false, consumer); // z tym po restarcie działa dalej
 
         // close
