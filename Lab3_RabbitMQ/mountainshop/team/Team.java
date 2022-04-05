@@ -2,6 +2,7 @@ package mountainshop.team;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Map;
 
 class Team {
     public static void main(String[] argv) throws Exception {
@@ -9,25 +10,30 @@ class Team {
         String EXCHANGE_NAME = "mountainShop";
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter connection key: ");
-        String key = br.readLine();
+        System.out.println("Enter your name: ");
+        String name = br.readLine();
 
-        QueueWriter writer = new QueueWriter(EXCHANGE_NAME, key);
-        writer.establishConnection();
+        Map<String, QueueWriter> ordersMap = Map.of(
+                "tlen", new QueueWriter(EXCHANGE_NAME, "tlen"),
+                "buty", new QueueWriter(EXCHANGE_NAME, "buty"),
+                "plecak", new QueueWriter(EXCHANGE_NAME, "plecak")
+        );
 
         while (true) {
-
-            // read msg
-            System.out.print("Enter message: ");
+            System.out.print("Pick your order: ");
             String message = br.readLine();
 
-            // break condition
-            if ("exit".equals(message)) {
+            if (message.equals("quit")) {
                 break;
             }
+            QueueWriter currentWriter = ordersMap.get(message);
+            if (currentWriter != null) {
+                currentWriter.send(name + " " + message);
+            } else {
+                System.out.println("Item not found");
+            }
 
-            // publish
-            writer.send(message);
+
         }
     }
 }

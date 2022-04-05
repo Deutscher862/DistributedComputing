@@ -17,18 +17,20 @@ class QueueWriter {
     QueueWriter(String exchange_name, String topic) {
         this.topic = topic;
         this.exchangeName = exchange_name;
+
+        establishConnection();
     }
 
     void send(String message) {
         try {
             channel.basicPublish(exchangeName, topic, null, message.getBytes(StandardCharsets.UTF_8));
-            System.out.println("Sent: " + message);
+            System.out.println(message);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    void establishConnection() {
+    private void establishConnection() {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
         try {

@@ -35,7 +35,7 @@ class QueueListener extends Thread {
                 }
             };
             System.out.println("Ready...");
-            channel.basicConsume(topic, true, consumer);
+            channel.basicConsume(queueName, true, consumer);
         } catch (IOException | TimeoutException e) {
             e.printStackTrace();
         }
