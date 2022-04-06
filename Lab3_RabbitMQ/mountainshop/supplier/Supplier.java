@@ -4,20 +4,23 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 class Supplier {
+    final static String EXCHANGE_NAME = "confirmOrder";
+
     public static void main(String[] argv) throws Exception {
-        String EXCHANGE_NAME = "mountainShop";
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter supplier name: ");
+        System.out.println("Wprowadz imie: ");
         String name = br.readLine();
 
-        System.out.println("Enter first product: ");
+        System.out.println("Wprowadz pierwszy produkt: ");
         String firstProduct = br.readLine();
 
-        System.out.println("Enter second product: ");
+        System.out.println("Wprowadz drugi produkt: ");
         String secondProduct = br.readLine();
 
-        new QueueListener(firstProduct).start();
-        new QueueListener(secondProduct).start();
+        TopicWriter topicWriter = new TopicWriter(EXCHANGE_NAME);
+
+        new QueueListener(firstProduct, name, topicWriter).start();
+        new QueueListener(secondProduct, name, topicWriter).start();
     }
 }
