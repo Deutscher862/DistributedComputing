@@ -1,4 +1,4 @@
-package mountainshop.supplier;
+package mountainshop.topic;
 
 import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
-class TopicWriter {
+public class TopicWriter {
     private final String exchangeName;
     private Channel channel;
 

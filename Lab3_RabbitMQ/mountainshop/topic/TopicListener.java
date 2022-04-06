@@ -1,10 +1,10 @@
-package mountainshop.team;
+package mountainshop.topic;
 
 import com.rabbitmq.client.*;
 
 import java.nio.charset.StandardCharsets;
 
-class TopicListener extends Thread {
+public class TopicListener extends Thread {
     private final String exchangeName;
     private final String topic;
 

@@ -1,4 +1,7 @@
-package mountainshop.team;
+package mountainshop.users;
+
+import mountainshop.queue.QueueWriter;
+import mountainshop.topic.TopicListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +13,7 @@ class Team {
     static final String BUTY = "plecak";
     static final String PLECAK = "buty";
     static final String EXCHANGE_NAME = "confirmOrder";
+    final static String ADMIN_EXCHANGE = "systemInfo";
     static String name;
     static Map<String, QueueWriter> ordersMap;
     static int orderId = 1;
@@ -25,7 +29,7 @@ class Team {
                 PLECAK, new QueueWriter(PLECAK)
         );
 
-        runTopicListener();
+        runTopicListeners();
 
         while (true) {
             System.out.println("Wybierz zamowienie: ");
@@ -56,12 +60,13 @@ class Team {
                 e.printStackTrace();
             }
         } else {
-            System.out.println("Produkt nie znaleziony");
+            System.out.println("Produkt nie zostal znaleziony");
         }
     }
 
-    public static void runTopicListener() {
+    public static void runTopicListeners() {
         String key = name + ".*.*.*";
         new TopicListener(EXCHANGE_NAME, key).start();
+        new TopicListener(ADMIN_EXCHANGE, "*.team").start();
     }
 }

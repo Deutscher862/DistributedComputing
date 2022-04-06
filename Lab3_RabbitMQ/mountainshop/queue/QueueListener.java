@@ -1,11 +1,12 @@
-package mountainshop.supplier;
+package mountainshop.queue;
 
 import com.rabbitmq.client.*;
+import mountainshop.topic.TopicWriter;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-class QueueListener extends Thread {
+public class QueueListener extends Thread {
     private final String key;
     private final String supplierName;
     private final TopicWriter topicWriter;
