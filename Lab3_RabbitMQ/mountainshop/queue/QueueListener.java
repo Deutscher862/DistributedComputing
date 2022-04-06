@@ -10,6 +10,7 @@ public class QueueListener extends Thread {
     private final String key;
     private final String supplierName;
     private final TopicWriter topicWriter;
+    private int orderId = 1;
 
     public QueueListener(String key, String supplierName, TopicWriter topicWriter) {
         this.key = key;
@@ -33,7 +34,8 @@ public class QueueListener extends Thread {
                         String message = new String(body, StandardCharsets.UTF_8);
                         System.out.println("Otrzymano: " + message);
                         channel.basicAck(envelope.getDeliveryTag(), false);
-                        String orderName = message + "." + supplierName;
+                        String orderName = message + "." + supplierName + "." + orderId;
+                        orderId += 1;
                         String returnMessage = "Zamowienie " + orderName + " zrealizowane";
                         topicWriter.send(returnMessage, orderName);
                     } catch (IOException e) {

@@ -1,12 +1,14 @@
 package mountainshop.users;
 
+import mountainshop.topic.TopicListener;
 import mountainshop.topic.TopicWriter;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 class Administrator {
-    static final String EXCHANGE_NAME = "systemInfo";
+    final static String ORDER_EXCHANGE = "confirmOrder";
+    final static String ADMIN_EXCHANGE = "systemInfo";
     static final String MESSAGE_FOR_ALL = "Wiadomosc do wszystkich";
     static final String MESSAGE_FOR_TEAMS = "Wiadomosc do ekip";
     static final String MESSAGE_FOR_SUPPLIER = "Wiadomosc do dostawcow";
@@ -14,8 +16,10 @@ class Administrator {
     static final String SUPPLIER_TOPIC = "log.supplier";
 
     public static void main(String[] argv) throws Exception {
-        TopicWriter topicWriter = new TopicWriter(EXCHANGE_NAME);
+        TopicWriter topicWriter = new TopicWriter(ADMIN_EXCHANGE);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        new TopicListener(ORDER_EXCHANGE, "order.#").start();
 
         while (true) {
             System.out.println("Wybierz grupe uzytkownikow: ");

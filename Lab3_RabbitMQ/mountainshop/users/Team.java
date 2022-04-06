@@ -16,7 +16,6 @@ class Team {
     final static String ADMIN_EXCHANGE = "systemInfo";
     static String name;
     static Map<String, QueueWriter> ordersMap;
-    static int orderId = 1;
 
     public static void main(String[] argv) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -54,8 +53,7 @@ class Team {
         QueueWriter currentWriter = ordersMap.get(message);
         if (currentWriter != null) {
             try {
-                currentWriter.send(name + ".order" + orderId + "." + message);
-                orderId += 1;
+                currentWriter.send("order." + name + "."  + message);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -65,7 +63,7 @@ class Team {
     }
 
     public static void runTopicListeners() {
-        String key = name + ".*.*.*";
+        String key = "order." + name + ".#";
         new TopicListener(EXCHANGE_NAME, key).start();
         new TopicListener(ADMIN_EXCHANGE, "*.team").start();
     }
