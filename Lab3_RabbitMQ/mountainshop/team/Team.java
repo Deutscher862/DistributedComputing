@@ -5,8 +5,11 @@ import java.io.InputStreamReader;
 import java.util.Map;
 
 class Team {
+    static final String TLEN = "tlen";
+    static final String BUTY = "plecak";
+    static final String PLECAK = "buty";
+
     public static void main(String[] argv) throws Exception {
-        // exchange
         String EXCHANGE_NAME = "mountainShop";
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -14,9 +17,9 @@ class Team {
         String name = br.readLine();
 
         Map<String, QueueWriter> ordersMap = Map.of(
-                "tlen", new QueueWriter(EXCHANGE_NAME, "tlen"),
-                "buty", new QueueWriter(EXCHANGE_NAME, "buty"),
-                "plecak", new QueueWriter(EXCHANGE_NAME, "plecak")
+                TLEN, new QueueWriter(TLEN),
+                BUTY, new QueueWriter(BUTY),
+                PLECAK, new QueueWriter(PLECAK)
         );
 
         while (true) {
@@ -28,12 +31,10 @@ class Team {
             }
             QueueWriter currentWriter = ordersMap.get(message);
             if (currentWriter != null) {
-                currentWriter.send(name + " " + message);
+                currentWriter.send(name + ": " + message);
             } else {
                 System.out.println("Item not found");
             }
-
-
         }
     }
 }

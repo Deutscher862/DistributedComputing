@@ -2,20 +2,15 @@ package mountainshop.supplier;
 
 import com.rabbitmq.client.*;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.TimeoutException;
 
 class QueueListener extends Thread {
-    private final String topic;
-    private final String exchangeName;
+    private final String key;
 
-    QueueListener(String topic, String exchangeName) {
-        this.topic = topic;
-        this.exchangeName = exchangeName;
+    public QueueListener(String key) {
+        this.key = key;
     }
 
-    @Override
     public void run() {
         try {
             ConnectionFactory factory = new ConnectionFactory();
@@ -23,22 +18,18 @@ class QueueListener extends Thread {
             Connection connection = factory.newConnection();
             Channel channel = connection.createChannel();
 
-            channel.exchangeDeclare(exchangeName, BuiltinExchangeType.TOPIC);
-            String queueName = channel.queueDeclare().getQueue();
-            channel.queueBind(queueName, exchangeName, topic);
+            channel.queueDeclare(key, false, false, false, null);
 
             Consumer consumer = new DefaultConsumer(channel) {
                 @Override
                 public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) {
                     String message = new String(body, StandardCharsets.UTF_8);
-                    System.out.println("Received: " + message);
+                    System.out.println(message);
                 }
             };
-            System.out.println("Ready...");
-            channel.basicConsume(queueName, true, consumer);
-        } catch (IOException | TimeoutException e) {
+            channel.basicConsume(key, false, consumer);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
