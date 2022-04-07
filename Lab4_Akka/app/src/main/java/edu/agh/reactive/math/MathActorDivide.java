@@ -7,6 +7,8 @@ import akka.actor.typed.javadsl.Behaviors;
 import akka.actor.typed.javadsl.Receive;
 
 public class MathActorDivide extends AbstractBehavior<MathActor.MathCommandDivide> {
+    private int operationCount = 0;
+
     public MathActorDivide(ActorContext<MathActor.MathCommandDivide> context) {
         super(context);
     }
@@ -31,7 +33,9 @@ public class MathActorDivide extends AbstractBehavior<MathActor.MathCommandDivid
         } catch (ArithmeticException e) {
             result = 0;
         }
+        operationCount += 1;
         System.out.println("actorDivide: divide result = " + result);
+        System.out.println("actorDivide: operation count = " + operationCount);
         System.out.println("actorDivide: sending response");
         mathCommandDivide.replyTo.tell(new MathActor.MathCommandResult(result));
         return this;
