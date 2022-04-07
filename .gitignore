@@ -385,3 +385,17 @@ cython_debug/
 /Lab3_RabbitMQ/Z2_Consumer.java
 /Lab3_RabbitMQ/Z2_Producer.java
 /Lab3_RabbitMQ/.idea/
+/Lab4_Akka/.gitattributes
+/Lab4_Akka/.idea/.gitignore
+/Lab4_Akka/.gitignore
+/Lab4_Akka/.idea/.name
+/Lab4_Akka/.idea/codeStyles/codeStyleConfig.xml
+/Lab4_Akka/.idea/compiler.xml
+/Lab4_Akka/.idea/encodings.xml
+/Lab4_Akka/.idea/gradle.xml
+/Lab4_Akka/gradlew
+/Lab4_Akka/gradlew.bat
+/Lab4_Akka/.idea/jarRepositories.xml
+/Lab4_Akka/.idea/misc.xml
+/Lab4_Akka/.idea/codeStyles/Project.xml
+/Lab4_Akka/.idea/vcs.xml
