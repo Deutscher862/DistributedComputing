@@ -8,6 +8,7 @@ import akka.NotUsed;
 import akka.actor.typed.ActorSystem;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.stream.*;
+import akka.stream.impl.fusing.Buffer;
 import akka.stream.javadsl.*;
 import edu.agh.reactive.hello.HelloActor;
 import edu.agh.reactive.math.MathActor;
@@ -21,46 +22,49 @@ public class App {
         //////////////////////////////////////////
         //TASK 0 - hello
         // create actor system
-
-        final ActorSystem<String> helloSystem =
-                ActorSystem.create(HelloActor.create(), "helloActor");
-        // send messages
-        helloSystem.tell("hello world");
-
-
-        //////////////////////////////////////////
-        //TASK 1 - math operations
-        final ActorSystem<MathActor.MathCommand> mathContext =
-                ActorSystem.create(MathActor.create(), "actorMath");
-        System.out.println("math main: actor system ready");
-
-        // send messages
-        mathContext.tell(new MathActor.MathCommandAdd(5, 3));
-        mathContext.tell(new MathActor.MathCommandMultiply(5, 3, null));
-        mathContext.tell(new MathActor.MathCommandMultiply(5, 2, null));
-        mathContext.tell(new MathActor.MathCommandDivide(15, 3, null));
-        mathContext.tell(new MathActor.MathCommandDivide(15, 5, null));
-
-        mathContext.tell(new MathActor.MathCommandDivide(15, 0, null));
-        Thread.sleep(2000);
-
-        System.out.println("Math main: sending second package of messages");
-        mathContext.tell(new MathActor.MathCommandMultiply(5, 3, null));
-        mathContext.tell(new MathActor.MathCommandMultiply(5, 2, null));
-        mathContext.tell(new MathActor.MathCommandDivide(15, 3, null));
-        mathContext.tell(new MathActor.MathCommandDivide(15, 5, null));
-        System.out.println("Math main: messages send");
+//
+//        final ActorSystem<String> helloSystem =
+//                ActorSystem.create(HelloActor.create(), "helloActor");
+//        // send messages
+//        helloSystem.tell("hello world");
+//
+//
+//        //////////////////////////////////////////
+//        //TASK 1 - math operations
+//        final ActorSystem<MathActor.MathCommand> mathContext =
+//                ActorSystem.create(MathActor.create(), "actorMath");
+//        System.out.println("math main: actor system ready");
+//
+//        // send messages
+//        mathContext.tell(new MathActor.MathCommandAdd(5, 3));
+//        mathContext.tell(new MathActor.MathCommandMultiply(5, 3, null));
+//        mathContext.tell(new MathActor.MathCommandMultiply(5, 2, null));
+//        mathContext.tell(new MathActor.MathCommandDivide(15, 3, null));
+//        mathContext.tell(new MathActor.MathCommandDivide(15, 5, null));
+//
+//        mathContext.tell(new MathActor.MathCommandDivide(15, 0, null));
+//        Thread.sleep(2000);
+//
+//        System.out.println("Math main: sending second package of messages");
+//        mathContext.tell(new MathActor.MathCommandMultiply(5, 3, null));
+//        mathContext.tell(new MathActor.MathCommandMultiply(5, 2, null));
+//        mathContext.tell(new MathActor.MathCommandDivide(15, 3, null));
+//        mathContext.tell(new MathActor.MathCommandDivide(15, 5, null));
+//        System.out.println("Math main: messages send");
 
 
         /// TASK 2 - Reactive Streams in Akka Streams
         final ActorSystem streamSystem = ActorSystem.create(Behaviors.empty(), "streams");
         final Materializer materializer = Materializer.createMaterializer(streamSystem);
         // example how to create simple Akka Streams
-        //final Source<Integer, NotUsed> source = Source.range(1, 100);
-        //final Flow<Integer, String, NotUsed> flow = Flow.fromFunction((Integer n) -> n.toString());
-        //final Sink<String, CompletionStage<Done>> sink = Sink.foreach(str->System.out.println(str));
-        //final RunnableGraph<NotUsed> runnableGraph = source.via(flow).to(sink);
-        //runnableGraph.run(materializer);
+        final Source<Integer, NotUsed> source = Source.range(1, 100).buffer(16, OverflowStrategy.dropTail());
+        final Flow<Integer, String, NotUsed> flow = Flow.fromFunction((Integer n) -> n.toString()).async();
+        final Sink<String, CompletionStage<Done>> sink = Sink.foreach(str -> {
+            System.out.println(str);
+            Thread.sleep(1000);
+        });
+        final RunnableGraph<NotUsed> runnableGraph = source.via(flow).to(sink);
+        runnableGraph.run(materializer);
         // create debugFlow and add slowSink components
 
         // TASK 3 - graph dsl

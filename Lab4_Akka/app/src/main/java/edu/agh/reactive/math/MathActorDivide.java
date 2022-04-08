@@ -27,12 +27,7 @@ public class MathActorDivide extends AbstractBehavior<MathActor.MathCommandDivid
 
     private Behavior<MathActor.MathCommandDivide> onMathCommandDivide(MathActor.MathCommandDivide mathCommandDivide) {
         System.out.println("actorDivide: received command: divide");
-        int result;
-        try {
-            result = mathCommandDivide.firstNumber / mathCommandDivide.secondNumber;
-        } catch (ArithmeticException e) {
-            result = 0;
-        }
+        int result = mathCommandDivide.firstNumber / mathCommandDivide.secondNumber;
         operationCount += 1;
         System.out.println("actorDivide: divide result = " + result);
         System.out.println("actorDivide: operation count = " + operationCount);
