@@ -30,8 +30,12 @@ public class TopicWriter {
         }
     }
 
-    public void send(String message, String topic) throws IOException {
-        channel.basicPublish(exchangeName, topic, null, message.getBytes(StandardCharsets.UTF_8));
-        System.out.println("Wyslano: " + message);
+    public void send(String message, String topic) {
+        try {
+            channel.basicPublish(exchangeName, topic, null, message.getBytes(StandardCharsets.UTF_8));
+            System.out.println("Wyslano: " + message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

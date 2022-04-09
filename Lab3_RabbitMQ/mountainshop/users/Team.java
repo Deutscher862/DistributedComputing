@@ -1,70 +1,59 @@
 package mountainshop.users;
 
-import mountainshop.queue.QueueWriter;
 import mountainshop.topic.TopicListener;
+import mountainshop.topic.TopicWriter;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Map;
 
 class Team {
     static final String TLEN = "tlen";
     static final String BUTY = "plecak";
     static final String PLECAK = "buty";
-    static final String EXCHANGE_NAME = "confirmOrder";
+    static final String CONFIRM_ORDER_EXCHANGE = "confirmOrder";
     final static String ADMIN_EXCHANGE = "systemInfo";
+    final static String ORDER_EHCHANGE = "mountainShop";
+    static TopicWriter topicWriter;
     static String name;
-    static Map<String, QueueWriter> ordersMap;
 
     public static void main(String[] argv) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Wprowadz imie: ");
         name = br.readLine();
 
-        ordersMap = Map.of(
-                TLEN, new QueueWriter(TLEN),
-                BUTY, new QueueWriter(BUTY),
-                PLECAK, new QueueWriter(PLECAK)
-        );
-
+        topicWriter = new TopicWriter(ORDER_EHCHANGE);
         runTopicListeners();
 
         while (true) {
             System.out.println("Wybierz zamowienie: ");
-            String message = br.readLine();
+            String product = br.readLine();
 
-            if (message.equals("q")) {
+            if (product.equals("q")) {
                 break;
-            } else if (message.equals("seq")) {
-                choseWriterAndSend(TLEN);
-                choseWriterAndSend(TLEN);
-                choseWriterAndSend(BUTY);
-                choseWriterAndSend(BUTY);
-                choseWriterAndSend(PLECAK);
-                choseWriterAndSend(PLECAK);
+            } else if (product.equals("seq")) {
+                sendSequence();
             } else {
-                choseWriterAndSend(message);
+                String message = "order." + name + "." + product;
+                topicWriter.send(message, message);
             }
-        }
-    }
-
-    public static void choseWriterAndSend(String message) {
-        QueueWriter currentWriter = ordersMap.get(message);
-        if (currentWriter != null) {
-            try {
-                currentWriter.send("order." + name + "."  + message);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("Produkt nie zostal znaleziony");
         }
     }
 
     public static void runTopicListeners() {
         String key = "order." + name + ".#";
-        new TopicListener(EXCHANGE_NAME, key).start();
+        new TopicListener(CONFIRM_ORDER_EXCHANGE, key).start();
         new TopicListener(ADMIN_EXCHANGE, "*.team").start();
+    }
+
+    public static void sendSequence() {
+        String tMessage = "order." + name + "." + TLEN;
+        String bMessage = "order." + name + "." + BUTY;
+        String pMessage = "order." + name + "." + PLECAK;
+        topicWriter.send(tMessage, tMessage);
+        topicWriter.send(tMessage, tMessage);
+        topicWriter.send(bMessage, bMessage);
+        topicWriter.send(bMessage, bMessage);
+        topicWriter.send(pMessage, pMessage);
+        topicWriter.send(pMessage, pMessage);
     }
 }

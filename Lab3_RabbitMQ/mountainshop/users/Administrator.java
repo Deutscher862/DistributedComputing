@@ -7,8 +7,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 class Administrator {
-    final static String ORDER_EXCHANGE = "confirmOrder";
+    final static String CONFIRM_ORDER_EXCHANGE = "confirmOrder";
     final static String ADMIN_EXCHANGE = "systemInfo";
+    final static String ORDER_EHCHANGE = "mountainShop";
     static final String MESSAGE_FOR_ALL = "Wiadomosc do wszystkich";
     static final String MESSAGE_FOR_TEAMS = "Wiadomosc do ekip";
     static final String MESSAGE_FOR_SUPPLIER = "Wiadomosc do dostawcow";
@@ -19,7 +20,8 @@ class Administrator {
         TopicWriter topicWriter = new TopicWriter(ADMIN_EXCHANGE);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        new TopicListener(ORDER_EXCHANGE, "order.#").start();
+        new TopicListener(CONFIRM_ORDER_EXCHANGE, "#").start();
+        new TopicListener(ORDER_EHCHANGE, "#").start();
 
         while (true) {
             System.out.println("Wybierz grupe uzytkownikow: ");

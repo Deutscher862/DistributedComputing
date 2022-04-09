@@ -1,6 +1,6 @@
 package mountainshop.users;
 
-import mountainshop.queue.QueueListener;
+import mountainshop.topic.SupplierTopicListener;
 import mountainshop.topic.TopicListener;
 import mountainshop.topic.TopicWriter;
 
@@ -8,8 +8,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 class Supplier {
-    final static String ORDER_EXCHANGE = "confirmOrder";
+    final static String ORDER_CONFIRM_EXCHANGE = "confirmOrder";
     final static String ADMIN_EXCHANGE = "systemInfo";
+    final static String ORDER_EHCHANGE = "mountainShop";
+
 
     public static void main(String[] argv) throws Exception {
 
@@ -23,10 +25,12 @@ class Supplier {
         System.out.println("Wprowadz drugi produkt: ");
         String secondProduct = br.readLine();
 
-        TopicWriter topicWriter = new TopicWriter(ORDER_EXCHANGE);
+        TopicWriter topicWriter = new TopicWriter(ORDER_CONFIRM_EXCHANGE);
 
-        new QueueListener(firstProduct, name, topicWriter).start();
-        new QueueListener(secondProduct, name, topicWriter).start();
+        new SupplierTopicListener(ORDER_EHCHANGE, topicWriter, name, firstProduct).start();
+        new SupplierTopicListener(ORDER_EHCHANGE, topicWriter, name, secondProduct).start();
         new TopicListener(ADMIN_EXCHANGE, "*.supplier").start();
+
+        System.out.println("Czekam na wiadomosci...");
     }
 }
