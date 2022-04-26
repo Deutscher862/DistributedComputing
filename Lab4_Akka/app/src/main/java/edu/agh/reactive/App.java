@@ -7,14 +7,13 @@ import akka.Done;
 import akka.NotUsed;
 import akka.actor.typed.ActorSystem;
 import akka.actor.typed.javadsl.Behaviors;
+import akka.japi.Pair;
 import akka.stream.*;
-import akka.stream.impl.fusing.Buffer;
 import akka.stream.javadsl.*;
-import edu.agh.reactive.hello.HelloActor;
-import edu.agh.reactive.math.MathActor;
 
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.concurrent.CompletionStage;
 
 public class App {
@@ -54,33 +53,59 @@ public class App {
 
 
         /// TASK 2 - Reactive Streams in Akka Streams
-        final ActorSystem streamSystem = ActorSystem.create(Behaviors.empty(), "streams");
-        final Materializer materializer = Materializer.createMaterializer(streamSystem);
-        // example how to create simple Akka Streams
-        final Source<Integer, NotUsed> source = Source.range(1, 100).buffer(16, OverflowStrategy.dropTail());
-        final Flow<Integer, String, NotUsed> flow = Flow.fromFunction((Integer n) -> n.toString()).async();
-        final Sink<String, CompletionStage<Done>> sink = Sink.foreach(str -> {
-            System.out.println(str);
-            Thread.sleep(1000);
-        });
-        final RunnableGraph<NotUsed> runnableGraph = source.via(flow).to(sink);
-        runnableGraph.run(materializer);
+//        final ActorSystem streamSystem = ActorSystem.create(Behaviors.empty(), "streams");
+//        final Materializer materializer = Materializer.createMaterializer(streamSystem);
+//        final Source<Integer, NotUsed> source = Source.range(1, 100);
+
         // create debugFlow and add slowSink components
+//        final Flow<Integer, String, NotUsed> flow = Flow.fromFunction((Integer n) -> {
+//            System.out.println("Processing: " + n);
+//            return n.toString();
+//        });
+//        final Sink<String, CompletionStage<Done>> sink = Sink.foreach(str -> {
+//            System.out.println(str);
+//            Thread.sleep(1000);
+//        });
+//        final RunnableGraph<NotUsed> runnableGraph = source.via(flow).buffer(16, OverflowStrategy.dropTail()).async().to(sink);
+//        runnableGraph.run(materializer);
 
         // TASK 3 - graph dsl
-        // how to create
-        // step 1 - frame
-        //final Graph<ClosedShape, CompletionStage<Done>> specialGraph = GraphDSL.create(sink , (builder, out)-> {
-        //step 2 - building blocks
-        //builder.add(sink);
-        //    final Outlet<Integer> dslSource = builder.add(source).out();
-        // step 3 - glue components
-        //        builder.from(dslSource).via(builder.add(flow)).to(out);
-        // step 4 closing
-        //        return ClosedShape.getInstance();
-        //});
+        final ActorSystem<Object> streamSystem = ActorSystem.create(Behaviors.empty(), "streams");
+        final Materializer materializer = Materializer.createMaterializer(streamSystem);
+        final Source<Integer, NotUsed> source = Source.range(1, 100);
 
-        //RunnableGraph.fromGraph(specialGraph).run(materializer);
+        final Flow<Integer, Integer, NotUsed> addFlow = Flow.fromFunction((Integer n) -> {
+            System.out.println("Adding: " + n);
+            return n + 1;
+        });
+
+        final Flow<Integer, Integer, NotUsed> multiplyFlow = Flow.fromFunction((Integer n) -> {
+            System.out.println("Multiplying: " + n);
+            return n * 10;
+        });
+
+        final Sink<Pair<Integer, Integer>, CompletionStage<Done>> sink = Sink.foreach(n -> System.out.println("Received: " + n));
+
+        RunnableGraph.fromGraph(
+                GraphDSL.create(sink, (builder, out) -> {
+                    final UniformFanOutShape<Integer, Integer> bcast = builder.add(Broadcast.create(2));
+                    final FanInShape2<Integer, Integer, Pair<Integer, Integer>> zipShape = builder.add(Zip.create());
+                    final UniformFanInShape<Integer, Pair<Integer, Integer>> zip =
+                            UniformFanInShape.create(zipShape.out(), Arrays.asList(zipShape.in0(), zipShape.in1()));
+                    final Outlet<Integer> dslSource = builder.add(source).out();
+
+                    builder.from(dslSource)
+                            .viaFanOut(bcast)
+                            .via(builder.add(addFlow))
+                            .viaFanIn(zip)
+                            .to(out);
+
+                    builder.from(bcast)
+                            .via(builder.add(multiplyFlow))
+                            .toFanIn(zip);
+
+                    return ClosedShape.getInstance();
+                })).run(materializer);
 
         try {
             System.out.println(">>> Press ENTER to exit <<<");
