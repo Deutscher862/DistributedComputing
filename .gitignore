@@ -404,3 +404,16 @@ cython_debug/
 /Lab5_middleware/Ice/.settings/
 /Lab5_middleware/Thrift/.settings/
 /Lab5_middleware/Thrift/.idea/
+/Lab5_middleware/SmartHome/.idea/
+/Lab5_middleware/SmartHome/SmartHome.iml
+/Lab5_middleware/ReverseProxy_gRPC/.idea/
+/Lab5_middleware/ReverseProxy_gRPC/ReverseProxy_gRPC.iml
+/Lab4_Akka/.gradle/buildOutputCleanup/buildOutputCleanup.lock
+/Lab4_Akka/.gradle/buildOutputCleanup/cache.properties
+/Lab4_Akka/.gradle/7.4.2/checksums/checksums.lock
+/Lab4_Akka/.gradle/7.4.2/dependencies-accessors/dependencies-accessors.lock
+/Lab4_Akka/.gradle/7.4.2/executionHistory/executionHistory.lock
+/Lab4_Akka/.gradle/7.4.2/fileHashes/fileHashes.lock
+/Lab4_Akka/.gradle/7.4.2/checksums/md5-checksums.bin
+/Lab4_Akka/.gradle/buildOutputCleanup/outputFiles.bin
+/Lab4_Akka/.gradle/7.4.2/checksums/sha1-checksums.bin
