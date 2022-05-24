@@ -56,8 +56,7 @@ public class App {
 //        final ActorSystem streamSystem = ActorSystem.create(Behaviors.empty(), "streams");
 //        final Materializer materializer = Materializer.createMaterializer(streamSystem);
 //        final Source<Integer, NotUsed> source = Source.range(1, 100);
-
-        // create debugFlow and add slowSink components
+//
 //        final Flow<Integer, String, NotUsed> flow = Flow.fromFunction((Integer n) -> {
 //            System.out.println("Processing: " + n);
 //            return n.toString();
@@ -66,7 +65,12 @@ public class App {
 //            System.out.println(str);
 //            Thread.sleep(1000);
 //        });
-//        final RunnableGraph<NotUsed> runnableGraph = source.via(flow).buffer(16, OverflowStrategy.dropTail()).async().to(sink);
+//        final RunnableGraph<NotUsed> runnableGraph =
+//                source.via(flow)
+//                .buffer(7, OverflowStrategy.backpressure())
+//                .async()
+//                .to(sink);
+//
 //        runnableGraph.run(materializer);
 
         // TASK 3 - graph dsl
@@ -106,6 +110,9 @@ public class App {
 
                     return ClosedShape.getInstance();
                 })).run(materializer);
+
+
+
 
         try {
             System.out.println(">>> Press ENTER to exit <<<");

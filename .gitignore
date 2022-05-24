@@ -399,3 +399,8 @@ cython_debug/
 /Lab4_Akka/.idea/misc.xml
 /Lab4_Akka/.idea/codeStyles/Project.xml
 /Lab4_Akka/.idea/vcs.xml
+/Lab5_middleware/gRPC/.idea/
+/Lab5_middleware/Ice/.idea/
+/Lab5_middleware/Ice/.settings/
+/Lab5_middleware/Thrift/.settings/
+/Lab5_middleware/Thrift/.idea/
