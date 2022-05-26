@@ -3,7 +3,7 @@ package server.devices;
 import SmartHome.*;
 import com.zeroc.Ice.Current;
 
-class Thermostat implements SmartHome.Thermostat {
+public class Thermostat implements SmartHome.Thermostat {
     private final DeviceInfo deviceInfo;
     private ThermostatState state;
 

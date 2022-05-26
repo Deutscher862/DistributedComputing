@@ -4,11 +4,13 @@ import SmartHome.DeviceInfo;
 import SmartHome.NightMode;
 import com.zeroc.Ice.Current;
 
-class OutdoorLight extends LightBulb implements SmartHome.OutdoorLight {
+public class OutdoorLight extends LightBulb implements SmartHome.OutdoorLight {
     private NightMode nightMode;
 
-    OutdoorLight(DeviceInfo info) {
+    public OutdoorLight(DeviceInfo info, NightMode nightMode) {
         super(info);
+        this.nightMode = nightMode;
+        this.nightMode.nightModeEnabled = false;
     }
 
     @Override

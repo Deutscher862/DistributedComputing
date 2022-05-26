@@ -4,10 +4,10 @@ import SmartHome.DeviceInfo;
 import SmartHome.Time;
 import com.zeroc.Ice.Current;
 
-class RoomLight extends LightBulb implements SmartHome.RoomLight {
+public class RoomLight extends LightBulb implements SmartHome.RoomLight {
     private Time autoTurnOffTime;
 
-    RoomLight(DeviceInfo info, Time defaultTime) {
+    public RoomLight(DeviceInfo info, Time defaultTime) {
         super(info);
         autoTurnOffTime = defaultTime;
     }

@@ -3,7 +3,7 @@ package server.devices;
 import SmartHome.*;
 import com.zeroc.Ice.Current;
 
-class LightBulb implements SmartHome.LightBulb {
+public class LightBulb implements SmartHome.LightBulb {
     private final DeviceInfo deviceInfo;
     private LightBulbState lightbulbState;
 

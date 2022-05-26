@@ -73,4 +73,10 @@ module SmartHome {
         void decreaseAirMoisture() throws DeviceTurnedOffError;
     };
 
+    sequence<string> devices;
+
+    interface DeviceList {
+        idempotent devices getDevicesList();
+    };
+
 };
