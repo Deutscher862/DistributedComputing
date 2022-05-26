@@ -1,4 +1,4 @@
-package server.main;
+package main;
 
 import SmartHome.DeviceInfo;
 import SmartHome.NightMode;
@@ -7,9 +7,9 @@ import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.Identity;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
-import server.devices.DeviceList;
-import server.devices.OutdoorLight;
-import server.devices.RoomLight;
+import devices.DeviceList;
+import devices.OutdoorLight;
+import devices.RoomLight;
 
 import java.util.logging.Level;
 

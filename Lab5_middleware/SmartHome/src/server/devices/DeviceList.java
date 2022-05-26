@@ -1,4 +1,4 @@
-package server.devices;
+package devices;
 
 import SmartHome.DeviceInfo;
 import com.zeroc.Ice.Current;
