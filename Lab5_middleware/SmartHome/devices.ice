@@ -6,7 +6,7 @@ module SmartHome {
         string name;
     };
 
-    struct LightbulbState {
+    struct LightBulbState {
         Color color;
         bool tunredOn;
     };
@@ -28,34 +28,49 @@ module SmartHome {
         string errorMessage;
     };
 
-    interface Lightbulb {
+    interface LightBulb {
         idempotent DeviceInfo getDeviceInfo();
-        idempotent LightbulbState getLightbulbState();
+        idempotent LightBulbState getLightBulbState();
         idempotent Color getColor() throws DeviceTurnedOffError;
         void setColor(Color newColor) throws DeviceTurnedOffError, InvalidColorError;
         void turnOn();
         void turnOff();
     };
 
-    interface OutdoorLight extends Lightbulb {
+    interface OutdoorLight extends LightBulb {
         void setNightMode(NightMode nightMode);
         idempotent NightMode getNightMode();
     };
 
-    interface RoomLight extends Lightbulb {
+    interface RoomLight extends LightBulb {
         void setAutoTurnOffTime(Time time);
         idempotent Time getAutoTurnOffTime();
     };
 
     struct Temperature {
-        int tempareture;
+        float value;
     };
 
-    interface TemperatureSensor {
+    struct AirMoisture {
+        float value;
+    };
+
+    struct ThermostatState {
+        Temperature temperature;
+        AirMoisture airMisture;
+        bool turnedOn;
+    };
+
+    interface Thermostat {
         idempotent DeviceInfo getDeviceInfo();
         void turnOn();
         void turnOff();
         idempotent Temperature getTemperature() throws DeviceTurnedOffError;
+        void increaseTemperature() throws DeviceTurnedOffError;
+        void decreaseTemperature() throws DeviceTurnedOffError;
+        idempotent AirMoisture getAirMoisture() throws DeviceTurnedOffError;
+        void increaseAirMoisture() throws DeviceTurnedOffError;
+        void decreaseAirMoisture() throws DeviceTurnedOffError;
     };
 
 };

@@ -15,19 +15,19 @@
 
 package SmartHome;
 
-public class LightbulbState implements java.lang.Cloneable,
+public class LightBulbState implements java.lang.Cloneable,
                                        java.io.Serializable
 {
     public Color color;
 
     public boolean tunredOn;
 
-    public LightbulbState()
+    public LightBulbState()
     {
         this.color = Color.White;
     }
 
-    public LightbulbState(Color color, boolean tunredOn)
+    public LightBulbState(Color color, boolean tunredOn)
     {
         this.color = color;
         this.tunredOn = tunredOn;
@@ -39,10 +39,10 @@ public class LightbulbState implements java.lang.Cloneable,
         {
             return true;
         }
-        LightbulbState r = null;
-        if(rhs instanceof LightbulbState)
+        LightBulbState r = null;
+        if(rhs instanceof LightBulbState)
         {
-            r = (LightbulbState)rhs;
+            r = (LightBulbState)rhs;
         }
 
         if(r != null)
@@ -68,18 +68,18 @@ public class LightbulbState implements java.lang.Cloneable,
     public int hashCode()
     {
         int h_ = 5381;
-        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, "::SmartHome::LightbulbState");
+        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, "::SmartHome::LightBulbState");
         h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, color);
         h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, tunredOn);
         return h_;
     }
 
-    public LightbulbState clone()
+    public LightBulbState clone()
     {
-        LightbulbState c = null;
+        LightBulbState c = null;
         try
         {
-            c = (LightbulbState)super.clone();
+            c = (LightBulbState)super.clone();
         }
         catch(CloneNotSupportedException ex)
         {
@@ -100,7 +100,7 @@ public class LightbulbState implements java.lang.Cloneable,
         this.tunredOn = istr.readBool();
     }
 
-    static public void ice_write(com.zeroc.Ice.OutputStream ostr, LightbulbState v)
+    static public void ice_write(com.zeroc.Ice.OutputStream ostr, LightBulbState v)
     {
         if(v == null)
         {
@@ -112,14 +112,14 @@ public class LightbulbState implements java.lang.Cloneable,
         }
     }
 
-    static public LightbulbState ice_read(com.zeroc.Ice.InputStream istr)
+    static public LightBulbState ice_read(com.zeroc.Ice.InputStream istr)
     {
-        LightbulbState v = new LightbulbState();
+        LightBulbState v = new LightBulbState();
         v.ice_readMembers(istr);
         return v;
     }
 
-    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, java.util.Optional<LightbulbState> v)
+    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, java.util.Optional<LightBulbState> v)
     {
         if(v != null && v.isPresent())
         {
@@ -127,7 +127,7 @@ public class LightbulbState implements java.lang.Cloneable,
         }
     }
 
-    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, LightbulbState v)
+    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, LightBulbState v)
     {
         if(ostr.writeOptional(tag, com.zeroc.Ice.OptionalFormat.FSize))
         {
@@ -137,12 +137,12 @@ public class LightbulbState implements java.lang.Cloneable,
         }
     }
 
-    static public java.util.Optional<LightbulbState> ice_read(com.zeroc.Ice.InputStream istr, int tag)
+    static public java.util.Optional<LightBulbState> ice_read(com.zeroc.Ice.InputStream istr, int tag)
     {
         if(istr.readOptional(tag, com.zeroc.Ice.OptionalFormat.FSize))
         {
             istr.skip(4);
-            return java.util.Optional.of(LightbulbState.ice_read(istr));
+            return java.util.Optional.of(LightBulbState.ice_read(istr));
         }
         else
         {
@@ -150,8 +150,8 @@ public class LightbulbState implements java.lang.Cloneable,
         }
     }
 
-    private static final LightbulbState _nullMarshalValue = new LightbulbState();
+    private static final LightBulbState _nullMarshalValue = new LightBulbState();
 
     /** @hidden */
-    public static final long serialVersionUID = 675670349L;
+    public static final long serialVersionUID = 2041680173L;
 }

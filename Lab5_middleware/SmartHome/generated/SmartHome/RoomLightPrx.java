@@ -15,7 +15,7 @@
 
 package SmartHome;
 
-public interface RoomLightPrx extends LightbulbPrx
+public interface RoomLightPrx extends LightBulbPrx
 {
     default void setAutoTurnOffTime(Time time)
     {

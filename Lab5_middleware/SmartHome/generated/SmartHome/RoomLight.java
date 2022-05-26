@@ -15,7 +15,7 @@
 
 package SmartHome;
 
-public interface RoomLight extends Lightbulb
+public interface RoomLight extends LightBulb
 {
     void setAutoTurnOffTime(Time time, com.zeroc.Ice.Current current);
 
@@ -25,7 +25,7 @@ public interface RoomLight extends Lightbulb
     static final String[] _iceIds =
     {
         "::Ice::Object",
-        "::SmartHome::Lightbulb",
+        "::SmartHome::LightBulb",
         "::SmartHome::RoomLight"
     };
 
@@ -88,7 +88,7 @@ public interface RoomLight extends Lightbulb
         "getAutoTurnOffTime",
         "getColor",
         "getDeviceInfo",
-        "getLightbulbState",
+        "getLightBulbState",
         "ice_id",
         "ice_ids",
         "ice_isA",
@@ -118,15 +118,15 @@ public interface RoomLight extends Lightbulb
             }
             case 1:
             {
-                return Lightbulb._iceD_getColor(this, in, current);
+                return LightBulb._iceD_getColor(this, in, current);
             }
             case 2:
             {
-                return Lightbulb._iceD_getDeviceInfo(this, in, current);
+                return LightBulb._iceD_getDeviceInfo(this, in, current);
             }
             case 3:
             {
-                return Lightbulb._iceD_getLightbulbState(this, in, current);
+                return LightBulb._iceD_getLightBulbState(this, in, current);
             }
             case 4:
             {
@@ -150,15 +150,15 @@ public interface RoomLight extends Lightbulb
             }
             case 9:
             {
-                return Lightbulb._iceD_setColor(this, in, current);
+                return LightBulb._iceD_setColor(this, in, current);
             }
             case 10:
             {
-                return Lightbulb._iceD_turnOff(this, in, current);
+                return LightBulb._iceD_turnOff(this, in, current);
             }
             case 11:
             {
-                return Lightbulb._iceD_turnOn(this, in, current);
+                return LightBulb._iceD_turnOn(this, in, current);
             }
         }
 

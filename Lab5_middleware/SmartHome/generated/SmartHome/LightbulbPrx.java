@@ -15,7 +15,7 @@
 
 package SmartHome;
 
-public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
+public interface LightBulbPrx extends com.zeroc.Ice.ObjectPrx
 {
     default DeviceInfo getDeviceInfo()
     {
@@ -54,24 +54,24 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
-    default LightbulbState getLightbulbState()
+    default LightBulbState getLightBulbState()
     {
-        return getLightbulbState(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return getLightBulbState(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default LightbulbState getLightbulbState(java.util.Map<String, String> context)
+    default LightBulbState getLightBulbState(java.util.Map<String, String> context)
     {
-        return _iceI_getLightbulbStateAsync(context, true).waitForResponse();
+        return _iceI_getLightBulbStateAsync(context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<LightbulbState> getLightbulbStateAsync()
+    default java.util.concurrent.CompletableFuture<LightBulbState> getLightBulbStateAsync()
     {
-        return _iceI_getLightbulbStateAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_getLightBulbStateAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<LightbulbState> getLightbulbStateAsync(java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<LightBulbState> getLightBulbStateAsync(java.util.Map<String, String> context)
     {
-        return _iceI_getLightbulbStateAsync(context, false);
+        return _iceI_getLightBulbStateAsync(context, false);
     }
 
     /**
@@ -80,12 +80,12 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<LightbulbState> _iceI_getLightbulbStateAsync(java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<LightBulbState> _iceI_getLightBulbStateAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<LightbulbState> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getLightbulbState", com.zeroc.Ice.OperationMode.Idempotent, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<LightBulbState> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getLightBulbState", com.zeroc.Ice.OperationMode.Idempotent, sync, null);
         f.invoke(true, context, null, null, istr -> {
-                     LightbulbState ret;
-                     ret = LightbulbState.ice_read(istr);
+                     LightBulbState ret;
+                     ret = LightBulbState.ice_read(istr);
                      return ret;
                  });
         return f;
@@ -281,9 +281,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @param obj The untyped proxy.
      * @return A proxy for this type, or null if the object does not support this type.
      **/
-    static LightbulbPrx checkedCast(com.zeroc.Ice.ObjectPrx obj)
+    static LightBulbPrx checkedCast(com.zeroc.Ice.ObjectPrx obj)
     {
-        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, ice_staticId(), LightbulbPrx.class, _LightbulbPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, ice_staticId(), LightBulbPrx.class, _LightBulbPrxI.class);
     }
 
     /**
@@ -293,9 +293,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @param context The Context map to send with the invocation.
      * @return A proxy for this type, or null if the object does not support this type.
      **/
-    static LightbulbPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, java.util.Map<String, String> context)
+    static LightBulbPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, java.util.Map<String, String> context)
     {
-        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, context, ice_staticId(), LightbulbPrx.class, _LightbulbPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, context, ice_staticId(), LightBulbPrx.class, _LightBulbPrxI.class);
     }
 
     /**
@@ -305,9 +305,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @param facet The name of the desired facet.
      * @return A proxy for this type, or null if the object does not support this type.
      **/
-    static LightbulbPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, String facet)
+    static LightBulbPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, String facet)
     {
-        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, facet, ice_staticId(), LightbulbPrx.class, _LightbulbPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, facet, ice_staticId(), LightBulbPrx.class, _LightBulbPrxI.class);
     }
 
     /**
@@ -318,9 +318,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @param context The Context map to send with the invocation.
      * @return A proxy for this type, or null if the object does not support this type.
      **/
-    static LightbulbPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, String facet, java.util.Map<String, String> context)
+    static LightBulbPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, String facet, java.util.Map<String, String> context)
     {
-        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, facet, context, ice_staticId(), LightbulbPrx.class, _LightbulbPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, facet, context, ice_staticId(), LightBulbPrx.class, _LightBulbPrxI.class);
     }
 
     /**
@@ -328,9 +328,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @param obj The untyped proxy.
      * @return A proxy for this type.
      **/
-    static LightbulbPrx uncheckedCast(com.zeroc.Ice.ObjectPrx obj)
+    static LightBulbPrx uncheckedCast(com.zeroc.Ice.ObjectPrx obj)
     {
-        return com.zeroc.Ice.ObjectPrx._uncheckedCast(obj, LightbulbPrx.class, _LightbulbPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._uncheckedCast(obj, LightBulbPrx.class, _LightBulbPrxI.class);
     }
 
     /**
@@ -339,9 +339,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @param facet The name of the desired facet.
      * @return A proxy for this type.
      **/
-    static LightbulbPrx uncheckedCast(com.zeroc.Ice.ObjectPrx obj, String facet)
+    static LightBulbPrx uncheckedCast(com.zeroc.Ice.ObjectPrx obj, String facet)
     {
-        return com.zeroc.Ice.ObjectPrx._uncheckedCast(obj, facet, LightbulbPrx.class, _LightbulbPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._uncheckedCast(obj, facet, LightBulbPrx.class, _LightBulbPrxI.class);
     }
 
     /**
@@ -350,9 +350,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified per-proxy context.
      **/
     @Override
-    default LightbulbPrx ice_context(java.util.Map<String, String> newContext)
+    default LightBulbPrx ice_context(java.util.Map<String, String> newContext)
     {
-        return (LightbulbPrx)_ice_context(newContext);
+        return (LightBulbPrx)_ice_context(newContext);
     }
 
     /**
@@ -361,9 +361,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified adapter ID.
      **/
     @Override
-    default LightbulbPrx ice_adapterId(String newAdapterId)
+    default LightBulbPrx ice_adapterId(String newAdapterId)
     {
-        return (LightbulbPrx)_ice_adapterId(newAdapterId);
+        return (LightBulbPrx)_ice_adapterId(newAdapterId);
     }
 
     /**
@@ -372,9 +372,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified endpoints.
      **/
     @Override
-    default LightbulbPrx ice_endpoints(com.zeroc.Ice.Endpoint[] newEndpoints)
+    default LightBulbPrx ice_endpoints(com.zeroc.Ice.Endpoint[] newEndpoints)
     {
-        return (LightbulbPrx)_ice_endpoints(newEndpoints);
+        return (LightBulbPrx)_ice_endpoints(newEndpoints);
     }
 
     /**
@@ -383,9 +383,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified locator cache timeout.
      **/
     @Override
-    default LightbulbPrx ice_locatorCacheTimeout(int newTimeout)
+    default LightBulbPrx ice_locatorCacheTimeout(int newTimeout)
     {
-        return (LightbulbPrx)_ice_locatorCacheTimeout(newTimeout);
+        return (LightBulbPrx)_ice_locatorCacheTimeout(newTimeout);
     }
 
     /**
@@ -394,9 +394,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified invocation timeout.
      **/
     @Override
-    default LightbulbPrx ice_invocationTimeout(int newTimeout)
+    default LightBulbPrx ice_invocationTimeout(int newTimeout)
     {
-        return (LightbulbPrx)_ice_invocationTimeout(newTimeout);
+        return (LightBulbPrx)_ice_invocationTimeout(newTimeout);
     }
 
     /**
@@ -405,9 +405,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified caching policy.
      **/
     @Override
-    default LightbulbPrx ice_connectionCached(boolean newCache)
+    default LightBulbPrx ice_connectionCached(boolean newCache)
     {
-        return (LightbulbPrx)_ice_connectionCached(newCache);
+        return (LightBulbPrx)_ice_connectionCached(newCache);
     }
 
     /**
@@ -416,9 +416,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified endpoint selection policy.
      **/
     @Override
-    default LightbulbPrx ice_endpointSelection(com.zeroc.Ice.EndpointSelectionType newType)
+    default LightBulbPrx ice_endpointSelection(com.zeroc.Ice.EndpointSelectionType newType)
     {
-        return (LightbulbPrx)_ice_endpointSelection(newType);
+        return (LightBulbPrx)_ice_endpointSelection(newType);
     }
 
     /**
@@ -429,9 +429,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified selection policy.
      **/
     @Override
-    default LightbulbPrx ice_secure(boolean b)
+    default LightBulbPrx ice_secure(boolean b)
     {
-        return (LightbulbPrx)_ice_secure(b);
+        return (LightBulbPrx)_ice_secure(b);
     }
 
     /**
@@ -440,9 +440,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified encoding version.
      **/
     @Override
-    default LightbulbPrx ice_encodingVersion(com.zeroc.Ice.EncodingVersion e)
+    default LightBulbPrx ice_encodingVersion(com.zeroc.Ice.EncodingVersion e)
     {
-        return (LightbulbPrx)_ice_encodingVersion(e);
+        return (LightBulbPrx)_ice_encodingVersion(e);
     }
 
     /**
@@ -453,9 +453,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified selection policy.
      **/
     @Override
-    default LightbulbPrx ice_preferSecure(boolean b)
+    default LightBulbPrx ice_preferSecure(boolean b)
     {
-        return (LightbulbPrx)_ice_preferSecure(b);
+        return (LightBulbPrx)_ice_preferSecure(b);
     }
 
     /**
@@ -464,9 +464,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified router.
      **/
     @Override
-    default LightbulbPrx ice_router(com.zeroc.Ice.RouterPrx router)
+    default LightBulbPrx ice_router(com.zeroc.Ice.RouterPrx router)
     {
-        return (LightbulbPrx)_ice_router(router);
+        return (LightBulbPrx)_ice_router(router);
     }
 
     /**
@@ -475,9 +475,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified locator.
      **/
     @Override
-    default LightbulbPrx ice_locator(com.zeroc.Ice.LocatorPrx locator)
+    default LightBulbPrx ice_locator(com.zeroc.Ice.LocatorPrx locator)
     {
-        return (LightbulbPrx)_ice_locator(locator);
+        return (LightBulbPrx)_ice_locator(locator);
     }
 
     /**
@@ -486,9 +486,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified collocation optimization.
      **/
     @Override
-    default LightbulbPrx ice_collocationOptimized(boolean b)
+    default LightBulbPrx ice_collocationOptimized(boolean b)
     {
-        return (LightbulbPrx)_ice_collocationOptimized(b);
+        return (LightBulbPrx)_ice_collocationOptimized(b);
     }
 
     /**
@@ -496,9 +496,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy that uses twoway invocations.
      **/
     @Override
-    default LightbulbPrx ice_twoway()
+    default LightBulbPrx ice_twoway()
     {
-        return (LightbulbPrx)_ice_twoway();
+        return (LightBulbPrx)_ice_twoway();
     }
 
     /**
@@ -506,9 +506,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy that uses oneway invocations.
      **/
     @Override
-    default LightbulbPrx ice_oneway()
+    default LightBulbPrx ice_oneway()
     {
-        return (LightbulbPrx)_ice_oneway();
+        return (LightBulbPrx)_ice_oneway();
     }
 
     /**
@@ -516,9 +516,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy that uses batch oneway invocations.
      **/
     @Override
-    default LightbulbPrx ice_batchOneway()
+    default LightBulbPrx ice_batchOneway()
     {
-        return (LightbulbPrx)_ice_batchOneway();
+        return (LightBulbPrx)_ice_batchOneway();
     }
 
     /**
@@ -526,9 +526,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy that uses datagram invocations.
      **/
     @Override
-    default LightbulbPrx ice_datagram()
+    default LightBulbPrx ice_datagram()
     {
-        return (LightbulbPrx)_ice_datagram();
+        return (LightBulbPrx)_ice_datagram();
     }
 
     /**
@@ -536,9 +536,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy that uses batch datagram invocations.
      **/
     @Override
-    default LightbulbPrx ice_batchDatagram()
+    default LightBulbPrx ice_batchDatagram()
     {
-        return (LightbulbPrx)_ice_batchDatagram();
+        return (LightBulbPrx)_ice_batchDatagram();
     }
 
     /**
@@ -547,9 +547,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified compression setting.
      **/
     @Override
-    default LightbulbPrx ice_compress(boolean co)
+    default LightBulbPrx ice_compress(boolean co)
     {
-        return (LightbulbPrx)_ice_compress(co);
+        return (LightBulbPrx)_ice_compress(co);
     }
 
     /**
@@ -558,9 +558,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified timeout.
      **/
     @Override
-    default LightbulbPrx ice_timeout(int t)
+    default LightBulbPrx ice_timeout(int t)
     {
-        return (LightbulbPrx)_ice_timeout(t);
+        return (LightBulbPrx)_ice_timeout(t);
     }
 
     /**
@@ -569,9 +569,9 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified connection ID.
      **/
     @Override
-    default LightbulbPrx ice_connectionId(String connectionId)
+    default LightBulbPrx ice_connectionId(String connectionId)
     {
-        return (LightbulbPrx)_ice_connectionId(connectionId);
+        return (LightBulbPrx)_ice_connectionId(connectionId);
     }
 
     /**
@@ -580,13 +580,13 @@ public interface LightbulbPrx extends com.zeroc.Ice.ObjectPrx
      * @return A fixed proxy bound to the given connection.
      **/
     @Override
-    default LightbulbPrx ice_fixed(com.zeroc.Ice.Connection connection)
+    default LightBulbPrx ice_fixed(com.zeroc.Ice.Connection connection)
     {
-        return (LightbulbPrx)_ice_fixed(connection);
+        return (LightBulbPrx)_ice_fixed(connection);
     }
 
     static String ice_staticId()
     {
-        return "::SmartHome::Lightbulb";
+        return "::SmartHome::LightBulb";
     }
 }

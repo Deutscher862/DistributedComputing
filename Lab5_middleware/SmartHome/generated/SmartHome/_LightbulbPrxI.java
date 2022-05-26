@@ -16,7 +16,7 @@
 package SmartHome;
 
 /** @hidden */
-public class _LightbulbPrxI extends com.zeroc.Ice._ObjectPrxI implements LightbulbPrx
+public class _LightBulbPrxI extends com.zeroc.Ice._ObjectPrxI implements LightBulbPrx
 {
     /** @hidden */
     public static final long serialVersionUID = 0L;

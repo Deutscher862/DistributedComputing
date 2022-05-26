@@ -15,16 +15,16 @@
 
 package SmartHome;
 
-public class Temperature implements java.lang.Cloneable,
+public class AirMoisture implements java.lang.Cloneable,
                                     java.io.Serializable
 {
     public float value;
 
-    public Temperature()
+    public AirMoisture()
     {
     }
 
-    public Temperature(float value)
+    public AirMoisture(float value)
     {
         this.value = value;
     }
@@ -35,10 +35,10 @@ public class Temperature implements java.lang.Cloneable,
         {
             return true;
         }
-        Temperature r = null;
-        if(rhs instanceof Temperature)
+        AirMoisture r = null;
+        if(rhs instanceof AirMoisture)
         {
-            r = (Temperature)rhs;
+            r = (AirMoisture)rhs;
         }
 
         if(r != null)
@@ -57,17 +57,17 @@ public class Temperature implements java.lang.Cloneable,
     public int hashCode()
     {
         int h_ = 5381;
-        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, "::SmartHome::Temperature");
+        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, "::SmartHome::AirMoisture");
         h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, value);
         return h_;
     }
 
-    public Temperature clone()
+    public AirMoisture clone()
     {
-        Temperature c = null;
+        AirMoisture c = null;
         try
         {
-            c = (Temperature)super.clone();
+            c = (AirMoisture)super.clone();
         }
         catch(CloneNotSupportedException ex)
         {
@@ -86,7 +86,7 @@ public class Temperature implements java.lang.Cloneable,
         this.value = istr.readFloat();
     }
 
-    static public void ice_write(com.zeroc.Ice.OutputStream ostr, Temperature v)
+    static public void ice_write(com.zeroc.Ice.OutputStream ostr, AirMoisture v)
     {
         if(v == null)
         {
@@ -98,14 +98,14 @@ public class Temperature implements java.lang.Cloneable,
         }
     }
 
-    static public Temperature ice_read(com.zeroc.Ice.InputStream istr)
+    static public AirMoisture ice_read(com.zeroc.Ice.InputStream istr)
     {
-        Temperature v = new Temperature();
+        AirMoisture v = new AirMoisture();
         v.ice_readMembers(istr);
         return v;
     }
 
-    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, java.util.Optional<Temperature> v)
+    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, java.util.Optional<AirMoisture> v)
     {
         if(v != null && v.isPresent())
         {
@@ -113,7 +113,7 @@ public class Temperature implements java.lang.Cloneable,
         }
     }
 
-    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, Temperature v)
+    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, AirMoisture v)
     {
         if(ostr.writeOptional(tag, com.zeroc.Ice.OptionalFormat.VSize))
         {
@@ -122,12 +122,12 @@ public class Temperature implements java.lang.Cloneable,
         }
     }
 
-    static public java.util.Optional<Temperature> ice_read(com.zeroc.Ice.InputStream istr, int tag)
+    static public java.util.Optional<AirMoisture> ice_read(com.zeroc.Ice.InputStream istr, int tag)
     {
         if(istr.readOptional(tag, com.zeroc.Ice.OptionalFormat.VSize))
         {
             istr.skipSize();
-            return java.util.Optional.of(Temperature.ice_read(istr));
+            return java.util.Optional.of(AirMoisture.ice_read(istr));
         }
         else
         {
@@ -135,8 +135,8 @@ public class Temperature implements java.lang.Cloneable,
         }
     }
 
-    private static final Temperature _nullMarshalValue = new Temperature();
+    private static final AirMoisture _nullMarshalValue = new AirMoisture();
 
     /** @hidden */
-    public static final long serialVersionUID = 1365153629L;
+    public static final long serialVersionUID = 789705253L;
 }

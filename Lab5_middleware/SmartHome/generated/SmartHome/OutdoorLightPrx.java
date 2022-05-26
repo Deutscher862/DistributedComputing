@@ -15,7 +15,7 @@
 
 package SmartHome;
 
-public interface OutdoorLightPrx extends LightbulbPrx
+public interface OutdoorLightPrx extends LightBulbPrx
 {
     default void setNightMode(NightMode nightMode)
     {

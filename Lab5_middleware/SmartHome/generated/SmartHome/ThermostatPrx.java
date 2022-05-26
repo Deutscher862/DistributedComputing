@@ -15,7 +15,7 @@
 
 package SmartHome;
 
-public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
+public interface ThermostatPrx extends com.zeroc.Ice.ObjectPrx
 {
     default DeviceInfo getDeviceInfo()
     {
@@ -176,15 +176,279 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
         DeviceTurnedOffError.class
     };
 
+    default void increaseTemperature()
+        throws DeviceTurnedOffError
+    {
+        increaseTemperature(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default void increaseTemperature(java.util.Map<String, String> context)
+        throws DeviceTurnedOffError
+    {
+        try
+        {
+            _iceI_increaseTemperatureAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> increaseTemperatureAsync()
+    {
+        return _iceI_increaseTemperatureAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> increaseTemperatureAsync(java.util.Map<String, String> context)
+    {
+        return _iceI_increaseTemperatureAsync(context, false);
+    }
+
+    /**
+     * @hidden
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_increaseTemperatureAsync(java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "increaseTemperature", null, sync, _iceE_increaseTemperature);
+        f.invoke(true, context, null, null, null);
+        return f;
+    }
+
+    /** @hidden */
+    static final Class<?>[] _iceE_increaseTemperature =
+    {
+        DeviceTurnedOffError.class
+    };
+
+    default void decreaseTemperature()
+        throws DeviceTurnedOffError
+    {
+        decreaseTemperature(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default void decreaseTemperature(java.util.Map<String, String> context)
+        throws DeviceTurnedOffError
+    {
+        try
+        {
+            _iceI_decreaseTemperatureAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> decreaseTemperatureAsync()
+    {
+        return _iceI_decreaseTemperatureAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> decreaseTemperatureAsync(java.util.Map<String, String> context)
+    {
+        return _iceI_decreaseTemperatureAsync(context, false);
+    }
+
+    /**
+     * @hidden
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_decreaseTemperatureAsync(java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "decreaseTemperature", null, sync, _iceE_decreaseTemperature);
+        f.invoke(true, context, null, null, null);
+        return f;
+    }
+
+    /** @hidden */
+    static final Class<?>[] _iceE_decreaseTemperature =
+    {
+        DeviceTurnedOffError.class
+    };
+
+    default AirMoisture getAirMoisture()
+        throws DeviceTurnedOffError
+    {
+        return getAirMoisture(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default AirMoisture getAirMoisture(java.util.Map<String, String> context)
+        throws DeviceTurnedOffError
+    {
+        try
+        {
+            return _iceI_getAirMoistureAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
+    }
+
+    default java.util.concurrent.CompletableFuture<AirMoisture> getAirMoistureAsync()
+    {
+        return _iceI_getAirMoistureAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<AirMoisture> getAirMoistureAsync(java.util.Map<String, String> context)
+    {
+        return _iceI_getAirMoistureAsync(context, false);
+    }
+
+    /**
+     * @hidden
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<AirMoisture> _iceI_getAirMoistureAsync(java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<AirMoisture> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getAirMoisture", com.zeroc.Ice.OperationMode.Idempotent, sync, _iceE_getAirMoisture);
+        f.invoke(true, context, null, null, istr -> {
+                     AirMoisture ret;
+                     ret = AirMoisture.ice_read(istr);
+                     return ret;
+                 });
+        return f;
+    }
+
+    /** @hidden */
+    static final Class<?>[] _iceE_getAirMoisture =
+    {
+        DeviceTurnedOffError.class
+    };
+
+    default void increaseAirMoisture()
+        throws DeviceTurnedOffError
+    {
+        increaseAirMoisture(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default void increaseAirMoisture(java.util.Map<String, String> context)
+        throws DeviceTurnedOffError
+    {
+        try
+        {
+            _iceI_increaseAirMoistureAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> increaseAirMoistureAsync()
+    {
+        return _iceI_increaseAirMoistureAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> increaseAirMoistureAsync(java.util.Map<String, String> context)
+    {
+        return _iceI_increaseAirMoistureAsync(context, false);
+    }
+
+    /**
+     * @hidden
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_increaseAirMoistureAsync(java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "increaseAirMoisture", null, sync, _iceE_increaseAirMoisture);
+        f.invoke(true, context, null, null, null);
+        return f;
+    }
+
+    /** @hidden */
+    static final Class<?>[] _iceE_increaseAirMoisture =
+    {
+        DeviceTurnedOffError.class
+    };
+
+    default void decreaseAirMoisture()
+        throws DeviceTurnedOffError
+    {
+        decreaseAirMoisture(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default void decreaseAirMoisture(java.util.Map<String, String> context)
+        throws DeviceTurnedOffError
+    {
+        try
+        {
+            _iceI_decreaseAirMoistureAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> decreaseAirMoistureAsync()
+    {
+        return _iceI_decreaseAirMoistureAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> decreaseAirMoistureAsync(java.util.Map<String, String> context)
+    {
+        return _iceI_decreaseAirMoistureAsync(context, false);
+    }
+
+    /**
+     * @hidden
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_decreaseAirMoistureAsync(java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "decreaseAirMoisture", null, sync, _iceE_decreaseAirMoisture);
+        f.invoke(true, context, null, null, null);
+        return f;
+    }
+
+    /** @hidden */
+    static final Class<?>[] _iceE_decreaseAirMoisture =
+    {
+        DeviceTurnedOffError.class
+    };
+
     /**
      * Contacts the remote server to verify that the object implements this type.
      * Raises a local exception if a communication error occurs.
      * @param obj The untyped proxy.
      * @return A proxy for this type, or null if the object does not support this type.
      **/
-    static TemperatureSensorPrx checkedCast(com.zeroc.Ice.ObjectPrx obj)
+    static ThermostatPrx checkedCast(com.zeroc.Ice.ObjectPrx obj)
     {
-        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, ice_staticId(), TemperatureSensorPrx.class, _TemperatureSensorPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, ice_staticId(), ThermostatPrx.class, _ThermostatPrxI.class);
     }
 
     /**
@@ -194,9 +458,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @param context The Context map to send with the invocation.
      * @return A proxy for this type, or null if the object does not support this type.
      **/
-    static TemperatureSensorPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, java.util.Map<String, String> context)
+    static ThermostatPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, java.util.Map<String, String> context)
     {
-        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, context, ice_staticId(), TemperatureSensorPrx.class, _TemperatureSensorPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, context, ice_staticId(), ThermostatPrx.class, _ThermostatPrxI.class);
     }
 
     /**
@@ -206,9 +470,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @param facet The name of the desired facet.
      * @return A proxy for this type, or null if the object does not support this type.
      **/
-    static TemperatureSensorPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, String facet)
+    static ThermostatPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, String facet)
     {
-        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, facet, ice_staticId(), TemperatureSensorPrx.class, _TemperatureSensorPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, facet, ice_staticId(), ThermostatPrx.class, _ThermostatPrxI.class);
     }
 
     /**
@@ -219,9 +483,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @param context The Context map to send with the invocation.
      * @return A proxy for this type, or null if the object does not support this type.
      **/
-    static TemperatureSensorPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, String facet, java.util.Map<String, String> context)
+    static ThermostatPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, String facet, java.util.Map<String, String> context)
     {
-        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, facet, context, ice_staticId(), TemperatureSensorPrx.class, _TemperatureSensorPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, facet, context, ice_staticId(), ThermostatPrx.class, _ThermostatPrxI.class);
     }
 
     /**
@@ -229,9 +493,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @param obj The untyped proxy.
      * @return A proxy for this type.
      **/
-    static TemperatureSensorPrx uncheckedCast(com.zeroc.Ice.ObjectPrx obj)
+    static ThermostatPrx uncheckedCast(com.zeroc.Ice.ObjectPrx obj)
     {
-        return com.zeroc.Ice.ObjectPrx._uncheckedCast(obj, TemperatureSensorPrx.class, _TemperatureSensorPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._uncheckedCast(obj, ThermostatPrx.class, _ThermostatPrxI.class);
     }
 
     /**
@@ -240,9 +504,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @param facet The name of the desired facet.
      * @return A proxy for this type.
      **/
-    static TemperatureSensorPrx uncheckedCast(com.zeroc.Ice.ObjectPrx obj, String facet)
+    static ThermostatPrx uncheckedCast(com.zeroc.Ice.ObjectPrx obj, String facet)
     {
-        return com.zeroc.Ice.ObjectPrx._uncheckedCast(obj, facet, TemperatureSensorPrx.class, _TemperatureSensorPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._uncheckedCast(obj, facet, ThermostatPrx.class, _ThermostatPrxI.class);
     }
 
     /**
@@ -251,9 +515,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified per-proxy context.
      **/
     @Override
-    default TemperatureSensorPrx ice_context(java.util.Map<String, String> newContext)
+    default ThermostatPrx ice_context(java.util.Map<String, String> newContext)
     {
-        return (TemperatureSensorPrx)_ice_context(newContext);
+        return (ThermostatPrx)_ice_context(newContext);
     }
 
     /**
@@ -262,9 +526,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified adapter ID.
      **/
     @Override
-    default TemperatureSensorPrx ice_adapterId(String newAdapterId)
+    default ThermostatPrx ice_adapterId(String newAdapterId)
     {
-        return (TemperatureSensorPrx)_ice_adapterId(newAdapterId);
+        return (ThermostatPrx)_ice_adapterId(newAdapterId);
     }
 
     /**
@@ -273,9 +537,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified endpoints.
      **/
     @Override
-    default TemperatureSensorPrx ice_endpoints(com.zeroc.Ice.Endpoint[] newEndpoints)
+    default ThermostatPrx ice_endpoints(com.zeroc.Ice.Endpoint[] newEndpoints)
     {
-        return (TemperatureSensorPrx)_ice_endpoints(newEndpoints);
+        return (ThermostatPrx)_ice_endpoints(newEndpoints);
     }
 
     /**
@@ -284,9 +548,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified locator cache timeout.
      **/
     @Override
-    default TemperatureSensorPrx ice_locatorCacheTimeout(int newTimeout)
+    default ThermostatPrx ice_locatorCacheTimeout(int newTimeout)
     {
-        return (TemperatureSensorPrx)_ice_locatorCacheTimeout(newTimeout);
+        return (ThermostatPrx)_ice_locatorCacheTimeout(newTimeout);
     }
 
     /**
@@ -295,9 +559,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified invocation timeout.
      **/
     @Override
-    default TemperatureSensorPrx ice_invocationTimeout(int newTimeout)
+    default ThermostatPrx ice_invocationTimeout(int newTimeout)
     {
-        return (TemperatureSensorPrx)_ice_invocationTimeout(newTimeout);
+        return (ThermostatPrx)_ice_invocationTimeout(newTimeout);
     }
 
     /**
@@ -306,9 +570,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified caching policy.
      **/
     @Override
-    default TemperatureSensorPrx ice_connectionCached(boolean newCache)
+    default ThermostatPrx ice_connectionCached(boolean newCache)
     {
-        return (TemperatureSensorPrx)_ice_connectionCached(newCache);
+        return (ThermostatPrx)_ice_connectionCached(newCache);
     }
 
     /**
@@ -317,9 +581,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified endpoint selection policy.
      **/
     @Override
-    default TemperatureSensorPrx ice_endpointSelection(com.zeroc.Ice.EndpointSelectionType newType)
+    default ThermostatPrx ice_endpointSelection(com.zeroc.Ice.EndpointSelectionType newType)
     {
-        return (TemperatureSensorPrx)_ice_endpointSelection(newType);
+        return (ThermostatPrx)_ice_endpointSelection(newType);
     }
 
     /**
@@ -330,9 +594,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified selection policy.
      **/
     @Override
-    default TemperatureSensorPrx ice_secure(boolean b)
+    default ThermostatPrx ice_secure(boolean b)
     {
-        return (TemperatureSensorPrx)_ice_secure(b);
+        return (ThermostatPrx)_ice_secure(b);
     }
 
     /**
@@ -341,9 +605,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified encoding version.
      **/
     @Override
-    default TemperatureSensorPrx ice_encodingVersion(com.zeroc.Ice.EncodingVersion e)
+    default ThermostatPrx ice_encodingVersion(com.zeroc.Ice.EncodingVersion e)
     {
-        return (TemperatureSensorPrx)_ice_encodingVersion(e);
+        return (ThermostatPrx)_ice_encodingVersion(e);
     }
 
     /**
@@ -354,9 +618,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified selection policy.
      **/
     @Override
-    default TemperatureSensorPrx ice_preferSecure(boolean b)
+    default ThermostatPrx ice_preferSecure(boolean b)
     {
-        return (TemperatureSensorPrx)_ice_preferSecure(b);
+        return (ThermostatPrx)_ice_preferSecure(b);
     }
 
     /**
@@ -365,9 +629,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified router.
      **/
     @Override
-    default TemperatureSensorPrx ice_router(com.zeroc.Ice.RouterPrx router)
+    default ThermostatPrx ice_router(com.zeroc.Ice.RouterPrx router)
     {
-        return (TemperatureSensorPrx)_ice_router(router);
+        return (ThermostatPrx)_ice_router(router);
     }
 
     /**
@@ -376,9 +640,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified locator.
      **/
     @Override
-    default TemperatureSensorPrx ice_locator(com.zeroc.Ice.LocatorPrx locator)
+    default ThermostatPrx ice_locator(com.zeroc.Ice.LocatorPrx locator)
     {
-        return (TemperatureSensorPrx)_ice_locator(locator);
+        return (ThermostatPrx)_ice_locator(locator);
     }
 
     /**
@@ -387,9 +651,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified collocation optimization.
      **/
     @Override
-    default TemperatureSensorPrx ice_collocationOptimized(boolean b)
+    default ThermostatPrx ice_collocationOptimized(boolean b)
     {
-        return (TemperatureSensorPrx)_ice_collocationOptimized(b);
+        return (ThermostatPrx)_ice_collocationOptimized(b);
     }
 
     /**
@@ -397,9 +661,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy that uses twoway invocations.
      **/
     @Override
-    default TemperatureSensorPrx ice_twoway()
+    default ThermostatPrx ice_twoway()
     {
-        return (TemperatureSensorPrx)_ice_twoway();
+        return (ThermostatPrx)_ice_twoway();
     }
 
     /**
@@ -407,9 +671,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy that uses oneway invocations.
      **/
     @Override
-    default TemperatureSensorPrx ice_oneway()
+    default ThermostatPrx ice_oneway()
     {
-        return (TemperatureSensorPrx)_ice_oneway();
+        return (ThermostatPrx)_ice_oneway();
     }
 
     /**
@@ -417,9 +681,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy that uses batch oneway invocations.
      **/
     @Override
-    default TemperatureSensorPrx ice_batchOneway()
+    default ThermostatPrx ice_batchOneway()
     {
-        return (TemperatureSensorPrx)_ice_batchOneway();
+        return (ThermostatPrx)_ice_batchOneway();
     }
 
     /**
@@ -427,9 +691,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy that uses datagram invocations.
      **/
     @Override
-    default TemperatureSensorPrx ice_datagram()
+    default ThermostatPrx ice_datagram()
     {
-        return (TemperatureSensorPrx)_ice_datagram();
+        return (ThermostatPrx)_ice_datagram();
     }
 
     /**
@@ -437,9 +701,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy that uses batch datagram invocations.
      **/
     @Override
-    default TemperatureSensorPrx ice_batchDatagram()
+    default ThermostatPrx ice_batchDatagram()
     {
-        return (TemperatureSensorPrx)_ice_batchDatagram();
+        return (ThermostatPrx)_ice_batchDatagram();
     }
 
     /**
@@ -448,9 +712,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified compression setting.
      **/
     @Override
-    default TemperatureSensorPrx ice_compress(boolean co)
+    default ThermostatPrx ice_compress(boolean co)
     {
-        return (TemperatureSensorPrx)_ice_compress(co);
+        return (ThermostatPrx)_ice_compress(co);
     }
 
     /**
@@ -459,9 +723,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified timeout.
      **/
     @Override
-    default TemperatureSensorPrx ice_timeout(int t)
+    default ThermostatPrx ice_timeout(int t)
     {
-        return (TemperatureSensorPrx)_ice_timeout(t);
+        return (ThermostatPrx)_ice_timeout(t);
     }
 
     /**
@@ -470,9 +734,9 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A proxy with the specified connection ID.
      **/
     @Override
-    default TemperatureSensorPrx ice_connectionId(String connectionId)
+    default ThermostatPrx ice_connectionId(String connectionId)
     {
-        return (TemperatureSensorPrx)_ice_connectionId(connectionId);
+        return (ThermostatPrx)_ice_connectionId(connectionId);
     }
 
     /**
@@ -481,13 +745,13 @@ public interface TemperatureSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @return A fixed proxy bound to the given connection.
      **/
     @Override
-    default TemperatureSensorPrx ice_fixed(com.zeroc.Ice.Connection connection)
+    default ThermostatPrx ice_fixed(com.zeroc.Ice.Connection connection)
     {
-        return (TemperatureSensorPrx)_ice_fixed(connection);
+        return (ThermostatPrx)_ice_fixed(connection);
     }
 
     static String ice_staticId()
     {
-        return "::SmartHome::TemperatureSensor";
+        return "::SmartHome::Thermostat";
     }
 }

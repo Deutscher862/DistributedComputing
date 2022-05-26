@@ -15,11 +15,11 @@
 
 package SmartHome;
 
-public interface Lightbulb extends com.zeroc.Ice.Object
+public interface LightBulb extends com.zeroc.Ice.Object
 {
     DeviceInfo getDeviceInfo(com.zeroc.Ice.Current current);
 
-    LightbulbState getLightbulbState(com.zeroc.Ice.Current current);
+    LightBulbState getLightBulbState(com.zeroc.Ice.Current current);
 
     Color getColor(com.zeroc.Ice.Current current)
         throws DeviceTurnedOffError;
@@ -36,7 +36,7 @@ public interface Lightbulb extends com.zeroc.Ice.Object
     static final String[] _iceIds =
     {
         "::Ice::Object",
-        "::SmartHome::Lightbulb"
+        "::SmartHome::LightBulb"
     };
 
     @Override
@@ -53,7 +53,7 @@ public interface Lightbulb extends com.zeroc.Ice.Object
 
     static String ice_staticId()
     {
-        return "::SmartHome::Lightbulb";
+        return "::SmartHome::LightBulb";
     }
 
     /**
@@ -63,7 +63,7 @@ public interface Lightbulb extends com.zeroc.Ice.Object
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getDeviceInfo(Lightbulb obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getDeviceInfo(LightBulb obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(com.zeroc.Ice.OperationMode.Idempotent, current.mode);
         inS.readEmptyParams();
@@ -81,13 +81,13 @@ public interface Lightbulb extends com.zeroc.Ice.Object
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getLightbulbState(Lightbulb obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getLightBulbState(LightBulb obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(com.zeroc.Ice.OperationMode.Idempotent, current.mode);
         inS.readEmptyParams();
-        LightbulbState ret = obj.getLightbulbState(current);
+        LightBulbState ret = obj.getLightBulbState(current);
         com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
-        LightbulbState.ice_write(ostr, ret);
+        LightBulbState.ice_write(ostr, ret);
         inS.endWriteParams(ostr);
         return inS.setResult(ostr);
     }
@@ -100,7 +100,7 @@ public interface Lightbulb extends com.zeroc.Ice.Object
      * @return -
      * @throws com.zeroc.Ice.UserException -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getColor(Lightbulb obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getColor(LightBulb obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
         throws com.zeroc.Ice.UserException
     {
         com.zeroc.Ice.Object._iceCheckMode(com.zeroc.Ice.OperationMode.Idempotent, current.mode);
@@ -120,7 +120,7 @@ public interface Lightbulb extends com.zeroc.Ice.Object
      * @return -
      * @throws com.zeroc.Ice.UserException -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setColor(Lightbulb obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setColor(LightBulb obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
         throws com.zeroc.Ice.UserException
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
@@ -139,7 +139,7 @@ public interface Lightbulb extends com.zeroc.Ice.Object
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_turnOn(Lightbulb obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_turnOn(LightBulb obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         inS.readEmptyParams();
@@ -154,7 +154,7 @@ public interface Lightbulb extends com.zeroc.Ice.Object
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_turnOff(Lightbulb obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_turnOff(LightBulb obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         inS.readEmptyParams();
@@ -167,7 +167,7 @@ public interface Lightbulb extends com.zeroc.Ice.Object
     {
         "getColor",
         "getDeviceInfo",
-        "getLightbulbState",
+        "getLightBulbState",
         "ice_id",
         "ice_ids",
         "ice_isA",
@@ -200,7 +200,7 @@ public interface Lightbulb extends com.zeroc.Ice.Object
             }
             case 2:
             {
-                return _iceD_getLightbulbState(this, in, current);
+                return _iceD_getLightBulbState(this, in, current);
             }
             case 3:
             {

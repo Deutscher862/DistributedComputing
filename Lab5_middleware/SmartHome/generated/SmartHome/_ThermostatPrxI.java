@@ -16,7 +16,7 @@
 package SmartHome;
 
 /** @hidden */
-public class _TemperatureSensorPrxI extends com.zeroc.Ice._ObjectPrxI implements TemperatureSensorPrx
+public class _ThermostatPrxI extends com.zeroc.Ice._ObjectPrxI implements ThermostatPrx
 {
     /** @hidden */
     public static final long serialVersionUID = 0L;

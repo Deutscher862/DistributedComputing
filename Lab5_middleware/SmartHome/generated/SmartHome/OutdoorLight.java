@@ -15,7 +15,7 @@
 
 package SmartHome;
 
-public interface OutdoorLight extends Lightbulb
+public interface OutdoorLight extends LightBulb
 {
     void setNightMode(NightMode nightMode, com.zeroc.Ice.Current current);
 
@@ -25,7 +25,7 @@ public interface OutdoorLight extends Lightbulb
     static final String[] _iceIds =
     {
         "::Ice::Object",
-        "::SmartHome::Lightbulb",
+        "::SmartHome::LightBulb",
         "::SmartHome::OutdoorLight"
     };
 
@@ -87,7 +87,7 @@ public interface OutdoorLight extends Lightbulb
     {
         "getColor",
         "getDeviceInfo",
-        "getLightbulbState",
+        "getLightBulbState",
         "getNightMode",
         "ice_id",
         "ice_ids",
@@ -114,15 +114,15 @@ public interface OutdoorLight extends Lightbulb
         {
             case 0:
             {
-                return Lightbulb._iceD_getColor(this, in, current);
+                return LightBulb._iceD_getColor(this, in, current);
             }
             case 1:
             {
-                return Lightbulb._iceD_getDeviceInfo(this, in, current);
+                return LightBulb._iceD_getDeviceInfo(this, in, current);
             }
             case 2:
             {
-                return Lightbulb._iceD_getLightbulbState(this, in, current);
+                return LightBulb._iceD_getLightBulbState(this, in, current);
             }
             case 3:
             {
@@ -146,7 +146,7 @@ public interface OutdoorLight extends Lightbulb
             }
             case 8:
             {
-                return Lightbulb._iceD_setColor(this, in, current);
+                return LightBulb._iceD_setColor(this, in, current);
             }
             case 9:
             {
@@ -154,11 +154,11 @@ public interface OutdoorLight extends Lightbulb
             }
             case 10:
             {
-                return Lightbulb._iceD_turnOff(this, in, current);
+                return LightBulb._iceD_turnOff(this, in, current);
             }
             case 11:
             {
-                return Lightbulb._iceD_turnOn(this, in, current);
+                return LightBulb._iceD_turnOn(this, in, current);
             }
         }
 
