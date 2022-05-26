@@ -2,6 +2,7 @@ package main;
 
 import SmartHome.DeviceInfo;
 import SmartHome.NightMode;
+import SmartHome.ThermostatState;
 import SmartHome.Time;
 import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.Identity;
@@ -10,6 +11,7 @@ import com.zeroc.Ice.Util;
 import devices.DeviceList;
 import devices.OutdoorLight;
 import devices.RoomLight;
+import devices.Thermostat;
 
 import java.util.logging.Level;
 
@@ -17,10 +19,13 @@ class Server1 {
     public static void main(String[] args) {
         DeviceList deviceList = new DeviceList();
 
-        RoomLight roomLight = new RoomLight(new DeviceInfo(1, "Kuchnia"), new Time(12, 30));
-        OutdoorLight outdoorLight = new OutdoorLight(new DeviceInfo(2, "Ogródek"), new NightMode());
+        RoomLight roomLight1 = new RoomLight(new DeviceInfo(1, "room1"), new Time(12, 30));
+        RoomLight roomLight2 = new RoomLight(new DeviceInfo(2, "room2"), new Time(20, 15));
+        OutdoorLight outdoorLight = new OutdoorLight(new DeviceInfo(3, "lamp"), new NightMode());
+        Thermostat thermostat = new Thermostat(new DeviceInfo(4, "thermostat"), new ThermostatState());
 
-        deviceList.addDevice(roomLight.getDeviceInfo(null));
+        deviceList.addDevice(roomLight1.getDeviceInfo(null));
+        deviceList.addDevice(roomLight2.getDeviceInfo(null));
         deviceList.addDevice(outdoorLight.getDeviceInfo(null));
 
         ServerLogger.log(Level.INFO, "Starting server...");
@@ -33,11 +38,11 @@ class Server1 {
 
             ObjectAdapter adapter = communicator.createObjectAdapter("Adapter1");
 
-//          ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("Adapter1", "tcp -h 127.0.0.2 -p 10000 -z : udp -h 127.0.0.2 -p 10000 -z");
-
             adapter.add(deviceList, new Identity("deviceList", "list"));
-            adapter.add(roomLight, new Identity("kuchnia", "roomLight"));
-            adapter.add(outdoorLight, new Identity("ogródek", "outdoorLight"));
+            adapter.add(roomLight1, new Identity("room1", "device"));
+            adapter.add(roomLight2, new Identity("room2", "device"));
+            adapter.add(outdoorLight, new Identity("lamp", "device"));
+            adapter.add(thermostat, new Identity("thermostat", "device"));
 
             adapter.activate();
 

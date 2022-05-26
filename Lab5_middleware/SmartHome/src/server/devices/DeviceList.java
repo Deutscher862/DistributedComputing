@@ -13,7 +13,7 @@ public class DeviceList implements SmartHome.DeviceList {
     }
 
     public void addDevice(DeviceInfo deviceInfo) {
-        devices[no_devices] = deviceInfo.id + " " + deviceInfo.name;
+        devices[no_devices] = deviceInfo.id + ": " + deviceInfo.name;
         no_devices += 1;
     }
 }

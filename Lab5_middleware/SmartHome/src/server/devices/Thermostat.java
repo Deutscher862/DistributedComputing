@@ -7,8 +7,11 @@ public class Thermostat implements SmartHome.Thermostat {
     private final DeviceInfo deviceInfo;
     private ThermostatState state;
 
-    Thermostat(DeviceInfo deviceInfo) {
+    public Thermostat(DeviceInfo deviceInfo, ThermostatState state) {
         this.deviceInfo = deviceInfo;
+        this.state = state;
+        this.state.temperature.value = 20.0f;
+        this.state.airMisture.value = 0.45f;
     }
 
     @Override
