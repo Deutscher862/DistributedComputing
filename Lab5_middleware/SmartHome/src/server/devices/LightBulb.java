@@ -7,8 +7,9 @@ public class LightBulb implements SmartHome.LightBulb {
     private final DeviceInfo deviceInfo;
     private LightBulbState lightbulbState;
 
-    LightBulb(DeviceInfo info) {
+    public LightBulb(DeviceInfo info) {
         this.deviceInfo = info;
+        this.lightbulbState = new LightBulbState();
     }
 
     @Override

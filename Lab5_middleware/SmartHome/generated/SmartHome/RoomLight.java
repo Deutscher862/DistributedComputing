@@ -17,7 +17,9 @@ package SmartHome;
 
 public interface RoomLight extends LightBulb
 {
-    void setAutoTurnOffTime(Time time, com.zeroc.Ice.Current current);
+    void setHours(int hours, com.zeroc.Ice.Current current);
+
+    void setMinutes(int minutes, com.zeroc.Ice.Current current);
 
     Time getAutoTurnOffTime(com.zeroc.Ice.Current current);
 
@@ -53,14 +55,32 @@ public interface RoomLight extends LightBulb
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setAutoTurnOffTime(RoomLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setHours(RoomLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        Time iceP_time;
-        iceP_time = Time.ice_read(istr);
+        int iceP_hours;
+        iceP_hours = istr.readInt();
         inS.endReadParams();
-        obj.setAutoTurnOffTime(iceP_time, current);
+        obj.setHours(iceP_hours, current);
+        return inS.setResult(inS.writeEmptyParams());
+    }
+
+    /**
+     * @hidden
+     * @param obj -
+     * @param inS -
+     * @param current -
+     * @return -
+    **/
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setMinutes(RoomLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    {
+        com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
+        com.zeroc.Ice.InputStream istr = inS.startReadParams();
+        int iceP_minutes;
+        iceP_minutes = istr.readInt();
+        inS.endReadParams();
+        obj.setMinutes(iceP_minutes, current);
         return inS.setResult(inS.writeEmptyParams());
     }
 
@@ -93,8 +113,9 @@ public interface RoomLight extends LightBulb
         "ice_ids",
         "ice_isA",
         "ice_ping",
-        "setAutoTurnOffTime",
         "setColor",
+        "setHours",
+        "setMinutes",
         "turnOff",
         "turnOn"
     };
@@ -146,17 +167,21 @@ public interface RoomLight extends LightBulb
             }
             case 8:
             {
-                return _iceD_setAutoTurnOffTime(this, in, current);
+                return LightBulb._iceD_setColor(this, in, current);
             }
             case 9:
             {
-                return LightBulb._iceD_setColor(this, in, current);
+                return _iceD_setHours(this, in, current);
             }
             case 10:
             {
-                return LightBulb._iceD_turnOff(this, in, current);
+                return _iceD_setMinutes(this, in, current);
             }
             case 11:
+            {
+                return LightBulb._iceD_turnOff(this, in, current);
+            }
+            case 12:
             {
                 return LightBulb._iceD_turnOn(this, in, current);
             }

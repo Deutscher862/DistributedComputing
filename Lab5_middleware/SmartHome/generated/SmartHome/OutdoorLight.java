@@ -17,7 +17,7 @@ package SmartHome;
 
 public interface OutdoorLight extends LightBulb
 {
-    void setNightMode(NightMode nightMode, com.zeroc.Ice.Current current);
+    void setNightMode(boolean nightModeEnabled, com.zeroc.Ice.Current current);
 
     NightMode getNightMode(com.zeroc.Ice.Current current);
 
@@ -57,10 +57,10 @@ public interface OutdoorLight extends LightBulb
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        NightMode iceP_nightMode;
-        iceP_nightMode = NightMode.ice_read(istr);
+        boolean iceP_nightModeEnabled;
+        iceP_nightModeEnabled = istr.readBool();
         inS.endReadParams();
-        obj.setNightMode(iceP_nightMode, current);
+        obj.setNightMode(iceP_nightModeEnabled, current);
         return inS.setResult(inS.writeEmptyParams());
     }
 

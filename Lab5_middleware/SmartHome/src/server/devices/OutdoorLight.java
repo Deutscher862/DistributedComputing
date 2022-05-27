@@ -14,8 +14,8 @@ public class OutdoorLight extends LightBulb implements SmartHome.OutdoorLight {
     }
 
     @Override
-    public void setNightMode(NightMode nightMode, Current current) {
-        this.nightMode = nightMode;
+    public void setNightMode(boolean nightModeEnabled, Current current) {
+        nightMode.nightModeEnabled = nightModeEnabled;
     }
 
     @Override

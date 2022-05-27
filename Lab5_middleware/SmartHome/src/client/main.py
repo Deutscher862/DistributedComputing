@@ -1,12 +1,17 @@
 import sys, Ice
 
-from SmartHome import RoomLightPrx, OutdoorLightPrx, DeviceListPrx, ThermostatPrx, DeviceTurnedOffError
+from SmartHome import LightBulbPrx, RoomLightPrx, OutdoorLightPrx, DeviceListPrx, ThermostatPrx, DeviceTurnedOffError
+from devices.lightbulb import lightbulb_handler
+from devices.room_light import room_light_handler
+from devices.outdoor_light import outdoor_light_handler
+from devices.thermostat import thermostat_handler
 
 devices = {
     "room1": RoomLightPrx,
     "room2": RoomLightPrx,
     "lamp": OutdoorLightPrx,
-    "thermostat": ThermostatPrx
+    "thermostat": ThermostatPrx,
+    "lightbulb": LightBulbPrx
 }
 
 
@@ -22,10 +27,23 @@ def list_devices(communicator):
     print()
 
 
+def handle_device(device_name, device_prx, communicator):
+    base = communicator.propertyToProxy(f"""{device_name}.Proxy""")
+    device = device_prx.checkedCast(base)
+    if device_name == "lightbulb":
+        lightbulb_handler(device, device_name)
+    elif device_name == "room1" or device_name == "room2":
+        room_light_handler(device, device_name)
+    elif device_name == "lamp":
+        outdoor_light_handler(device, device_name)
+    elif device_name == "thermostat":
+        thermostat_handler(device, device_name)
+
+
 def init_message():
     print("Client start")
     print("Input \"list\" to list available devices")
-    print("Input device_identity to connect to it\n")
+    print("Input device_name to connect to it\n")
 
 
 def main():
@@ -37,11 +55,9 @@ def main():
 
                 if message == "list":
                     list_devices(communicator)
-
-                # base = communicator.propertyToProxy(f"""{device_identity}.Proxy""")
-
-                # fridgePrx = LightBulbPrx.checkedCast(base)
-                # LightBulbPrx.turnOn()
+                else:
+                    device_prx = devices[message]
+                    handle_device(message, device_prx, communicator)
 
             except DeviceTurnedOffError as e:
                 print('Invalid operation: ', e.reason)

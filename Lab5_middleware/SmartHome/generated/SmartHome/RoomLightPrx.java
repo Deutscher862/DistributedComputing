@@ -17,38 +17,74 @@ package SmartHome;
 
 public interface RoomLightPrx extends LightBulbPrx
 {
-    default void setAutoTurnOffTime(Time time)
+    default void setHours(int hours)
     {
-        setAutoTurnOffTime(time, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        setHours(hours, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void setAutoTurnOffTime(Time time, java.util.Map<String, String> context)
+    default void setHours(int hours, java.util.Map<String, String> context)
     {
-        _iceI_setAutoTurnOffTimeAsync(time, context, true).waitForResponse();
+        _iceI_setHoursAsync(hours, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setAutoTurnOffTimeAsync(Time time)
+    default java.util.concurrent.CompletableFuture<Void> setHoursAsync(int hours)
     {
-        return _iceI_setAutoTurnOffTimeAsync(time, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_setHoursAsync(hours, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setAutoTurnOffTimeAsync(Time time, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> setHoursAsync(int hours, java.util.Map<String, String> context)
     {
-        return _iceI_setAutoTurnOffTimeAsync(time, context, false);
+        return _iceI_setHoursAsync(hours, context, false);
     }
 
     /**
      * @hidden
-     * @param iceP_time -
+     * @param iceP_hours -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setAutoTurnOffTimeAsync(Time iceP_time, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setHoursAsync(int iceP_hours, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setAutoTurnOffTime", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setHours", null, sync, null);
         f.invoke(false, context, null, ostr -> {
-                     Time.ice_write(ostr, iceP_time);
+                     ostr.writeInt(iceP_hours);
+                 }, null);
+        return f;
+    }
+
+    default void setMinutes(int minutes)
+    {
+        setMinutes(minutes, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default void setMinutes(int minutes, java.util.Map<String, String> context)
+    {
+        _iceI_setMinutesAsync(minutes, context, true).waitForResponse();
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> setMinutesAsync(int minutes)
+    {
+        return _iceI_setMinutesAsync(minutes, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> setMinutesAsync(int minutes, java.util.Map<String, String> context)
+    {
+        return _iceI_setMinutesAsync(minutes, context, false);
+    }
+
+    /**
+     * @hidden
+     * @param iceP_minutes -
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setMinutesAsync(int iceP_minutes, java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setMinutes", null, sync, null);
+        f.invoke(false, context, null, ostr -> {
+                     ostr.writeInt(iceP_minutes);
                  }, null);
         return f;
     }

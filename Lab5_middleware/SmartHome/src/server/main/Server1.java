@@ -8,10 +8,7 @@ import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.Identity;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Util;
-import devices.DeviceList;
-import devices.OutdoorLight;
-import devices.RoomLight;
-import devices.Thermostat;
+import devices.*;
 
 import java.util.logging.Level;
 
@@ -19,6 +16,7 @@ class Server1 {
     public static void main(String[] args) {
         DeviceList deviceList = new DeviceList();
 
+        LightBulb lightBulb = new LightBulb(new DeviceInfo(5, "lightbulb"));
         RoomLight roomLight1 = new RoomLight(new DeviceInfo(1, "room1"), new Time(12, 30));
         RoomLight roomLight2 = new RoomLight(new DeviceInfo(2, "room2"), new Time(20, 15));
         OutdoorLight outdoorLight = new OutdoorLight(new DeviceInfo(3, "lamp"), new NightMode());
@@ -27,6 +25,8 @@ class Server1 {
         deviceList.addDevice(roomLight1.getDeviceInfo(null));
         deviceList.addDevice(roomLight2.getDeviceInfo(null));
         deviceList.addDevice(outdoorLight.getDeviceInfo(null));
+        deviceList.addDevice(lightBulb.getDeviceInfo(null));
+        deviceList.addDevice(thermostat.getDeviceInfo(null));
 
         ServerLogger.log(Level.INFO, "Starting server...");
 
@@ -43,6 +43,7 @@ class Server1 {
             adapter.add(roomLight2, new Identity("room2", "device"));
             adapter.add(outdoorLight, new Identity("lamp", "device"));
             adapter.add(thermostat, new Identity("thermostat", "device"));
+            adapter.add(lightBulb, new Identity("lightbulb", "device"));
 
             adapter.activate();
 

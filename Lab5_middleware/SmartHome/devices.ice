@@ -38,12 +38,13 @@ module SmartHome {
     };
 
     interface OutdoorLight extends LightBulb {
-        void setNightMode(NightMode nightMode);
+        void setNightMode(bool nightModeEnabled);
         idempotent NightMode getNightMode();
     };
 
     interface RoomLight extends LightBulb {
-        void setAutoTurnOffTime(Time time);
+        void setHours(int hours);
+        void setMinutes(int minutes);
         idempotent Time getAutoTurnOffTime();
     };
 

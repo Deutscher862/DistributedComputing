@@ -17,38 +17,38 @@ package SmartHome;
 
 public interface OutdoorLightPrx extends LightBulbPrx
 {
-    default void setNightMode(NightMode nightMode)
+    default void setNightMode(boolean nightModeEnabled)
     {
-        setNightMode(nightMode, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        setNightMode(nightModeEnabled, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void setNightMode(NightMode nightMode, java.util.Map<String, String> context)
+    default void setNightMode(boolean nightModeEnabled, java.util.Map<String, String> context)
     {
-        _iceI_setNightModeAsync(nightMode, context, true).waitForResponse();
+        _iceI_setNightModeAsync(nightModeEnabled, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setNightModeAsync(NightMode nightMode)
+    default java.util.concurrent.CompletableFuture<Void> setNightModeAsync(boolean nightModeEnabled)
     {
-        return _iceI_setNightModeAsync(nightMode, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_setNightModeAsync(nightModeEnabled, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setNightModeAsync(NightMode nightMode, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> setNightModeAsync(boolean nightModeEnabled, java.util.Map<String, String> context)
     {
-        return _iceI_setNightModeAsync(nightMode, context, false);
+        return _iceI_setNightModeAsync(nightModeEnabled, context, false);
     }
 
     /**
      * @hidden
-     * @param iceP_nightMode -
+     * @param iceP_nightModeEnabled -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setNightModeAsync(NightMode iceP_nightMode, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setNightModeAsync(boolean iceP_nightModeEnabled, java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setNightMode", null, sync, null);
         f.invoke(false, context, null, ostr -> {
-                     NightMode.ice_write(ostr, iceP_nightMode);
+                     ostr.writeBool(iceP_nightModeEnabled);
                  }, null);
         return f;
     }

@@ -13,8 +13,13 @@ public class RoomLight extends LightBulb implements SmartHome.RoomLight {
     }
 
     @Override
-    public void setAutoTurnOffTime(Time time, Current current) {
-        autoTurnOffTime = time;
+    public void setHours(int hours, Current current) {
+        autoTurnOffTime.hours = hours;
+    }
+
+    @Override
+    public void setMinutes(int minutes, Current current) {
+        autoTurnOffTime.minutes = minutes;
     }
 
     @Override
