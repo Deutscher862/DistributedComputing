@@ -417,3 +417,5 @@ cython_debug/
 /Lab4_Akka/.gradle/7.4.2/checksums/md5-checksums.bin
 /Lab4_Akka/.gradle/buildOutputCleanup/outputFiles.bin
 /Lab4_Akka/.gradle/7.4.2/checksums/sha1-checksums.bin
+/Lab5_middleware/SmartHome/server_java/.idea/
+/Lab5_middleware/SmartHome/client_python/.idea/
