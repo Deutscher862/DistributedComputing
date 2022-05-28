@@ -1,15 +1,20 @@
 from devices import lightbulb
 from devices import device_handler_loop
+from SmartHome import NightMode
 
 
 def set_night_mode(outdoor_light):
     msg = input("enable night mode? yes/no: ")
+    night_mode = NightMode()
     if msg == "yes":
-        outdoor_light.setNightMode(True)
+        night_mode.nightModeEnabled = True
     elif msg == "no":
-        outdoor_light.setNightMode(False)
+        night_mode.nightModeEnabled = False
     else:
         print("Invalid input")
+        return
+
+    outdoor_light.setNightMode(night_mode)
     get_night_mode(outdoor_light)
 
 

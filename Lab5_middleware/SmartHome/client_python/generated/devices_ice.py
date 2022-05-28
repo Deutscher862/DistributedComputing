@@ -666,17 +666,17 @@ if 'RoomLightPrx' not in _M_SmartHome.__dict__:
     _M_SmartHome.RoomLightPrx = Ice.createTempClass()
     class RoomLightPrx(_M_SmartHome.LightBulbPrx):
 
-        def setTime(self, time, context=None):
-            return _M_SmartHome.RoomLight._op_setTime.invoke(self, ((time, ), context))
+        def setAutoTurnOffTime(self, time, context=None):
+            return _M_SmartHome.RoomLight._op_setAutoTurnOffTime.invoke(self, ((time, ), context))
 
-        def setTimeAsync(self, time, context=None):
-            return _M_SmartHome.RoomLight._op_setTime.invokeAsync(self, ((time, ), context))
+        def setAutoTurnOffTimeAsync(self, time, context=None):
+            return _M_SmartHome.RoomLight._op_setAutoTurnOffTime.invokeAsync(self, ((time, ), context))
 
-        def begin_setTime(self, time, _response=None, _ex=None, _sent=None, context=None):
-            return _M_SmartHome.RoomLight._op_setTime.begin(self, ((time, ), _response, _ex, _sent, context))
+        def begin_setAutoTurnOffTime(self, time, _response=None, _ex=None, _sent=None, context=None):
+            return _M_SmartHome.RoomLight._op_setAutoTurnOffTime.begin(self, ((time, ), _response, _ex, _sent, context))
 
-        def end_setTime(self, _r):
-            return _M_SmartHome.RoomLight._op_setTime.end(self, _r)
+        def end_setAutoTurnOffTime(self, _r):
+            return _M_SmartHome.RoomLight._op_setAutoTurnOffTime.end(self, _r)
 
         def getAutoTurnOffTime(self, context=None):
             return _M_SmartHome.RoomLight._op_getAutoTurnOffTime.invoke(self, ((), context))
@@ -719,8 +719,8 @@ if 'RoomLightPrx' not in _M_SmartHome.__dict__:
         def ice_staticId():
             return '::SmartHome::RoomLight'
 
-        def setTime(self, time, current=None):
-            raise NotImplementedError("servant method 'setTime' not implemented")
+        def setAutoTurnOffTime(self, time, current=None):
+            raise NotImplementedError("servant method 'setAutoTurnOffTime' not implemented")
 
         def getAutoTurnOffTime(self, current=None):
             raise NotImplementedError("servant method 'getAutoTurnOffTime' not implemented")
@@ -733,7 +733,7 @@ if 'RoomLightPrx' not in _M_SmartHome.__dict__:
     _M_SmartHome._t_RoomLightDisp = IcePy.defineClass('::SmartHome::RoomLight', RoomLight, (), None, (_M_SmartHome._t_LightBulbDisp,))
     RoomLight._ice_type = _M_SmartHome._t_RoomLightDisp
 
-    RoomLight._op_setTime = IcePy.Operation('setTime', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_SmartHome._t_Time, False, 0),), (), None, ())
+    RoomLight._op_setAutoTurnOffTime = IcePy.Operation('setAutoTurnOffTime', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_SmartHome._t_Time, False, 0),), (), None, ())
     RoomLight._op_getAutoTurnOffTime = IcePy.Operation('getAutoTurnOffTime', Ice.OperationMode.Idempotent, Ice.OperationMode.Idempotent, False, None, (), (), (), ((), _M_SmartHome._t_Time, False, 0), ())
 
     _M_SmartHome.RoomLight = RoomLight

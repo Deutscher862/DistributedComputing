@@ -44,7 +44,7 @@ Thermostat implements SmartHome.Thermostat {
         if (!state.turnedOn) {
             throw new DeviceTurnedOffError("Thermostat " + deviceInfo.name + " is turned off");
         }
-        state.temperature.value += 0.2f;
+        state.temperature.value += 0.5f;
     }
 
     @Override
@@ -52,7 +52,7 @@ Thermostat implements SmartHome.Thermostat {
         if (!state.turnedOn) {
             throw new DeviceTurnedOffError("Thermostat " + deviceInfo.name + " is turned off");
         }
-        state.temperature.value -= 0.2f;
+        state.temperature.value -= 0.5f;
     }
 
     @Override

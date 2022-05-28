@@ -43,7 +43,7 @@ module SmartHome {
     };
 
     interface RoomLight extends LightBulb {
-        void setTime(Time time);
+        void setAutoTurnOffTime(Time time);
         idempotent Time getAutoTurnOffTime();
     };
 

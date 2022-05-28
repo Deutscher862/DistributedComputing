@@ -66,6 +66,6 @@ def main():
                 print(e)
                 print()
 
-
+#TODO wyjątki w pythonie, dwa serwery, nazwa serwera w device info, zmiana nazwy w nightmode
 if __name__ == "__main__":
     main()

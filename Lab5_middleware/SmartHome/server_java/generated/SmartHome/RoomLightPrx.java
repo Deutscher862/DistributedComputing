@@ -17,24 +17,24 @@ package SmartHome;
 
 public interface RoomLightPrx extends LightBulbPrx
 {
-    default void setTime(Time time)
+    default void setAutoTurnOffTime(Time time)
     {
-        setTime(time, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        setAutoTurnOffTime(time, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void setTime(Time time, java.util.Map<String, String> context)
+    default void setAutoTurnOffTime(Time time, java.util.Map<String, String> context)
     {
-        _iceI_setTimeAsync(time, context, true).waitForResponse();
+        _iceI_setAutoTurnOffTimeAsync(time, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setTimeAsync(Time time)
+    default java.util.concurrent.CompletableFuture<Void> setAutoTurnOffTimeAsync(Time time)
     {
-        return _iceI_setTimeAsync(time, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_setAutoTurnOffTimeAsync(time, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setTimeAsync(Time time, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> setAutoTurnOffTimeAsync(Time time, java.util.Map<String, String> context)
     {
-        return _iceI_setTimeAsync(time, context, false);
+        return _iceI_setAutoTurnOffTimeAsync(time, context, false);
     }
 
     /**
@@ -44,9 +44,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setTimeAsync(Time iceP_time, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setAutoTurnOffTimeAsync(Time iceP_time, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setTime", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setAutoTurnOffTime", null, sync, null);
         f.invoke(false, context, null, ostr -> {
                      Time.ice_write(ostr, iceP_time);
                  }, null);

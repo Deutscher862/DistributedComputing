@@ -16,17 +16,17 @@ class Server1 {
     public static void main(String[] args) {
         DeviceList deviceList = new DeviceList();
 
-        LightBulb lightBulb = new LightBulb(new DeviceInfo(5, "lightbulb"));
         RoomLight roomLight1 = new RoomLight(new DeviceInfo(1, "room1"), new Time(12, 30));
         RoomLight roomLight2 = new RoomLight(new DeviceInfo(2, "room2"), new Time(20, 15));
         OutdoorLight outdoorLight = new OutdoorLight(new DeviceInfo(3, "lamp"), new NightMode());
         Thermostat thermostat = new Thermostat(new DeviceInfo(4, "thermostat"), new ThermostatState());
+        LightBulb lightBulb = new LightBulb(new DeviceInfo(5, "lightbulb"));
 
         deviceList.addDevice(roomLight1.getDeviceInfo(null));
         deviceList.addDevice(roomLight2.getDeviceInfo(null));
         deviceList.addDevice(outdoorLight.getDeviceInfo(null));
-        deviceList.addDevice(lightBulb.getDeviceInfo(null));
         deviceList.addDevice(thermostat.getDeviceInfo(null));
+        deviceList.addDevice(lightBulb.getDeviceInfo(null));
 
         ServerLogger.log(Level.INFO, "Starting server...");
 
