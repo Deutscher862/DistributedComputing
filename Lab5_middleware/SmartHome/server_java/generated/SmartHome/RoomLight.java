@@ -15,18 +15,18 @@
 
 package SmartHome;
 
-public interface OutdoorLight extends LightBulb
+public interface RoomLight extends LightBulb
 {
-    void setNightMode(boolean nightModeEnabled, com.zeroc.Ice.Current current);
+    void setTime(Time time, com.zeroc.Ice.Current current);
 
-    NightMode getNightMode(com.zeroc.Ice.Current current);
+    Time getAutoTurnOffTime(com.zeroc.Ice.Current current);
 
     /** @hidden */
     static final String[] _iceIds =
     {
         "::Ice::Object",
         "::SmartHome::LightBulb",
-        "::SmartHome::OutdoorLight"
+        "::SmartHome::RoomLight"
     };
 
     @Override
@@ -43,7 +43,7 @@ public interface OutdoorLight extends LightBulb
 
     static String ice_staticId()
     {
-        return "::SmartHome::OutdoorLight";
+        return "::SmartHome::RoomLight";
     }
 
     /**
@@ -53,14 +53,14 @@ public interface OutdoorLight extends LightBulb
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setNightMode(OutdoorLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setTime(RoomLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        boolean iceP_nightModeEnabled;
-        iceP_nightModeEnabled = istr.readBool();
+        Time iceP_time;
+        iceP_time = Time.ice_read(istr);
         inS.endReadParams();
-        obj.setNightMode(iceP_nightModeEnabled, current);
+        obj.setTime(iceP_time, current);
         return inS.setResult(inS.writeEmptyParams());
     }
 
@@ -71,13 +71,13 @@ public interface OutdoorLight extends LightBulb
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getNightMode(OutdoorLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getAutoTurnOffTime(RoomLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(com.zeroc.Ice.OperationMode.Idempotent, current.mode);
         inS.readEmptyParams();
-        NightMode ret = obj.getNightMode(current);
+        Time ret = obj.getAutoTurnOffTime(current);
         com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
-        NightMode.ice_write(ostr, ret);
+        Time.ice_write(ostr, ret);
         inS.endWriteParams(ostr);
         return inS.setResult(ostr);
     }
@@ -85,16 +85,16 @@ public interface OutdoorLight extends LightBulb
     /** @hidden */
     final static String[] _iceOps =
     {
+        "getAutoTurnOffTime",
         "getColor",
         "getDeviceInfo",
         "getLightBulbState",
-        "getNightMode",
         "ice_id",
         "ice_ids",
         "ice_isA",
         "ice_ping",
         "setColor",
-        "setNightMode",
+        "setTime",
         "turnOff",
         "turnOn"
     };
@@ -114,19 +114,19 @@ public interface OutdoorLight extends LightBulb
         {
             case 0:
             {
-                return LightBulb._iceD_getColor(this, in, current);
+                return _iceD_getAutoTurnOffTime(this, in, current);
             }
             case 1:
             {
-                return LightBulb._iceD_getDeviceInfo(this, in, current);
+                return LightBulb._iceD_getColor(this, in, current);
             }
             case 2:
             {
-                return LightBulb._iceD_getLightBulbState(this, in, current);
+                return LightBulb._iceD_getDeviceInfo(this, in, current);
             }
             case 3:
             {
-                return _iceD_getNightMode(this, in, current);
+                return LightBulb._iceD_getLightBulbState(this, in, current);
             }
             case 4:
             {
@@ -150,7 +150,7 @@ public interface OutdoorLight extends LightBulb
             }
             case 9:
             {
-                return _iceD_setNightMode(this, in, current);
+                return _iceD_setTime(this, in, current);
             }
             case 10:
             {

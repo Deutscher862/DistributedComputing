@@ -654,7 +654,7 @@ if 'OutdoorLightPrx' not in _M_SmartHome.__dict__:
     _M_SmartHome._t_OutdoorLightDisp = IcePy.defineClass('::SmartHome::OutdoorLight', OutdoorLight, (), None, (_M_SmartHome._t_LightBulbDisp,))
     OutdoorLight._ice_type = _M_SmartHome._t_OutdoorLightDisp
 
-    OutdoorLight._op_setNightMode = IcePy.Operation('setNightMode', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_bool, False, 0),), (), None, ())
+    OutdoorLight._op_setNightMode = IcePy.Operation('setNightMode', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_SmartHome._t_NightMode, False, 0),), (), None, ())
     OutdoorLight._op_getNightMode = IcePy.Operation('getNightMode', Ice.OperationMode.Idempotent, Ice.OperationMode.Idempotent, False, None, (), (), (), ((), _M_SmartHome._t_NightMode, False, 0), ())
 
     _M_SmartHome.OutdoorLight = OutdoorLight
@@ -666,29 +666,17 @@ if 'RoomLightPrx' not in _M_SmartHome.__dict__:
     _M_SmartHome.RoomLightPrx = Ice.createTempClass()
     class RoomLightPrx(_M_SmartHome.LightBulbPrx):
 
-        def setHours(self, hours, context=None):
-            return _M_SmartHome.RoomLight._op_setHours.invoke(self, ((hours, ), context))
+        def setTime(self, time, context=None):
+            return _M_SmartHome.RoomLight._op_setTime.invoke(self, ((time, ), context))
 
-        def setHoursAsync(self, hours, context=None):
-            return _M_SmartHome.RoomLight._op_setHours.invokeAsync(self, ((hours, ), context))
+        def setTimeAsync(self, time, context=None):
+            return _M_SmartHome.RoomLight._op_setTime.invokeAsync(self, ((time, ), context))
 
-        def begin_setHours(self, hours, _response=None, _ex=None, _sent=None, context=None):
-            return _M_SmartHome.RoomLight._op_setHours.begin(self, ((hours, ), _response, _ex, _sent, context))
+        def begin_setTime(self, time, _response=None, _ex=None, _sent=None, context=None):
+            return _M_SmartHome.RoomLight._op_setTime.begin(self, ((time, ), _response, _ex, _sent, context))
 
-        def end_setHours(self, _r):
-            return _M_SmartHome.RoomLight._op_setHours.end(self, _r)
-
-        def setMinutes(self, minutes, context=None):
-            return _M_SmartHome.RoomLight._op_setMinutes.invoke(self, ((minutes, ), context))
-
-        def setMinutesAsync(self, minutes, context=None):
-            return _M_SmartHome.RoomLight._op_setMinutes.invokeAsync(self, ((minutes, ), context))
-
-        def begin_setMinutes(self, minutes, _response=None, _ex=None, _sent=None, context=None):
-            return _M_SmartHome.RoomLight._op_setMinutes.begin(self, ((minutes, ), _response, _ex, _sent, context))
-
-        def end_setMinutes(self, _r):
-            return _M_SmartHome.RoomLight._op_setMinutes.end(self, _r)
+        def end_setTime(self, _r):
+            return _M_SmartHome.RoomLight._op_setTime.end(self, _r)
 
         def getAutoTurnOffTime(self, context=None):
             return _M_SmartHome.RoomLight._op_getAutoTurnOffTime.invoke(self, ((), context))
@@ -731,11 +719,8 @@ if 'RoomLightPrx' not in _M_SmartHome.__dict__:
         def ice_staticId():
             return '::SmartHome::RoomLight'
 
-        def setHours(self, hours, current=None):
-            raise NotImplementedError("servant method 'setHours' not implemented")
-
-        def setMinutes(self, minutes, current=None):
-            raise NotImplementedError("servant method 'setMinutes' not implemented")
+        def setTime(self, time, current=None):
+            raise NotImplementedError("servant method 'setTime' not implemented")
 
         def getAutoTurnOffTime(self, current=None):
             raise NotImplementedError("servant method 'getAutoTurnOffTime' not implemented")
@@ -748,8 +733,7 @@ if 'RoomLightPrx' not in _M_SmartHome.__dict__:
     _M_SmartHome._t_RoomLightDisp = IcePy.defineClass('::SmartHome::RoomLight', RoomLight, (), None, (_M_SmartHome._t_LightBulbDisp,))
     RoomLight._ice_type = _M_SmartHome._t_RoomLightDisp
 
-    RoomLight._op_setHours = IcePy.Operation('setHours', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_int, False, 0),), (), None, ())
-    RoomLight._op_setMinutes = IcePy.Operation('setMinutes', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), IcePy._t_int, False, 0),), (), None, ())
+    RoomLight._op_setTime = IcePy.Operation('setTime', Ice.OperationMode.Normal, Ice.OperationMode.Normal, False, None, (), (((), _M_SmartHome._t_Time, False, 0),), (), None, ())
     RoomLight._op_getAutoTurnOffTime = IcePy.Operation('getAutoTurnOffTime', Ice.OperationMode.Idempotent, Ice.OperationMode.Idempotent, False, None, (), (), (), ((), _M_SmartHome._t_Time, False, 0), ())
 
     _M_SmartHome.RoomLight = RoomLight

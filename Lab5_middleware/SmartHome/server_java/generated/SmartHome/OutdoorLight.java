@@ -15,20 +15,18 @@
 
 package SmartHome;
 
-public interface RoomLight extends LightBulb
+public interface OutdoorLight extends LightBulb
 {
-    void setHours(int hours, com.zeroc.Ice.Current current);
+    void setNightMode(NightMode nightModeEnabled, com.zeroc.Ice.Current current);
 
-    void setMinutes(int minutes, com.zeroc.Ice.Current current);
-
-    Time getAutoTurnOffTime(com.zeroc.Ice.Current current);
+    NightMode getNightMode(com.zeroc.Ice.Current current);
 
     /** @hidden */
     static final String[] _iceIds =
     {
         "::Ice::Object",
         "::SmartHome::LightBulb",
-        "::SmartHome::RoomLight"
+        "::SmartHome::OutdoorLight"
     };
 
     @Override
@@ -45,7 +43,7 @@ public interface RoomLight extends LightBulb
 
     static String ice_staticId()
     {
-        return "::SmartHome::RoomLight";
+        return "::SmartHome::OutdoorLight";
     }
 
     /**
@@ -55,14 +53,14 @@ public interface RoomLight extends LightBulb
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setHours(RoomLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setNightMode(OutdoorLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        int iceP_hours;
-        iceP_hours = istr.readInt();
+        NightMode iceP_nightModeEnabled;
+        iceP_nightModeEnabled = NightMode.ice_read(istr);
         inS.endReadParams();
-        obj.setHours(iceP_hours, current);
+        obj.setNightMode(iceP_nightModeEnabled, current);
         return inS.setResult(inS.writeEmptyParams());
     }
 
@@ -73,31 +71,13 @@ public interface RoomLight extends LightBulb
      * @param current -
      * @return -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setMinutes(RoomLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
-    {
-        com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
-        com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        int iceP_minutes;
-        iceP_minutes = istr.readInt();
-        inS.endReadParams();
-        obj.setMinutes(iceP_minutes, current);
-        return inS.setResult(inS.writeEmptyParams());
-    }
-
-    /**
-     * @hidden
-     * @param obj -
-     * @param inS -
-     * @param current -
-     * @return -
-    **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getAutoTurnOffTime(RoomLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getNightMode(OutdoorLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(com.zeroc.Ice.OperationMode.Idempotent, current.mode);
         inS.readEmptyParams();
-        Time ret = obj.getAutoTurnOffTime(current);
+        NightMode ret = obj.getNightMode(current);
         com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
-        Time.ice_write(ostr, ret);
+        NightMode.ice_write(ostr, ret);
         inS.endWriteParams(ostr);
         return inS.setResult(ostr);
     }
@@ -105,17 +85,16 @@ public interface RoomLight extends LightBulb
     /** @hidden */
     final static String[] _iceOps =
     {
-        "getAutoTurnOffTime",
         "getColor",
         "getDeviceInfo",
         "getLightBulbState",
+        "getNightMode",
         "ice_id",
         "ice_ids",
         "ice_isA",
         "ice_ping",
         "setColor",
-        "setHours",
-        "setMinutes",
+        "setNightMode",
         "turnOff",
         "turnOn"
     };
@@ -135,19 +114,19 @@ public interface RoomLight extends LightBulb
         {
             case 0:
             {
-                return _iceD_getAutoTurnOffTime(this, in, current);
+                return LightBulb._iceD_getColor(this, in, current);
             }
             case 1:
             {
-                return LightBulb._iceD_getColor(this, in, current);
+                return LightBulb._iceD_getDeviceInfo(this, in, current);
             }
             case 2:
             {
-                return LightBulb._iceD_getDeviceInfo(this, in, current);
+                return LightBulb._iceD_getLightBulbState(this, in, current);
             }
             case 3:
             {
-                return LightBulb._iceD_getLightBulbState(this, in, current);
+                return _iceD_getNightMode(this, in, current);
             }
             case 4:
             {
@@ -171,17 +150,13 @@ public interface RoomLight extends LightBulb
             }
             case 9:
             {
-                return _iceD_setHours(this, in, current);
+                return _iceD_setNightMode(this, in, current);
             }
             case 10:
             {
-                return _iceD_setMinutes(this, in, current);
-            }
-            case 11:
-            {
                 return LightBulb._iceD_turnOff(this, in, current);
             }
-            case 12:
+            case 11:
             {
                 return LightBulb._iceD_turnOn(this, in, current);
             }

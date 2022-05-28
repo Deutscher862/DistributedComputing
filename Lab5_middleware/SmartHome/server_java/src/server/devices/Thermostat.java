@@ -3,9 +3,10 @@ package devices;
 import SmartHome.*;
 import com.zeroc.Ice.Current;
 
-public class Thermostat implements SmartHome.Thermostat {
+public class
+Thermostat implements SmartHome.Thermostat {
     private final DeviceInfo deviceInfo;
-    private ThermostatState state;
+    private final ThermostatState state;
 
     public Thermostat(DeviceInfo deviceInfo, ThermostatState state) {
         this.deviceInfo = deviceInfo;

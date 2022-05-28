@@ -5,7 +5,7 @@ import com.zeroc.Ice.Current;
 
 public class LightBulb implements SmartHome.LightBulb {
     private final DeviceInfo deviceInfo;
-    private LightBulbState lightbulbState;
+    private final LightBulbState lightbulbState;
 
     public LightBulb(DeviceInfo info) {
         this.deviceInfo = info;

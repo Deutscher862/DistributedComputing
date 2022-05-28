@@ -50,14 +50,14 @@ class Server1 {
             communicator.waitForShutdown();
 
         } catch (Exception e) {
-            System.err.println(e);
+            e.printStackTrace();
             status = 1;
         }
         if (communicator != null) {
             try {
                 communicator.destroy();
             } catch (Exception e) {
-                System.err.println(e);
+                e.printStackTrace();
                 status = 1;
             }
         }

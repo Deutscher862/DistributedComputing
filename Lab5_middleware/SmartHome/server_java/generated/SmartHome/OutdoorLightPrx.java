@@ -15,98 +15,62 @@
 
 package SmartHome;
 
-public interface RoomLightPrx extends LightBulbPrx
+public interface OutdoorLightPrx extends LightBulbPrx
 {
-    default void setHours(int hours)
+    default void setNightMode(NightMode nightModeEnabled)
     {
-        setHours(hours, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        setNightMode(nightModeEnabled, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void setHours(int hours, java.util.Map<String, String> context)
+    default void setNightMode(NightMode nightModeEnabled, java.util.Map<String, String> context)
     {
-        _iceI_setHoursAsync(hours, context, true).waitForResponse();
+        _iceI_setNightModeAsync(nightModeEnabled, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setHoursAsync(int hours)
+    default java.util.concurrent.CompletableFuture<Void> setNightModeAsync(NightMode nightModeEnabled)
     {
-        return _iceI_setHoursAsync(hours, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_setNightModeAsync(nightModeEnabled, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setHoursAsync(int hours, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> setNightModeAsync(NightMode nightModeEnabled, java.util.Map<String, String> context)
     {
-        return _iceI_setHoursAsync(hours, context, false);
+        return _iceI_setNightModeAsync(nightModeEnabled, context, false);
     }
 
     /**
      * @hidden
-     * @param iceP_hours -
+     * @param iceP_nightModeEnabled -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setHoursAsync(int iceP_hours, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setNightModeAsync(NightMode iceP_nightModeEnabled, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setHours", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setNightMode", null, sync, null);
         f.invoke(false, context, null, ostr -> {
-                     ostr.writeInt(iceP_hours);
+                     NightMode.ice_write(ostr, iceP_nightModeEnabled);
                  }, null);
         return f;
     }
 
-    default void setMinutes(int minutes)
+    default NightMode getNightMode()
     {
-        setMinutes(minutes, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return getNightMode(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void setMinutes(int minutes, java.util.Map<String, String> context)
+    default NightMode getNightMode(java.util.Map<String, String> context)
     {
-        _iceI_setMinutesAsync(minutes, context, true).waitForResponse();
+        return _iceI_getNightModeAsync(context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setMinutesAsync(int minutes)
+    default java.util.concurrent.CompletableFuture<NightMode> getNightModeAsync()
     {
-        return _iceI_setMinutesAsync(minutes, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_getNightModeAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setMinutesAsync(int minutes, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<NightMode> getNightModeAsync(java.util.Map<String, String> context)
     {
-        return _iceI_setMinutesAsync(minutes, context, false);
-    }
-
-    /**
-     * @hidden
-     * @param iceP_minutes -
-     * @param context -
-     * @param sync -
-     * @return -
-     **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setMinutesAsync(int iceP_minutes, java.util.Map<String, String> context, boolean sync)
-    {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setMinutes", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
-                     ostr.writeInt(iceP_minutes);
-                 }, null);
-        return f;
-    }
-
-    default Time getAutoTurnOffTime()
-    {
-        return getAutoTurnOffTime(com.zeroc.Ice.ObjectPrx.noExplicitContext);
-    }
-
-    default Time getAutoTurnOffTime(java.util.Map<String, String> context)
-    {
-        return _iceI_getAutoTurnOffTimeAsync(context, true).waitForResponse();
-    }
-
-    default java.util.concurrent.CompletableFuture<Time> getAutoTurnOffTimeAsync()
-    {
-        return _iceI_getAutoTurnOffTimeAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
-    }
-
-    default java.util.concurrent.CompletableFuture<Time> getAutoTurnOffTimeAsync(java.util.Map<String, String> context)
-    {
-        return _iceI_getAutoTurnOffTimeAsync(context, false);
+        return _iceI_getNightModeAsync(context, false);
     }
 
     /**
@@ -115,12 +79,12 @@ public interface RoomLightPrx extends LightBulbPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Time> _iceI_getAutoTurnOffTimeAsync(java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<NightMode> _iceI_getNightModeAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Time> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getAutoTurnOffTime", com.zeroc.Ice.OperationMode.Idempotent, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<NightMode> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getNightMode", com.zeroc.Ice.OperationMode.Idempotent, sync, null);
         f.invoke(true, context, null, null, istr -> {
-                     Time ret;
-                     ret = Time.ice_read(istr);
+                     NightMode ret;
+                     ret = NightMode.ice_read(istr);
                      return ret;
                  });
         return f;
@@ -132,9 +96,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @param obj The untyped proxy.
      * @return A proxy for this type, or null if the object does not support this type.
      **/
-    static RoomLightPrx checkedCast(com.zeroc.Ice.ObjectPrx obj)
+    static OutdoorLightPrx checkedCast(com.zeroc.Ice.ObjectPrx obj)
     {
-        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, ice_staticId(), RoomLightPrx.class, _RoomLightPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, ice_staticId(), OutdoorLightPrx.class, _OutdoorLightPrxI.class);
     }
 
     /**
@@ -144,9 +108,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @param context The Context map to send with the invocation.
      * @return A proxy for this type, or null if the object does not support this type.
      **/
-    static RoomLightPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, java.util.Map<String, String> context)
+    static OutdoorLightPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, java.util.Map<String, String> context)
     {
-        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, context, ice_staticId(), RoomLightPrx.class, _RoomLightPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, context, ice_staticId(), OutdoorLightPrx.class, _OutdoorLightPrxI.class);
     }
 
     /**
@@ -156,9 +120,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @param facet The name of the desired facet.
      * @return A proxy for this type, or null if the object does not support this type.
      **/
-    static RoomLightPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, String facet)
+    static OutdoorLightPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, String facet)
     {
-        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, facet, ice_staticId(), RoomLightPrx.class, _RoomLightPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, facet, ice_staticId(), OutdoorLightPrx.class, _OutdoorLightPrxI.class);
     }
 
     /**
@@ -169,9 +133,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @param context The Context map to send with the invocation.
      * @return A proxy for this type, or null if the object does not support this type.
      **/
-    static RoomLightPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, String facet, java.util.Map<String, String> context)
+    static OutdoorLightPrx checkedCast(com.zeroc.Ice.ObjectPrx obj, String facet, java.util.Map<String, String> context)
     {
-        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, facet, context, ice_staticId(), RoomLightPrx.class, _RoomLightPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._checkedCast(obj, facet, context, ice_staticId(), OutdoorLightPrx.class, _OutdoorLightPrxI.class);
     }
 
     /**
@@ -179,9 +143,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @param obj The untyped proxy.
      * @return A proxy for this type.
      **/
-    static RoomLightPrx uncheckedCast(com.zeroc.Ice.ObjectPrx obj)
+    static OutdoorLightPrx uncheckedCast(com.zeroc.Ice.ObjectPrx obj)
     {
-        return com.zeroc.Ice.ObjectPrx._uncheckedCast(obj, RoomLightPrx.class, _RoomLightPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._uncheckedCast(obj, OutdoorLightPrx.class, _OutdoorLightPrxI.class);
     }
 
     /**
@@ -190,9 +154,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @param facet The name of the desired facet.
      * @return A proxy for this type.
      **/
-    static RoomLightPrx uncheckedCast(com.zeroc.Ice.ObjectPrx obj, String facet)
+    static OutdoorLightPrx uncheckedCast(com.zeroc.Ice.ObjectPrx obj, String facet)
     {
-        return com.zeroc.Ice.ObjectPrx._uncheckedCast(obj, facet, RoomLightPrx.class, _RoomLightPrxI.class);
+        return com.zeroc.Ice.ObjectPrx._uncheckedCast(obj, facet, OutdoorLightPrx.class, _OutdoorLightPrxI.class);
     }
 
     /**
@@ -201,9 +165,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified per-proxy context.
      **/
     @Override
-    default RoomLightPrx ice_context(java.util.Map<String, String> newContext)
+    default OutdoorLightPrx ice_context(java.util.Map<String, String> newContext)
     {
-        return (RoomLightPrx)_ice_context(newContext);
+        return (OutdoorLightPrx)_ice_context(newContext);
     }
 
     /**
@@ -212,9 +176,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified adapter ID.
      **/
     @Override
-    default RoomLightPrx ice_adapterId(String newAdapterId)
+    default OutdoorLightPrx ice_adapterId(String newAdapterId)
     {
-        return (RoomLightPrx)_ice_adapterId(newAdapterId);
+        return (OutdoorLightPrx)_ice_adapterId(newAdapterId);
     }
 
     /**
@@ -223,9 +187,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified endpoints.
      **/
     @Override
-    default RoomLightPrx ice_endpoints(com.zeroc.Ice.Endpoint[] newEndpoints)
+    default OutdoorLightPrx ice_endpoints(com.zeroc.Ice.Endpoint[] newEndpoints)
     {
-        return (RoomLightPrx)_ice_endpoints(newEndpoints);
+        return (OutdoorLightPrx)_ice_endpoints(newEndpoints);
     }
 
     /**
@@ -234,9 +198,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified locator cache timeout.
      **/
     @Override
-    default RoomLightPrx ice_locatorCacheTimeout(int newTimeout)
+    default OutdoorLightPrx ice_locatorCacheTimeout(int newTimeout)
     {
-        return (RoomLightPrx)_ice_locatorCacheTimeout(newTimeout);
+        return (OutdoorLightPrx)_ice_locatorCacheTimeout(newTimeout);
     }
 
     /**
@@ -245,9 +209,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified invocation timeout.
      **/
     @Override
-    default RoomLightPrx ice_invocationTimeout(int newTimeout)
+    default OutdoorLightPrx ice_invocationTimeout(int newTimeout)
     {
-        return (RoomLightPrx)_ice_invocationTimeout(newTimeout);
+        return (OutdoorLightPrx)_ice_invocationTimeout(newTimeout);
     }
 
     /**
@@ -256,9 +220,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified caching policy.
      **/
     @Override
-    default RoomLightPrx ice_connectionCached(boolean newCache)
+    default OutdoorLightPrx ice_connectionCached(boolean newCache)
     {
-        return (RoomLightPrx)_ice_connectionCached(newCache);
+        return (OutdoorLightPrx)_ice_connectionCached(newCache);
     }
 
     /**
@@ -267,9 +231,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified endpoint selection policy.
      **/
     @Override
-    default RoomLightPrx ice_endpointSelection(com.zeroc.Ice.EndpointSelectionType newType)
+    default OutdoorLightPrx ice_endpointSelection(com.zeroc.Ice.EndpointSelectionType newType)
     {
-        return (RoomLightPrx)_ice_endpointSelection(newType);
+        return (OutdoorLightPrx)_ice_endpointSelection(newType);
     }
 
     /**
@@ -280,9 +244,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified selection policy.
      **/
     @Override
-    default RoomLightPrx ice_secure(boolean b)
+    default OutdoorLightPrx ice_secure(boolean b)
     {
-        return (RoomLightPrx)_ice_secure(b);
+        return (OutdoorLightPrx)_ice_secure(b);
     }
 
     /**
@@ -291,9 +255,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified encoding version.
      **/
     @Override
-    default RoomLightPrx ice_encodingVersion(com.zeroc.Ice.EncodingVersion e)
+    default OutdoorLightPrx ice_encodingVersion(com.zeroc.Ice.EncodingVersion e)
     {
-        return (RoomLightPrx)_ice_encodingVersion(e);
+        return (OutdoorLightPrx)_ice_encodingVersion(e);
     }
 
     /**
@@ -304,9 +268,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified selection policy.
      **/
     @Override
-    default RoomLightPrx ice_preferSecure(boolean b)
+    default OutdoorLightPrx ice_preferSecure(boolean b)
     {
-        return (RoomLightPrx)_ice_preferSecure(b);
+        return (OutdoorLightPrx)_ice_preferSecure(b);
     }
 
     /**
@@ -315,9 +279,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified router.
      **/
     @Override
-    default RoomLightPrx ice_router(com.zeroc.Ice.RouterPrx router)
+    default OutdoorLightPrx ice_router(com.zeroc.Ice.RouterPrx router)
     {
-        return (RoomLightPrx)_ice_router(router);
+        return (OutdoorLightPrx)_ice_router(router);
     }
 
     /**
@@ -326,9 +290,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified locator.
      **/
     @Override
-    default RoomLightPrx ice_locator(com.zeroc.Ice.LocatorPrx locator)
+    default OutdoorLightPrx ice_locator(com.zeroc.Ice.LocatorPrx locator)
     {
-        return (RoomLightPrx)_ice_locator(locator);
+        return (OutdoorLightPrx)_ice_locator(locator);
     }
 
     /**
@@ -337,9 +301,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified collocation optimization.
      **/
     @Override
-    default RoomLightPrx ice_collocationOptimized(boolean b)
+    default OutdoorLightPrx ice_collocationOptimized(boolean b)
     {
-        return (RoomLightPrx)_ice_collocationOptimized(b);
+        return (OutdoorLightPrx)_ice_collocationOptimized(b);
     }
 
     /**
@@ -347,9 +311,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy that uses twoway invocations.
      **/
     @Override
-    default RoomLightPrx ice_twoway()
+    default OutdoorLightPrx ice_twoway()
     {
-        return (RoomLightPrx)_ice_twoway();
+        return (OutdoorLightPrx)_ice_twoway();
     }
 
     /**
@@ -357,9 +321,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy that uses oneway invocations.
      **/
     @Override
-    default RoomLightPrx ice_oneway()
+    default OutdoorLightPrx ice_oneway()
     {
-        return (RoomLightPrx)_ice_oneway();
+        return (OutdoorLightPrx)_ice_oneway();
     }
 
     /**
@@ -367,9 +331,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy that uses batch oneway invocations.
      **/
     @Override
-    default RoomLightPrx ice_batchOneway()
+    default OutdoorLightPrx ice_batchOneway()
     {
-        return (RoomLightPrx)_ice_batchOneway();
+        return (OutdoorLightPrx)_ice_batchOneway();
     }
 
     /**
@@ -377,9 +341,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy that uses datagram invocations.
      **/
     @Override
-    default RoomLightPrx ice_datagram()
+    default OutdoorLightPrx ice_datagram()
     {
-        return (RoomLightPrx)_ice_datagram();
+        return (OutdoorLightPrx)_ice_datagram();
     }
 
     /**
@@ -387,9 +351,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy that uses batch datagram invocations.
      **/
     @Override
-    default RoomLightPrx ice_batchDatagram()
+    default OutdoorLightPrx ice_batchDatagram()
     {
-        return (RoomLightPrx)_ice_batchDatagram();
+        return (OutdoorLightPrx)_ice_batchDatagram();
     }
 
     /**
@@ -398,9 +362,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified compression setting.
      **/
     @Override
-    default RoomLightPrx ice_compress(boolean co)
+    default OutdoorLightPrx ice_compress(boolean co)
     {
-        return (RoomLightPrx)_ice_compress(co);
+        return (OutdoorLightPrx)_ice_compress(co);
     }
 
     /**
@@ -409,9 +373,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified timeout.
      **/
     @Override
-    default RoomLightPrx ice_timeout(int t)
+    default OutdoorLightPrx ice_timeout(int t)
     {
-        return (RoomLightPrx)_ice_timeout(t);
+        return (OutdoorLightPrx)_ice_timeout(t);
     }
 
     /**
@@ -420,9 +384,9 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A proxy with the specified connection ID.
      **/
     @Override
-    default RoomLightPrx ice_connectionId(String connectionId)
+    default OutdoorLightPrx ice_connectionId(String connectionId)
     {
-        return (RoomLightPrx)_ice_connectionId(connectionId);
+        return (OutdoorLightPrx)_ice_connectionId(connectionId);
     }
 
     /**
@@ -431,13 +395,13 @@ public interface RoomLightPrx extends LightBulbPrx
      * @return A fixed proxy bound to the given connection.
      **/
     @Override
-    default RoomLightPrx ice_fixed(com.zeroc.Ice.Connection connection)
+    default OutdoorLightPrx ice_fixed(com.zeroc.Ice.Connection connection)
     {
-        return (RoomLightPrx)_ice_fixed(connection);
+        return (OutdoorLightPrx)_ice_fixed(connection);
     }
 
     static String ice_staticId()
     {
-        return "::SmartHome::RoomLight";
+        return "::SmartHome::OutdoorLight";
     }
 }
