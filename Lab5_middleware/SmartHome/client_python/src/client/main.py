@@ -61,6 +61,8 @@ def main():
 
                 if message == "list":
                     list_devices(communicator)
+                elif message == "exit":
+                    break
                 else:
                     device_prx = devices[message]
                     handle_device(message, device_prx, communicator)
