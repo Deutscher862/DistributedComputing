@@ -30,3 +30,4 @@ def help(operations):
     print("Available operations:")
     for operation in operations:
         print(operation)
+    print()
