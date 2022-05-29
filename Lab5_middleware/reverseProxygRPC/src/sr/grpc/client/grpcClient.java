@@ -31,45 +31,31 @@
 
 package sr.grpc.client;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.StatusRuntimeException;
-import io.grpc.stub.StreamObserver;
-
-import sr.grpc.gen.*;
-import sr.grpc.gen.CalculatorGrpc.CalculatorBlockingStub;
-import sr.grpc.gen.CalculatorGrpc.CalculatorFutureStub;
-import sr.grpc.gen.CalculatorGrpc.CalculatorStub;
-import sr.grpc.gen.Number;
-import sr.grpc.gen.StreamTesterGrpc.StreamTesterBlockingStub;
-import sr.grpc.gen.StreamTesterGrpc.StreamTesterStub;
-
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
-
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.StatusRuntimeException;
+import io.grpc.stub.StreamObserver;
+import sr.grpc.gen.*;
+
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 
 public class grpcClient {
-    private static final Logger logger = Logger.getLogger(grpcClient.class.getName());
 
     private final ManagedChannel channel;
 
-    private final CalculatorBlockingStub calcBlockingStub;
-    private final CalculatorStub calcNonBlockingStub;
-    private final CalculatorFutureStub calcFutureStub;
+    private final CalculatorGrpc.CalculatorBlockingStub calcBlockingStub;
+    private final CalculatorGrpc.CalculatorStub calcNonBlockingStub;
+    private final CalculatorGrpc.CalculatorFutureStub calcFutureStub;
 
     private final AdvancedCalculatorGrpc.AdvancedCalculatorBlockingStub advCalcBlockingStub;
-
-    private final StreamTesterBlockingStub streamTesterBlockingStub;
-    private final StreamTesterStub streamTesterNonBlockingStub;
 
 
     /**
@@ -87,11 +73,7 @@ public class grpcClient {
 
         advCalcBlockingStub = AdvancedCalculatorGrpc.newBlockingStub(channel);
 
-        streamTesterBlockingStub = StreamTesterGrpc.newBlockingStub(channel);
-        streamTesterNonBlockingStub = StreamTesterGrpc.newStub(channel); //Blocking stubs do not support client-streaming or bidirectional-streaming RPCs.
-
     }
-
 
     public static void main(String[] args) throws Exception {
         grpcClient client = new grpcClient("192.168.8.100", 80);
@@ -166,7 +148,7 @@ public class grpcClient {
                     System.out.println(result.getRes());
                 } else if (line.equals("callback-add")) {
                     ArithmeticOpArguments request = ArithmeticOpArguments.newBuilder().setArg1(4444).setArg2(5555).build();
-                    StreamObserver<ArithmeticOpResult> responseObserver = new StreamObserver<ArithmeticOpResult>() {
+                    StreamObserver<ArithmeticOpResult> responseObserver = new StreamObserver<>() {
                         @Override
                         public void onError(Throwable t) {
                             System.out.println("gRPC ERROR");
@@ -185,7 +167,7 @@ public class grpcClient {
                 } else if (line.equals("future-add-1")) {
                     ArithmeticOpArguments request = ArithmeticOpArguments.newBuilder().setArg1(4444).setArg2(5555).build();
                     ListenableFuture<ArithmeticOpResult> future2 = calcFutureStub.add(request);
-                    Futures.addCallback(future2, new FutureCallback<ArithmeticOpResult>() {
+                    Futures.addCallback(future2, new FutureCallback<>() {
                         @Override
                         public void onSuccess(ArithmeticOpResult result) {
                             System.out.println(result.getRes() + " (future)");
@@ -201,17 +183,12 @@ public class grpcClient {
                     future = calcFutureStub.add(request);
                 } else if (line.equals("future-add-2b")) {
                     try {
+                        assert future != null;
                         ArithmeticOpResult result = future.get();
                         System.out.println(result.getRes() + " (future)");
                     } catch (InterruptedException | ExecutionException e) {
                         e.printStackTrace();
                     }
-                } else if (line.equals("getprime")) //rpc GeneratePrimeNumbers(Task) returns (stream Number) {}
-                {
-                    new PrimeNumbersFinderExecutor(streamTesterBlockingStub).start();
-                } else if (line.equals("countprime")) //rpc CountPrimeNumbers(stream Number) returns (Report) {}
-                {
-                    new PrimeCounterExecutor(streamTesterNonBlockingStub).start();
                 } else if (!line.equals("")) {
                     System.out.println("???");
                 }
@@ -223,93 +200,4 @@ public class grpcClient {
 
         shutdown();
     }
-}
-
-
-class PrimeNumbersFinderExecutor extends Thread {
-    StreamTesterBlockingStub streamTesterBlockingStub;
-
-    PrimeNumbersFinderExecutor(StreamTesterBlockingStub streamTesterBlockingStub) {
-        this.streamTesterBlockingStub = streamTesterBlockingStub;
-    }
-
-    public void run() {
-        Task request = Task.newBuilder().setMax(28).build();
-
-        Iterator<Number> numbers;
-        try {
-            System.out.println("Running GeneratePrimeNumbers(" + request.getMax() + ")...");
-            numbers = streamTesterBlockingStub.generatePrimeNumbers(request); //rpc GeneratePrimeNumbers(Task) returns (stream Number) {}
-            while (numbers.hasNext()) {
-                //wypisuje siê z odstêpami czasowymi, wiêc strumieniowanie DZIA£A
-                Number num = numbers.next();
-                System.out.println("Number: " + num.getValue());
-            }
-            System.out.println("GeneratePrimeNumbers completed");
-        } catch (StatusRuntimeException ex) {
-            System.err.println("RPC failed: " + ex.getStatus());
-            return;
-        }
-    }
-}
-
-
-class PrimeCounterExecutor extends Thread {
-    StreamTesterStub streamTesterNonBlockingStub;
-
-    PrimeCounterExecutor(StreamTesterStub streamTesterNonBlockingStub) {
-        this.streamTesterNonBlockingStub = streamTesterNonBlockingStub;
-    }
-
-    public void run() {
-        StreamObserver<Report> responseObserver = new StreamObserver<Report>() {
-            int count = -1;
-
-            @Override
-            public void onNext(Report result) { //tylko jeden wynik
-                count = result.getCount();
-            }
-
-            @Override
-            public void onError(Throwable t) {
-                System.out.println("RPC ERROR");
-            }
-
-            @Override
-            public void onCompleted() {
-                System.out.println("Result received: found " + count + " prime numbers");
-            }
-        };
-
-        StreamObserver<Number> requestObserver = streamTesterNonBlockingStub.countPrimeNumbers(responseObserver); //rpc CountPrimeNumbers(stream Number) returns (Report) {}
-        try {
-            for (int i = 0; i < 100; ++i) {
-                if (isPrime(i)) {
-                    Number number = Number.newBuilder().setValue(i).build();
-                    System.out.println("Streaming data to the service...");
-                    requestObserver.onNext(number);
-                }
-            }
-        } catch (RuntimeException e) {
-            // Cancel RPC
-            requestObserver.onError(e);
-            throw e;
-        }
-        // Mark the end of requests
-        requestObserver.onCompleted();
-
-        //responseObserver.
-    }
-
-
-    private boolean isPrime(int val) {
-        if (val % 2 == 0) return false; //oczywiœcie to nieprawda ;)
-        try {
-            Thread.sleep(1000);
-        } catch (java.lang.InterruptedException ex) {
-            ex.printStackTrace();
-        }
-        return true; //oczywiœcie to nieprawda ;)
-    }
-
 }
