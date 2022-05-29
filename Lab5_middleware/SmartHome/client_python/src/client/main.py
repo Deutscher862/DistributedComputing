@@ -1,27 +1,33 @@
-import sys, Ice
+import Ice
+import sys
 
-from SmartHome import LightBulbPrx, RoomLightPrx, OutdoorLightPrx, DeviceListPrx, ThermostatPrx, DeviceTurnedOffError
+from SmartHome import LightBulbPrx, RoomLightPrx, OutdoorLightPrx, DeviceListPrx, ThermostatPrx
 from devices.lightbulb import lightbulb_handler
-from devices.room_light import room_light_handler
 from devices.outdoor_light import outdoor_light_handler
+from devices.room_light import room_light_handler
 from devices.thermostat import thermostat_handler
 
 devices = {
     "room1": RoomLightPrx,
     "room2": RoomLightPrx,
     "lamp": OutdoorLightPrx,
-    "thermostat": ThermostatPrx,
+    "thermostat1": ThermostatPrx,
+    "thermostat2": ThermostatPrx,
     "lightbulb": LightBulbPrx
 }
 
 
 def list_devices(communicator):
-    base = communicator.propertyToProxy(f"""deviceList.Proxy""")
-    list = DeviceListPrx.checkedCast(base)
-    device_list = list.getDevicesList()
+    base = communicator.propertyToProxy(f"""deviceList1.Proxy""")
+    list1 = DeviceListPrx.checkedCast(base)
+    device_list1 = list1.getDevicesList()
 
-    print('Available devices')
-    for device in device_list:
+    base = communicator.propertyToProxy(f"""deviceList2.Proxy""")
+    list2 = DeviceListPrx.checkedCast(base)
+    device_list2 = list2.getDevicesList()
+
+    print('Available devices:')
+    for device in device_list1 + device_list2:
         if device != "":
             print(device)
     print()
@@ -36,14 +42,14 @@ def handle_device(device_name, device_prx, communicator):
         room_light_handler(device, device_name)
     elif device_name == "lamp":
         outdoor_light_handler(device, device_name)
-    elif device_name == "thermostat":
+    elif device_name == "thermostat1" or device_name == "thermostat2":
         thermostat_handler(device, device_name)
 
 
 def init_message():
-    print("Client start")
+    print("Client starts...")
     print("Input \"list\" to list available devices")
-    print("Input device_name to connect to it\n")
+    print("Input device name to connect to it\n")
 
 
 def main():
@@ -58,14 +64,10 @@ def main():
                 else:
                     device_prx = devices[message]
                     handle_device(message, device_prx, communicator)
-
-            except DeviceTurnedOffError as e:
-                print('Invalid operation: ', e.reason)
-                print()
             except Exception as e:
                 print(e)
                 print()
 
-#TODO wyjątki w pythonie, dwa serwery, nazwa serwera w device info, zmiana nazwy w nightmode
+
 if __name__ == "__main__":
     main()

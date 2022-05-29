@@ -24,7 +24,7 @@ public interface LightBulb extends com.zeroc.Ice.Object
     Color getColor(com.zeroc.Ice.Current current)
         throws DeviceTurnedOffError;
 
-    void setColor(Color newColor, com.zeroc.Ice.Current current)
+    void setColor(String newColor, com.zeroc.Ice.Current current)
         throws DeviceTurnedOffError,
                InvalidColorError;
 
@@ -125,8 +125,8 @@ public interface LightBulb extends com.zeroc.Ice.Object
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        Color iceP_newColor;
-        iceP_newColor = Color.ice_read(istr);
+        String iceP_newColor;
+        iceP_newColor = istr.readString();
         inS.endReadParams();
         obj.setColor(iceP_newColor, current);
         return inS.setResult(inS.writeEmptyParams());

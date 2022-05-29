@@ -17,10 +17,10 @@ package SmartHome;
 
 public enum Color implements java.io.Serializable
 {
-    White(0),
-    Red(1),
-    Green(2),
-    Blue(3);
+    WHITE(0),
+    RED(1),
+    GREEN(2),
+    BLUE(3);
 
     public int value()
     {
@@ -32,13 +32,13 @@ public enum Color implements java.io.Serializable
         switch(v)
         {
         case 0:
-            return White;
+            return WHITE;
         case 1:
-            return Red;
+            return RED;
         case 2:
-            return Green;
+            return GREEN;
         case 3:
-            return Blue;
+            return BLUE;
         }
         return null;
     }
@@ -57,7 +57,7 @@ public enum Color implements java.io.Serializable
     {
         if(v == null)
         {
-            ostr.writeEnum(SmartHome.Color.White.value(), 3);
+            ostr.writeEnum(SmartHome.Color.WHITE.value(), 3);
         }
         else
         {

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5d00cde7-5df2-4eac-95c3-b9250cbe6efd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/SmartHome/server_java/src/server/main/Server2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/client_python/generated/SmartHome/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/client_python/generated/devices_ice.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/client_python/src/client/devices/device_handler_loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/client_python/src/client/devices/devices_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/client_python/src/client/devices/lightbulb.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/client_python/src/client/devices/lightbulb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/client_python/src/client/devices/outdoor_light.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/client_python/src/client/devices/outdoor_light.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/client_python/src/client/devices/room_light.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/client_python/src/client/devices/room_light.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/client_python/src/client/devices/thermostat.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/client_python/src/client/devices/thermostat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/client_python/src/client/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/client_python/src/client/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/client_python/src/resources/config.client" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/client_python/src/resources/config.client" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/client_python/src/resources/config.server" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/devices.ice" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/devices.ice" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/AirMoisture.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/Color.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/DeviceInfo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/DeviceList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/DeviceListPrx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/DeviceTurnedOffError.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/InvalidColorError.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/LightBulb.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/LightBulbPrx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/LightBulbState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/NightMode.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/OutdoorLight.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/OutdoorLightPrx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/RoomLight.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/RoomLightPrx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/Temperature.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/Thermostat.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/ThermostatPrx.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/ThermostatState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/Time.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/_DeviceListPrxI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/_LightBulbPrxI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/_OutdoorLightPrxI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/_RoomLightPrxI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/generated/SmartHome/_ThermostatPrxI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/src/resources/config.client" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/src/server/devices/LightBulb.java" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/server_java/src/server/devices/LightBulb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/src/server/devices/OutdoorLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/server_java/src/server/devices/OutdoorLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/src/server/devices/RoomLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/server_java/src/server/devices/RoomLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/src/server/devices/Thermostat.java" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/server_java/src/server/devices/Thermostat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SmartHome/server_java/src/server/main/Server1.java" beforeDir="false" afterPath="$PROJECT_DIR$/SmartHome/server_java/src/server/main/Server1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gRPC/protoc.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reverseProxygRPC/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reverseProxygRPC/pom.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="29ps92U9yOFjm5hutYAKyi2tr7q" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5d00cde7-5df2-4eac-95c3-b9250cbe6efd" name="Changes" comment="" />
+      <created>1653821206857</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1653821206857</updated>
+      <workItem from="1653821208141" duration="88000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

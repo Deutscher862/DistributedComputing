@@ -32,6 +32,14 @@ Thermostat implements SmartHome.Thermostat {
     }
 
     @Override
+    public ThermostatState getState(Current current) throws DeviceTurnedOffError {
+        if (!state.turnedOn) {
+            throw new DeviceTurnedOffError("Thermostat " + deviceInfo.name + " is turned off");
+        }
+        return state;
+    }
+
+    @Override
     public Temperature getTemperature(Current current) throws DeviceTurnedOffError {
         if (!state.turnedOn) {
             throw new DeviceTurnedOffError("Thermostat " + deviceInfo.name + " is turned off");
@@ -40,17 +48,23 @@ Thermostat implements SmartHome.Thermostat {
     }
 
     @Override
-    public void increaseTemperature(Current current) throws DeviceTurnedOffError {
+    public void increaseTemperature(Current current) throws DeviceTurnedOffError, ValueLimitReachedError {
         if (!state.turnedOn) {
             throw new DeviceTurnedOffError("Thermostat " + deviceInfo.name + " is turned off");
+        }
+        if (state.temperature.value >= 27.0f) {
+            throw new ValueLimitReachedError("Temperature limit reached, current value: " + state.temperature.value);
         }
         state.temperature.value += 0.5f;
     }
 
     @Override
-    public void decreaseTemperature(Current current) throws DeviceTurnedOffError {
+    public void decreaseTemperature(Current current) throws DeviceTurnedOffError, ValueLimitReachedError {
         if (!state.turnedOn) {
             throw new DeviceTurnedOffError("Thermostat " + deviceInfo.name + " is turned off");
+        }
+        if (state.temperature.value <= 15.0f) {
+            throw new ValueLimitReachedError("Temperature limit reached, current value: " + state.temperature.value);
         }
         state.temperature.value -= 0.5f;
     }
@@ -64,18 +78,24 @@ Thermostat implements SmartHome.Thermostat {
     }
 
     @Override
-    public void increaseAirMoisture(Current current) throws DeviceTurnedOffError {
+    public void increaseAirMoisture(Current current) throws DeviceTurnedOffError, ValueLimitReachedError {
         if (!state.turnedOn) {
             throw new DeviceTurnedOffError("Thermostat " + deviceInfo.name + " is turned off");
         }
-        state.temperature.value += 0.05f;
+        if (state.airMisture.value >= 0.6f) {
+            throw new ValueLimitReachedError("AirMoisture limit reached, current value: " + state.airMisture.value);
+        }
+        state.airMisture.value += 0.05f;
     }
 
     @Override
-    public void decreaseAirMoisture(Current current) throws DeviceTurnedOffError {
+    public void decreaseAirMoisture(Current current) throws DeviceTurnedOffError, ValueLimitReachedError {
         if (!state.turnedOn) {
             throw new DeviceTurnedOffError("Thermostat " + deviceInfo.name + " is turned off");
         }
-        state.temperature.value -= 0.05f;
+        if (state.airMisture.value <= 0.4f) {
+            throw new ValueLimitReachedError("AirMoisture limit reached, current value: " + state.airMisture.value);
+        }
+        state.airMisture.value -= 0.05f;
     }
 }

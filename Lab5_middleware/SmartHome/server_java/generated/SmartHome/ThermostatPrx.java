@@ -120,6 +120,62 @@ public interface ThermostatPrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
+    default ThermostatState getState()
+        throws DeviceTurnedOffError
+    {
+        return getState(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default ThermostatState getState(java.util.Map<String, String> context)
+        throws DeviceTurnedOffError
+    {
+        try
+        {
+            return _iceI_getStateAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
+    }
+
+    default java.util.concurrent.CompletableFuture<ThermostatState> getStateAsync()
+    {
+        return _iceI_getStateAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<ThermostatState> getStateAsync(java.util.Map<String, String> context)
+    {
+        return _iceI_getStateAsync(context, false);
+    }
+
+    /**
+     * @hidden
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<ThermostatState> _iceI_getStateAsync(java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<ThermostatState> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getState", com.zeroc.Ice.OperationMode.Idempotent, sync, _iceE_getState);
+        f.invoke(true, context, null, null, istr -> {
+                     ThermostatState ret;
+                     ret = ThermostatState.ice_read(istr);
+                     return ret;
+                 });
+        return f;
+    }
+
+    /** @hidden */
+    static final Class<?>[] _iceE_getState =
+    {
+        DeviceTurnedOffError.class
+    };
+
     default Temperature getTemperature()
         throws DeviceTurnedOffError
     {
@@ -177,19 +233,25 @@ public interface ThermostatPrx extends com.zeroc.Ice.ObjectPrx
     };
 
     default void increaseTemperature()
-        throws DeviceTurnedOffError
+        throws DeviceTurnedOffError,
+               ValueLimitReachedError
     {
         increaseTemperature(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default void increaseTemperature(java.util.Map<String, String> context)
-        throws DeviceTurnedOffError
+        throws DeviceTurnedOffError,
+               ValueLimitReachedError
     {
         try
         {
             _iceI_increaseTemperatureAsync(context, true).waitForResponseOrUserEx();
         }
         catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(ValueLimitReachedError ex)
         {
             throw ex;
         }
@@ -225,23 +287,30 @@ public interface ThermostatPrx extends com.zeroc.Ice.ObjectPrx
     /** @hidden */
     static final Class<?>[] _iceE_increaseTemperature =
     {
-        DeviceTurnedOffError.class
+        DeviceTurnedOffError.class,
+        ValueLimitReachedError.class
     };
 
     default void decreaseTemperature()
-        throws DeviceTurnedOffError
+        throws DeviceTurnedOffError,
+               ValueLimitReachedError
     {
         decreaseTemperature(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default void decreaseTemperature(java.util.Map<String, String> context)
-        throws DeviceTurnedOffError
+        throws DeviceTurnedOffError,
+               ValueLimitReachedError
     {
         try
         {
             _iceI_decreaseTemperatureAsync(context, true).waitForResponseOrUserEx();
         }
         catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(ValueLimitReachedError ex)
         {
             throw ex;
         }
@@ -277,7 +346,8 @@ public interface ThermostatPrx extends com.zeroc.Ice.ObjectPrx
     /** @hidden */
     static final Class<?>[] _iceE_decreaseTemperature =
     {
-        DeviceTurnedOffError.class
+        DeviceTurnedOffError.class,
+        ValueLimitReachedError.class
     };
 
     default AirMoisture getAirMoisture()
@@ -337,19 +407,25 @@ public interface ThermostatPrx extends com.zeroc.Ice.ObjectPrx
     };
 
     default void increaseAirMoisture()
-        throws DeviceTurnedOffError
+        throws DeviceTurnedOffError,
+               ValueLimitReachedError
     {
         increaseAirMoisture(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default void increaseAirMoisture(java.util.Map<String, String> context)
-        throws DeviceTurnedOffError
+        throws DeviceTurnedOffError,
+               ValueLimitReachedError
     {
         try
         {
             _iceI_increaseAirMoistureAsync(context, true).waitForResponseOrUserEx();
         }
         catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(ValueLimitReachedError ex)
         {
             throw ex;
         }
@@ -385,23 +461,30 @@ public interface ThermostatPrx extends com.zeroc.Ice.ObjectPrx
     /** @hidden */
     static final Class<?>[] _iceE_increaseAirMoisture =
     {
-        DeviceTurnedOffError.class
+        DeviceTurnedOffError.class,
+        ValueLimitReachedError.class
     };
 
     default void decreaseAirMoisture()
-        throws DeviceTurnedOffError
+        throws DeviceTurnedOffError,
+               ValueLimitReachedError
     {
         decreaseAirMoisture(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default void decreaseAirMoisture(java.util.Map<String, String> context)
-        throws DeviceTurnedOffError
+        throws DeviceTurnedOffError,
+               ValueLimitReachedError
     {
         try
         {
             _iceI_decreaseAirMoistureAsync(context, true).waitForResponseOrUserEx();
         }
         catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(ValueLimitReachedError ex)
         {
             throw ex;
         }
@@ -437,7 +520,8 @@ public interface ThermostatPrx extends com.zeroc.Ice.ObjectPrx
     /** @hidden */
     static final Class<?>[] _iceE_decreaseAirMoisture =
     {
-        DeviceTurnedOffError.class
+        DeviceTurnedOffError.class,
+        ValueLimitReachedError.class
     };
 
     /**

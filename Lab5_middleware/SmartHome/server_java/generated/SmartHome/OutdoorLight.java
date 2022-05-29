@@ -17,9 +17,11 @@ package SmartHome;
 
 public interface OutdoorLight extends LightBulb
 {
-    void setNightMode(NightMode nightModeEnabled, com.zeroc.Ice.Current current);
+    void setNightMode(NightMode nightMode, com.zeroc.Ice.Current current)
+        throws DeviceTurnedOffError;
 
-    NightMode getNightMode(com.zeroc.Ice.Current current);
+    NightMode getNightMode(com.zeroc.Ice.Current current)
+        throws DeviceTurnedOffError;
 
     /** @hidden */
     static final String[] _iceIds =
@@ -52,15 +54,17 @@ public interface OutdoorLight extends LightBulb
      * @param inS -
      * @param current -
      * @return -
+     * @throws com.zeroc.Ice.UserException -
     **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setNightMode(OutdoorLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+        throws com.zeroc.Ice.UserException
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        NightMode iceP_nightModeEnabled;
-        iceP_nightModeEnabled = NightMode.ice_read(istr);
+        NightMode iceP_nightMode;
+        iceP_nightMode = NightMode.ice_read(istr);
         inS.endReadParams();
-        obj.setNightMode(iceP_nightModeEnabled, current);
+        obj.setNightMode(iceP_nightMode, current);
         return inS.setResult(inS.writeEmptyParams());
     }
 
@@ -70,8 +74,10 @@ public interface OutdoorLight extends LightBulb
      * @param inS -
      * @param current -
      * @return -
+     * @throws com.zeroc.Ice.UserException -
     **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getNightMode(OutdoorLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+        throws com.zeroc.Ice.UserException
     {
         com.zeroc.Ice.Object._iceCheckMode(com.zeroc.Ice.OperationMode.Idempotent, current.mode);
         inS.readEmptyParams();

@@ -4,8 +4,8 @@ import SmartHome.*;
 import com.zeroc.Ice.Current;
 
 public class LightBulb implements SmartHome.LightBulb {
-    private final DeviceInfo deviceInfo;
-    private final LightBulbState lightbulbState;
+    protected final DeviceInfo deviceInfo;
+    protected final LightBulbState lightbulbState;
 
     public LightBulb(DeviceInfo info) {
         this.deviceInfo = info;
@@ -31,11 +31,15 @@ public class LightBulb implements SmartHome.LightBulb {
     }
 
     @Override
-    public void setColor(Color newColor, Current current) throws DeviceTurnedOffError, InvalidColorError {
+    public void setColor(String newColor, Current current) throws DeviceTurnedOffError, InvalidColorError {
         if (!lightbulbState.tunredOn) {
             throw new DeviceTurnedOffError("LightBulb " + deviceInfo.name + " is turned off");
         }
-        lightbulbState.color = newColor;
+        try {
+            lightbulbState.color = Color.valueOf(newColor.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new InvalidColorError("Color " + newColor + " is not a valid color name");
+        }
     }
 
     @Override

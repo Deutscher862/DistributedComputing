@@ -1,5 +1,5 @@
 from devices import lightbulb
-from devices import device_handler_loop
+from devices import devices_utils
 from SmartHome import Time
 
 
@@ -17,6 +17,7 @@ def get_auto_turn_off_time(room_light):
 
 operations = {
     "info": lightbulb.get_device_info,
+    "help": help,
     "turnOn": lightbulb.turn_on,
     "turnOff": lightbulb.turn_off,
     "getColor": lightbulb.get_color,
@@ -29,4 +30,4 @@ operations = {
 
 
 def room_light_handler(room_light, device_name):
-    device_handler_loop.run_loop(operations, room_light, device_name)
+    devices_utils.run_loop(operations, room_light, device_name)

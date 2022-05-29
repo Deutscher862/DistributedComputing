@@ -17,9 +17,11 @@ package SmartHome;
 
 public interface RoomLight extends LightBulb
 {
-    void setAutoTurnOffTime(Time time, com.zeroc.Ice.Current current);
+    void setAutoTurnOffTime(Time time, com.zeroc.Ice.Current current)
+        throws DeviceTurnedOffError;
 
-    Time getAutoTurnOffTime(com.zeroc.Ice.Current current);
+    Time getAutoTurnOffTime(com.zeroc.Ice.Current current)
+        throws DeviceTurnedOffError;
 
     /** @hidden */
     static final String[] _iceIds =
@@ -52,8 +54,10 @@ public interface RoomLight extends LightBulb
      * @param inS -
      * @param current -
      * @return -
+     * @throws com.zeroc.Ice.UserException -
     **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_setAutoTurnOffTime(RoomLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+        throws com.zeroc.Ice.UserException
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
@@ -70,8 +74,10 @@ public interface RoomLight extends LightBulb
      * @param inS -
      * @param current -
      * @return -
+     * @throws com.zeroc.Ice.UserException -
     **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getAutoTurnOffTime(RoomLight obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+        throws com.zeroc.Ice.UserException
     {
         com.zeroc.Ice.Object._iceCheckMode(com.zeroc.Ice.OperationMode.Idempotent, current.mode);
         inS.readEmptyParams();

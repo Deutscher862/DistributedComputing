@@ -17,50 +17,82 @@ package SmartHome;
 
 public interface OutdoorLightPrx extends LightBulbPrx
 {
-    default void setNightMode(NightMode nightModeEnabled)
+    default void setNightMode(NightMode nightMode)
+        throws DeviceTurnedOffError
     {
-        setNightMode(nightModeEnabled, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        setNightMode(nightMode, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void setNightMode(NightMode nightModeEnabled, java.util.Map<String, String> context)
+    default void setNightMode(NightMode nightMode, java.util.Map<String, String> context)
+        throws DeviceTurnedOffError
     {
-        _iceI_setNightModeAsync(nightModeEnabled, context, true).waitForResponse();
+        try
+        {
+            _iceI_setNightModeAsync(nightMode, context, true).waitForResponseOrUserEx();
+        }
+        catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setNightModeAsync(NightMode nightModeEnabled)
+    default java.util.concurrent.CompletableFuture<Void> setNightModeAsync(NightMode nightMode)
     {
-        return _iceI_setNightModeAsync(nightModeEnabled, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_setNightModeAsync(nightMode, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setNightModeAsync(NightMode nightModeEnabled, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> setNightModeAsync(NightMode nightMode, java.util.Map<String, String> context)
     {
-        return _iceI_setNightModeAsync(nightModeEnabled, context, false);
+        return _iceI_setNightModeAsync(nightMode, context, false);
     }
 
     /**
      * @hidden
-     * @param iceP_nightModeEnabled -
+     * @param iceP_nightMode -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setNightModeAsync(NightMode iceP_nightModeEnabled, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setNightModeAsync(NightMode iceP_nightMode, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setNightMode", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
-                     NightMode.ice_write(ostr, iceP_nightModeEnabled);
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setNightMode", null, sync, _iceE_setNightMode);
+        f.invoke(true, context, null, ostr -> {
+                     NightMode.ice_write(ostr, iceP_nightMode);
                  }, null);
         return f;
     }
 
+    /** @hidden */
+    static final Class<?>[] _iceE_setNightMode =
+    {
+        DeviceTurnedOffError.class
+    };
+
     default NightMode getNightMode()
+        throws DeviceTurnedOffError
     {
         return getNightMode(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default NightMode getNightMode(java.util.Map<String, String> context)
+        throws DeviceTurnedOffError
     {
-        return _iceI_getNightModeAsync(context, true).waitForResponse();
+        try
+        {
+            return _iceI_getNightModeAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
     }
 
     default java.util.concurrent.CompletableFuture<NightMode> getNightModeAsync()
@@ -81,7 +113,7 @@ public interface OutdoorLightPrx extends LightBulbPrx
      **/
     default com.zeroc.IceInternal.OutgoingAsync<NightMode> _iceI_getNightModeAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<NightMode> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getNightMode", com.zeroc.Ice.OperationMode.Idempotent, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<NightMode> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getNightMode", com.zeroc.Ice.OperationMode.Idempotent, sync, _iceE_getNightMode);
         f.invoke(true, context, null, null, istr -> {
                      NightMode ret;
                      ret = NightMode.ice_read(istr);
@@ -89,6 +121,12 @@ public interface OutdoorLightPrx extends LightBulbPrx
                  });
         return f;
     }
+
+    /** @hidden */
+    static final Class<?>[] _iceE_getNightMode =
+    {
+        DeviceTurnedOffError.class
+    };
 
     /**
      * Contacts the remote server to verify that the object implements this type.

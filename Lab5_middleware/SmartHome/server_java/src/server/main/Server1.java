@@ -1,7 +1,6 @@
 package main;
 
 import SmartHome.DeviceInfo;
-import SmartHome.NightMode;
 import SmartHome.ThermostatState;
 import SmartHome.Time;
 import com.zeroc.Ice.Communicator;
@@ -18,15 +17,11 @@ class Server1 {
 
         RoomLight roomLight1 = new RoomLight(new DeviceInfo(1, "room1"), new Time(12, 30));
         RoomLight roomLight2 = new RoomLight(new DeviceInfo(2, "room2"), new Time(20, 15));
-        OutdoorLight outdoorLight = new OutdoorLight(new DeviceInfo(3, "lamp"), new NightMode());
-        Thermostat thermostat = new Thermostat(new DeviceInfo(4, "thermostat"), new ThermostatState());
-        LightBulb lightBulb = new LightBulb(new DeviceInfo(5, "lightbulb"));
+        Thermostat thermostat = new Thermostat(new DeviceInfo(3, "thermostat1"), new ThermostatState());
 
         deviceList.addDevice(roomLight1.getDeviceInfo(null));
         deviceList.addDevice(roomLight2.getDeviceInfo(null));
-        deviceList.addDevice(outdoorLight.getDeviceInfo(null));
         deviceList.addDevice(thermostat.getDeviceInfo(null));
-        deviceList.addDevice(lightBulb.getDeviceInfo(null));
 
         ServerLogger.log(Level.INFO, "Starting server...");
 
@@ -38,18 +33,18 @@ class Server1 {
 
             ObjectAdapter adapter = communicator.createObjectAdapter("Adapter1");
 
-            adapter.add(deviceList, new Identity("deviceList", "list"));
+            adapter.add(deviceList, new Identity("deviceList1", "list"));
             adapter.add(roomLight1, new Identity("room1", "device"));
             adapter.add(roomLight2, new Identity("room2", "device"));
-            adapter.add(outdoorLight, new Identity("lamp", "device"));
-            adapter.add(thermostat, new Identity("thermostat", "device"));
-            adapter.add(lightBulb, new Identity("lightbulb", "device"));
+            adapter.add(thermostat, new Identity("thermostat1", "device"));
 
             adapter.activate();
 
+            ServerLogger.log(Level.INFO, "Start listening on port 10000");
             communicator.waitForShutdown();
 
         } catch (Exception e) {
+            ServerLogger.log(Level.SEVERE, "Server error");
             e.printStackTrace();
             status = 1;
         }
@@ -57,6 +52,7 @@ class Server1 {
             try {
                 communicator.destroy();
             } catch (Exception e) {
+                ServerLogger.log(Level.SEVERE, "Communicator destroying failed");
                 e.printStackTrace();
                 status = 1;
             }

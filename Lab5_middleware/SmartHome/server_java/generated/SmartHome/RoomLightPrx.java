@@ -18,13 +18,26 @@ package SmartHome;
 public interface RoomLightPrx extends LightBulbPrx
 {
     default void setAutoTurnOffTime(Time time)
+        throws DeviceTurnedOffError
     {
         setAutoTurnOffTime(time, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default void setAutoTurnOffTime(Time time, java.util.Map<String, String> context)
+        throws DeviceTurnedOffError
     {
-        _iceI_setAutoTurnOffTimeAsync(time, context, true).waitForResponse();
+        try
+        {
+            _iceI_setAutoTurnOffTimeAsync(time, context, true).waitForResponseOrUserEx();
+        }
+        catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
     }
 
     default java.util.concurrent.CompletableFuture<Void> setAutoTurnOffTimeAsync(Time time)
@@ -46,21 +59,40 @@ public interface RoomLightPrx extends LightBulbPrx
      **/
     default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setAutoTurnOffTimeAsync(Time iceP_time, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setAutoTurnOffTime", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setAutoTurnOffTime", null, sync, _iceE_setAutoTurnOffTime);
+        f.invoke(true, context, null, ostr -> {
                      Time.ice_write(ostr, iceP_time);
                  }, null);
         return f;
     }
 
+    /** @hidden */
+    static final Class<?>[] _iceE_setAutoTurnOffTime =
+    {
+        DeviceTurnedOffError.class
+    };
+
     default Time getAutoTurnOffTime()
+        throws DeviceTurnedOffError
     {
         return getAutoTurnOffTime(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
     default Time getAutoTurnOffTime(java.util.Map<String, String> context)
+        throws DeviceTurnedOffError
     {
-        return _iceI_getAutoTurnOffTimeAsync(context, true).waitForResponse();
+        try
+        {
+            return _iceI_getAutoTurnOffTimeAsync(context, true).waitForResponseOrUserEx();
+        }
+        catch(DeviceTurnedOffError ex)
+        {
+            throw ex;
+        }
+        catch(com.zeroc.Ice.UserException ex)
+        {
+            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
+        }
     }
 
     default java.util.concurrent.CompletableFuture<Time> getAutoTurnOffTimeAsync()
@@ -81,7 +113,7 @@ public interface RoomLightPrx extends LightBulbPrx
      **/
     default com.zeroc.IceInternal.OutgoingAsync<Time> _iceI_getAutoTurnOffTimeAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Time> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getAutoTurnOffTime", com.zeroc.Ice.OperationMode.Idempotent, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<Time> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getAutoTurnOffTime", com.zeroc.Ice.OperationMode.Idempotent, sync, _iceE_getAutoTurnOffTime);
         f.invoke(true, context, null, null, istr -> {
                      Time ret;
                      ret = Time.ice_read(istr);
@@ -89,6 +121,12 @@ public interface RoomLightPrx extends LightBulbPrx
                  });
         return f;
     }
+
+    /** @hidden */
+    static final Class<?>[] _iceE_getAutoTurnOffTime =
+    {
+        DeviceTurnedOffError.class
+    };
 
     /**
      * Contacts the remote server to verify that the object implements this type.

@@ -24,7 +24,7 @@ public class LightBulbState implements java.lang.Cloneable,
 
     public LightBulbState()
     {
-        this.color = Color.White;
+        this.color = Color.WHITE;
     }
 
     public LightBulbState(Color color, boolean tunredOn)

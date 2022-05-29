@@ -147,14 +147,14 @@ public interface LightBulbPrx extends com.zeroc.Ice.ObjectPrx
         DeviceTurnedOffError.class
     };
 
-    default void setColor(Color newColor)
+    default void setColor(String newColor)
         throws DeviceTurnedOffError,
                InvalidColorError
     {
         setColor(newColor, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void setColor(Color newColor, java.util.Map<String, String> context)
+    default void setColor(String newColor, java.util.Map<String, String> context)
         throws DeviceTurnedOffError,
                InvalidColorError
     {
@@ -176,12 +176,12 @@ public interface LightBulbPrx extends com.zeroc.Ice.ObjectPrx
         }
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setColorAsync(Color newColor)
+    default java.util.concurrent.CompletableFuture<Void> setColorAsync(String newColor)
     {
         return _iceI_setColorAsync(newColor, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> setColorAsync(Color newColor, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> setColorAsync(String newColor, java.util.Map<String, String> context)
     {
         return _iceI_setColorAsync(newColor, context, false);
     }
@@ -193,11 +193,11 @@ public interface LightBulbPrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setColorAsync(Color iceP_newColor, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_setColorAsync(String iceP_newColor, java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "setColor", null, sync, _iceE_setColor);
         f.invoke(true, context, null, ostr -> {
-                     Color.ice_write(ostr, iceP_newColor);
+                     ostr.writeString(iceP_newColor);
                  }, null);
         return f;
     }

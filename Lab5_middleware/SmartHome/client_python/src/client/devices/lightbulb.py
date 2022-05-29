@@ -1,4 +1,11 @@
-from devices import device_handler_loop
+from devices import devices_utils
+
+colors = [
+    "white",
+    "red",
+    "green",
+    "blue",
+]
 
 
 def turn_on(lightbulb):
@@ -22,6 +29,9 @@ def get_device_info(lightbulb):
 
 
 def set_color(lightbulb):
+    print("Available color")
+    for color in colors:
+        print(color)
     color = input("new color: ")
     lightbulb.setColor(color)
     get_color(lightbulb)
@@ -29,6 +39,7 @@ def set_color(lightbulb):
 
 operations = {
     "info": get_device_info,
+    "help": help,
     "turnOn": turn_on,
     "turnOff": turn_off,
     "getColor": get_color,
@@ -39,4 +50,4 @@ operations = {
 
 
 def lightbulb_handler(lightbulb, device_name):
-    device_handler_loop.run_loop(operations, lightbulb, device_name)
+    devices_utils.run_loop(operations, lightbulb, device_name)

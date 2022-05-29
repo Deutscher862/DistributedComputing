@@ -1,14 +1,14 @@
 from devices import lightbulb
-from devices import device_handler_loop
+from devices import devices_utils
 from SmartHome import NightMode
 
 
 def set_night_mode(outdoor_light):
     msg = input("enable night mode? yes/no: ")
     night_mode = NightMode()
-    if msg == "yes":
+    if msg.upper() == "YES":
         night_mode.nightModeEnabled = True
-    elif msg == "no":
+    elif msg.upper() == "NO":
         night_mode.nightModeEnabled = False
     else:
         print("Invalid input")
@@ -24,6 +24,7 @@ def get_night_mode(outdoor_light):
 
 operations = {
     "info": lightbulb.get_device_info,
+    "help": help,
     "turnOn": lightbulb.turn_on,
     "turnOff": lightbulb.turn_off,
     "getColor": lightbulb.get_color,
@@ -36,4 +37,4 @@ operations = {
 
 
 def outdoor_light_handler(outdoor_light, device_name):
-    device_handler_loop.run_loop(operations, outdoor_light, device_name)
+    devices_utils.run_loop(operations, outdoor_light, device_name)

@@ -23,23 +23,30 @@ public interface Thermostat extends com.zeroc.Ice.Object
 
     void turnOff(com.zeroc.Ice.Current current);
 
+    ThermostatState getState(com.zeroc.Ice.Current current)
+        throws DeviceTurnedOffError;
+
     Temperature getTemperature(com.zeroc.Ice.Current current)
         throws DeviceTurnedOffError;
 
     void increaseTemperature(com.zeroc.Ice.Current current)
-        throws DeviceTurnedOffError;
+        throws DeviceTurnedOffError,
+               ValueLimitReachedError;
 
     void decreaseTemperature(com.zeroc.Ice.Current current)
-        throws DeviceTurnedOffError;
+        throws DeviceTurnedOffError,
+               ValueLimitReachedError;
 
     AirMoisture getAirMoisture(com.zeroc.Ice.Current current)
         throws DeviceTurnedOffError;
 
     void increaseAirMoisture(com.zeroc.Ice.Current current)
-        throws DeviceTurnedOffError;
+        throws DeviceTurnedOffError,
+               ValueLimitReachedError;
 
     void decreaseAirMoisture(com.zeroc.Ice.Current current)
-        throws DeviceTurnedOffError;
+        throws DeviceTurnedOffError,
+               ValueLimitReachedError;
 
     /** @hidden */
     static final String[] _iceIds =
@@ -111,6 +118,26 @@ public interface Thermostat extends com.zeroc.Ice.Object
         inS.readEmptyParams();
         obj.turnOff(current);
         return inS.setResult(inS.writeEmptyParams());
+    }
+
+    /**
+     * @hidden
+     * @param obj -
+     * @param inS -
+     * @param current -
+     * @return -
+     * @throws com.zeroc.Ice.UserException -
+    **/
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getState(Thermostat obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+        throws com.zeroc.Ice.UserException
+    {
+        com.zeroc.Ice.Object._iceCheckMode(com.zeroc.Ice.OperationMode.Idempotent, current.mode);
+        inS.readEmptyParams();
+        ThermostatState ret = obj.getState(current);
+        com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
+        ThermostatState.ice_write(ostr, ret);
+        inS.endWriteParams(ostr);
+        return inS.setResult(ostr);
     }
 
     /**
@@ -228,6 +255,7 @@ public interface Thermostat extends com.zeroc.Ice.Object
         "decreaseTemperature",
         "getAirMoisture",
         "getDeviceInfo",
+        "getState",
         "getTemperature",
         "ice_id",
         "ice_ids",
@@ -270,37 +298,41 @@ public interface Thermostat extends com.zeroc.Ice.Object
             }
             case 4:
             {
-                return _iceD_getTemperature(this, in, current);
+                return _iceD_getState(this, in, current);
             }
             case 5:
             {
-                return com.zeroc.Ice.Object._iceD_ice_id(this, in, current);
+                return _iceD_getTemperature(this, in, current);
             }
             case 6:
             {
-                return com.zeroc.Ice.Object._iceD_ice_ids(this, in, current);
+                return com.zeroc.Ice.Object._iceD_ice_id(this, in, current);
             }
             case 7:
             {
-                return com.zeroc.Ice.Object._iceD_ice_isA(this, in, current);
+                return com.zeroc.Ice.Object._iceD_ice_ids(this, in, current);
             }
             case 8:
             {
-                return com.zeroc.Ice.Object._iceD_ice_ping(this, in, current);
+                return com.zeroc.Ice.Object._iceD_ice_isA(this, in, current);
             }
             case 9:
             {
-                return _iceD_increaseAirMoisture(this, in, current);
+                return com.zeroc.Ice.Object._iceD_ice_ping(this, in, current);
             }
             case 10:
             {
-                return _iceD_increaseTemperature(this, in, current);
+                return _iceD_increaseAirMoisture(this, in, current);
             }
             case 11:
             {
-                return _iceD_turnOff(this, in, current);
+                return _iceD_increaseTemperature(this, in, current);
             }
             case 12:
+            {
+                return _iceD_turnOff(this, in, current);
+            }
+            case 13:
             {
                 return _iceD_turnOn(this, in, current);
             }
