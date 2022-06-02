@@ -420,3 +420,4 @@ cython_debug/
 /Lab5_middleware/SmartHome/server_java/.idea/
 /Lab5_middleware/SmartHome/client_python/.idea/
 /Lab5_middleware/.idea/
+/Lab6_zookeeper/.idea/
