@@ -5,7 +5,6 @@ import org.apache.zookeeper.data.Stat;
 
 import java.util.Arrays;
 
-import static javax.security.auth.callback.ConfirmationCallback.OK;
 import static org.apache.zookeeper.KeeperException.Code.SESSIONEXPIRED;
 
 public class DataMonitor implements Watcher, AsyncCallback.StatCallback {
@@ -47,10 +46,11 @@ public class DataMonitor implements Watcher, AsyncCallback.StatCallback {
 
     public void processResult(int rc, String path, Object ctx, Stat stat) {
         boolean exists;
-        switch (rc) {
+        KeeperException.Code code = KeeperException.Code.get(rc);
+        switch (code) {
             case OK -> exists = true;
-            case KeeperException.Code.NoNode -> exists = false;
-            case KeeperException.Code.SessionExpired, KeeperException.Code.NoAuth -> {
+            case NONODE -> exists = false;
+            case SESSIONEXPIRED, NOAUTH -> {
                 dead = true;
                 listener.closing(rc);
                 return;
