@@ -1,7 +1,7 @@
 package zookeeper;
 
 public interface DataMonitorListener {
-    void exists(byte[] data);
+    void exists(boolean exists);
 
     void closing(int rc);
 }

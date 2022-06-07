@@ -3,28 +3,27 @@ package zookeeper;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 
-import java.util.Arrays;
+import java.util.List;
 
 import static org.apache.zookeeper.KeeperException.Code.SESSIONEXPIRED;
 
 public class DataMonitor implements Watcher, AsyncCallback.StatCallback {
-    ZooKeeper zk;
+    ZooKeeper zooKeeper;
     String znode;
-    Watcher chainedWatcher;
     boolean dead;
     DataMonitorListener listener;
-    byte[] prevData;
 
-    public DataMonitor(ZooKeeper zk, String znode, Watcher chainedWatcher, DataMonitorListener listener) {
-        this.zk = zk;
+    public DataMonitor(ZooKeeper zooKeeper, String znode, DataMonitorListener listener) {
+        this.zooKeeper = zooKeeper;
         this.znode = znode;
-        this.chainedWatcher = chainedWatcher;
         this.listener = listener;
-        zk.exists(znode, true, this, null);
+        watch(znode);
     }
 
+    @Override
     public void process(WatchedEvent event) {
         String path = event.getPath();
+
         if (event.getType() == Event.EventType.None) {
             switch (event.getState()) {
                 case SyncConnected:
@@ -36,14 +35,32 @@ public class DataMonitor implements Watcher, AsyncCallback.StatCallback {
             }
         } else {
             if (path != null && path.equals(znode)) {
-                zk.exists(znode, true, this, null);
+                watch(znode);
             }
-        }
-        if (chainedWatcher != null) {
-            chainedWatcher.process(event);
         }
     }
 
+    private void watch(String path) {
+        zooKeeper.exists(znode, true, this, null);
+        try {
+            Stat nodeStat = zooKeeper.exists(path, true);
+            if (nodeStat != null) {
+                List<String> zkChildren = zooKeeper.getChildren(path, true);
+                System.out.println("Actual children number: " + zooKeeper.getAllChildrenNumber(znode));
+                zkChildren.forEach(zNode -> {
+                    try {
+                        zooKeeper.getChildren(path + "/" + zNode, true);
+                    } catch (KeeperException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        } catch (KeeperException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void processResult(int rc, String path, Object ctx, Stat stat) {
         boolean exists;
         KeeperException.Code code = KeeperException.Code.get(rc);
@@ -56,25 +73,10 @@ public class DataMonitor implements Watcher, AsyncCallback.StatCallback {
                 return;
             }
             default -> {
-                zk.exists(znode, true, this, null);
+                zooKeeper.exists(znode, true, this, null);
                 return;
             }
         }
-
-        byte[] b = null;
-        if (exists) {
-            try {
-                b = zk.getData(znode, false, null);
-            } catch (KeeperException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                return;
-            }
-        }
-        if ((b == null && null != prevData)
-                || (b != null && !Arrays.equals(prevData, b))) {
-            listener.exists(b);
-            prevData = b;
-        }
+        listener.exists(exists);
     }
 }
