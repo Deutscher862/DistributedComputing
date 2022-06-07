@@ -3,17 +3,22 @@ package zookeeper;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
+import zookeeper.treeprinter.TreeBuilder;
+import zookeeper.treeprinter.TreeNode;
 
 import java.io.IOException;
 
 public class Executor implements Watcher, Runnable, DataMonitorListener {
+    private final String znode;
     private final String[] exec;
     private final DataMonitor dataMonitor;
     private Process child;
+    private final ZooKeeper zooKeeper;
 
     public Executor(String hostPort, String znode, String[] exec) throws IOException {
         this.exec = exec;
-        ZooKeeper zooKeeper = new ZooKeeper(hostPort, 3000, this);
+        this.znode = znode;
+        zooKeeper = new ZooKeeper(hostPort, 3000, this);
         dataMonitor = new DataMonitor(zooKeeper, znode, this);
     }
 
@@ -65,4 +70,11 @@ public class Executor implements Watcher, Runnable, DataMonitorListener {
             }
         }
     }
+
+    void printTree() {
+        System.out.println("Node tree structure:");
+        TreeNode root = TreeBuilder.buildTree(znode, zooKeeper);
+        System.out.println(root);
+    }
+
 }
