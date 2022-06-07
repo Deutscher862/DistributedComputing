@@ -45,15 +45,8 @@ public class DataMonitor implements Watcher, AsyncCallback.StatCallback {
         try {
             Stat nodeStat = zooKeeper.exists(path, true);
             if (nodeStat != null) {
-                List<String> zkChildren = zooKeeper.getChildren(path, true);
+                zooKeeper.getChildren(path, true);
                 System.out.println("Actual children number: " + zooKeeper.getAllChildrenNumber(znode));
-                zkChildren.forEach(zNode -> {
-                    try {
-                        zooKeeper.getChildren(path + "/" + zNode, true);
-                    } catch (KeeperException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                });
             }
         } catch (KeeperException | InterruptedException e) {
             e.printStackTrace();
