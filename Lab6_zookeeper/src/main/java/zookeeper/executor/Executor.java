@@ -1,4 +1,4 @@
-package zookeeper;
+package zookeeper.executor;
 
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
@@ -71,7 +71,7 @@ public class Executor implements Watcher, Runnable, DataMonitorListener {
         }
     }
 
-    void printTree() {
+    public void printTree() {
         System.out.println("Node tree structure:");
         TreeNode root = TreeBuilder.buildTree(znode, zooKeeper);
         System.out.println(root);

@@ -1,6 +1,6 @@
-package zookeeper;
+package zookeeper.executor;
 
-public interface DataMonitorListener {
+interface DataMonitorListener {
     void exists(boolean exists);
 
     void closing(int rc);

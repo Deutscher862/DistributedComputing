@@ -1,13 +1,11 @@
-package zookeeper;
+package zookeeper.executor;
 
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 
-import java.util.List;
-
 import static org.apache.zookeeper.KeeperException.Code.SESSIONEXPIRED;
 
-public class DataMonitor implements Watcher, AsyncCallback.StatCallback {
+class DataMonitor implements Watcher, AsyncCallback.StatCallback {
     ZooKeeper zooKeeper;
     String znode;
     boolean dead;
