@@ -57,17 +57,15 @@ public class Executor implements Watcher, Runnable, DataMonitorListener {
                     e.printStackTrace();
                 }
             }
-        } else {
-            if (child != null) {
-                System.out.println("Stopping child");
-                child.destroy();
-                try {
-                    child.waitFor();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                child = null;
+        } else if (child != null) {
+            System.out.println("Stopping child");
+            child.destroy();
+            try {
+                child.waitFor();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            child = null;
         }
     }
 

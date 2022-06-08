@@ -22,7 +22,7 @@ public class TreeBuilder {
                 createNodeTree(zooKeeper, child, child.getName());
             }
         } catch (KeeperException | InterruptedException e) {
-            System.out.println("node called \\z does not exist");
+            System.err.println("node called \\z does not exist");
             e.printStackTrace();
         }
     }
